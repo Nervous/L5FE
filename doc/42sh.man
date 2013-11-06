@@ -1,0 +1,21 @@
+.\" Manpage 42sh
+.\" Contact vallee_a@epita.fr
+.TH man 1 "06 November 2013" "0.1" "42sh Man Page"
+.SH NAME
+42sh \- Open a 42sh shell
+.SH SYNOPSIS
+42sh is a shell
+.SH DESCRIPTION
+42sh is a nice shell made by nice people
+.SH OPTIONS
+-c command: Specify your command
+.SH AUTHOR
+Vallee Antoine (vallee_a@epita.fr)
+
+Guet Emmanuel (guet_e@epita.fr)
+
+Moizan Guillaume (moizan_g@epita.fr)
+
+Gerondeau Xavier (gerond_x@epita.fr)
+
+Pruvot Amaury (pruvot_a@epita.fr)
