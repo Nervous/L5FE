@@ -31,7 +31,7 @@ static int parse_list(s_token **tok)
         g_global->current_node = g_global->current_node->father;
     return 0;
 }
-a
+
 static int parse_input(void)
 {
     s_token *tok = get_token(INPUT);
