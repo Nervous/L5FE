@@ -1,17 +1,19 @@
 BUILD = build/
 ARCHIVE = vallee_a-42sh
-
+EXEC = 42sh
 all: $(BUILD)
 	gmake --directory=build
+	mv $(BUILD)$(EXEC) $(EXEC)
 
 $(BUILD):
 	./configure
 
 clean:
 	$(RM) -r $(BUILD)
-
+	$(RM) $(EXEC)
 distclean:
 	$(RM) -r $(BUILD)
+	$(RM) $(EXEC)
 # is using -r after $(RM) correct?
 
 doc:
