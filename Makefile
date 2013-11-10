@@ -7,6 +7,7 @@ $(BUILD):
 	./configure
 
 clean:
-	rm -rf $(BUILD)
+	$(RM) -r $(BUILD)
+# is using -r after $(RM) correct?
 
 .PHONY: all clean
