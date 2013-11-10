@@ -18,7 +18,7 @@ int parse_redirection(s_token **tok)
             g_global->current_node = g_global->current_node->father;
         return 0;
 }
-a
+
 int parse_element(s_token **tok)
 {
     if ((*tok)->type == WORD)
