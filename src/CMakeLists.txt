@@ -6,7 +6,7 @@ project(42sh)
 file(
     GLOB_RECURSE
     source_files
-    src/main.c
+    main.c
 )
 
 #executable will be named 42sh in put in build/

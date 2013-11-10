@@ -30,4 +30,4 @@
 mkdir build
 # creates makefile and compiles in it so that every generated file is in build/
 cd build
-cmake .. -G "Unix Makefiles"
+cmake -G "Unix Makefiles" ../src/
