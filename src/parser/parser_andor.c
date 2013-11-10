@@ -16,7 +16,7 @@ static void parse_otherconditions(s_token **tok, bool mandatory)
             parse_error("PARSE ERROR : Expected a pipeline here");
     }
 }
-a
+
 int parse_andor(s_token **tok, bool mandatory)
 {
     ast_add_step("AND_OR");
