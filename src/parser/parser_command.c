@@ -59,7 +59,7 @@ static void parse_orcommand(s_token **tok)
     if (parse_command(tok) == -1)
         parse_error("PARSE ERROR : Was expecting a command");
 }
-a
+
 int parse_pipeline(s_token **tok, bool mandatory)
 {
     ast_add_step("Pipeline");
