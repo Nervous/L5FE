@@ -1,33 +1,32 @@
 #! /bin/sh
 
-#rm -f Makefile.rules
-#touch Makefile.rules
+debug=0
+help=0
 
-#debug=0
-#clang=0
+for var in $*; do
+    if [ $var = "--with-debug" ]; then
+	debug=1
+    fi
+    if [ $var = "--help" ]; then
+	help=1
+        echo ''
+        echo 'Usage: configure [options]'
+        echo ''
+        echo 'Options'
+        echo '--help       = Print usage information and exit.'
+        echo '--with-debug = Create sub Makefile with debug flags'
+        echo ''
+    fi
+done
 
-#for var in $*; do
-#    if [ $var = "--with-debug" ]; then
-#	if [ $clang -eq 1 ]; then
-#	    echo 'CFLAGS+=-g3' >> Makefile.rules
-#	else
-#	    echo 'CFLAGS+=-g3 -fvar-tracking' >> Makefile.rules
-#	fi
-#	debug=1
-#    fi
-#    if [ $var = "--with-clang" ]; then
-#	if [ $debug -eq 1 ]; then
-#	    rm -f Makefile.rules
-#	    touch Makefile.rules
-#	    echo 'CFLAGS+=-g3' >> Makefile.rules
-#	fi
-#	echo 'CC=clang33' >> Makefile.rules
-#	clang=1
-#    fi
-#done
-
-# creates a build directory
-mkdir build
-# creates makefile and compiles in it so that every generated file is in build/
-cd build
-cmake -G "Unix Makefiles" ../src/
+if [ $help -ne 1 ]; then
+    # creates a build directory
+    mkdir build
+    # creates makefile in it so that every generated file is in build/
+    cd build
+    if [ $debug -eq 0 ]; then
+        cmake -G "Unix Makefiles" ../src/
+    else
+        cmake -G "Unix Makefiles" ../src/
+    fi
+fi

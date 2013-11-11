@@ -1,4 +1,6 @@
 V0.1
 
+Find a clean way of adding debug flags when requested by --with-debug
+
 Handle doc generation with the /Makefile and respecting the subject's
 directory tree of submission
