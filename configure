@@ -27,6 +27,6 @@ if [ $help -ne 1 ]; then
     if [ $debug -eq 0 ]; then
         cmake -G "Unix Makefiles" ../src/
     else
-        cmake -G "Unix Makefiles" ../src/
+        cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ../src/
     fi
 fi
