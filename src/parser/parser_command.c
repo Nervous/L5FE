@@ -23,7 +23,7 @@ static int parse_simplecommand(s_token **tok)
     climb_ast(1);
     return 0;
 }
-a
+aa
 static int parse_command(s_token **tok)
 {
     ast_add_step("Command");
