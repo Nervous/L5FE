@@ -1,6 +1,6 @@
-V0.1
+V0.5
 
-Find a clean way of adding debug flags when requested by --with-debug
+add color and categories to test suite
 
 Handle doc generation with the /Makefile and respecting the subject's
 directory tree of submission
