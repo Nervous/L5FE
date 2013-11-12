@@ -20,7 +20,7 @@ for line in test_list:
            cmd.insert(0, './42sh') #getting from 'cmd' to './42sh cmd'
            # if no ouput specified or if it matches
            if (output == "" or subprocess.check_output(cmd) == output):
-               # if no return value specified or if it matches
+               # if the return value matches the expected one (0 by default) 
                if (subprocess.call(cmd,stdout=subprocess.PIPE, \
                         stderr=subprocess.PIPE) == return_value):
                    print(command[:-1] + ': SUCCESS')
@@ -33,7 +33,7 @@ for line in test_list:
            return_value = -1
 
     elif line[:4] == "CMD=":
-        command = line[4:] # command = ./42sh + cmd + 
+        command = line[4:]
     elif line[:3] == "RV=":
         return_value = int(line[3:])
     elif line[:3] == "OP=":

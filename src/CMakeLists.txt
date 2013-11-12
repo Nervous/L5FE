@@ -7,17 +7,23 @@ set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -std=c99 -pedantic")
 #creates a list named SRCS that contains main.c
 set(SRCS main.c)
 
+add_subdirectory(struct)
+
 # defines the files to compile, just add the files you want to include
 #in the compilation
-file(
-    GLOB_RECURSE
-    source_files
-    ${SRCS}
-)
-
+#file(
+#    GLOB_RECURSE
+#    source_files
+#    ${SRCS}
+#)
 #executable will be named 42sh in put in build/
 #and will be compiled with files listed in source_files
 add_executable(
+    
     42sh
-    ${source_files}
+
+    ${SRCS}
+
 )
+
+target_link_libraries(42sh struct)
