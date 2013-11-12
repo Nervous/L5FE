@@ -1,5 +1,5 @@
 #include "parser.h"
-
+a
 extern s_global *g_global;
 static void loop_coumpoundlist(s_token **tok, bool mandatory)
 {
