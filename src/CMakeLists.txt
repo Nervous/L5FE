@@ -4,12 +4,15 @@ project(42sh)
 
 set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -std=c99 -pedantic")
 
+#creates a list named SRCS that contains main.c
+set(SRCS main.c)
+
 # defines the files to compile, just add the files you want to include
 #in the compilation
 file(
     GLOB_RECURSE
     source_files
-    main.c
+    ${SRCS}
 )
 
 #executable will be named 42sh in put in build/
