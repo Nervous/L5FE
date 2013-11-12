@@ -13,7 +13,10 @@ Pattern :
 
 Exemple :
 
+CAT=funky category
+
 CMD=echo test
 RV=0
 OP=test
+
 
