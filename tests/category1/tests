@@ -8,12 +8,11 @@ Pattern :
 
 'CMD=<command_i_want_to_test> [arg]*'
 ['RV=<expected_return_value>']
-['[OP=<expected_output>]']
+['OP=<expected_output>']
+['EOP=<expected_error_output>']
 ''
 
 Exemple :
-
-CAT=funky category
 
 CMD=echo test
 RV=0
