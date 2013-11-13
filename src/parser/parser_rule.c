@@ -50,7 +50,7 @@ int parse_rulefor(s_token **tok)
     parse_loop_EOL(tok);
     check_in_rulefor(tok);
     return do_group(tok);
-} a
+}
 
 int parse_rulewhile(s_token **tok)
 {
