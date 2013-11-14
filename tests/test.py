@@ -1,6 +1,16 @@
-import subprocess
-import sys
-import os
+import subprocess, sys, os, time, signal, datetime
+
+def timeout_test(cmd, timeout):
+    start_time = datetime.datetime.now()
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    while process.poll() is None:
+        time.sleep(0.1)
+        current_time = datetime.datetime.now()
+        if (current_time - start_time).seconds > timeout:
+            os.kill(process.pid, signal.SIGKILL)
+            os.waitpid(-1, os.WNOHANG)
+            return False
+    return True
 
 def make_dir_list(files, dir_list, path):
     for e in files:
@@ -12,32 +22,36 @@ def get_percentage(a, b):
     return perc_str
 
 def test_command(command, tests, tests_cat, succ_tests, succ_tests_cat, output, return_value, \
-        c_categories):
+        c_categories, err_out):
  if command != "":
            tests[0] += 1
            tests_cat[0] += 1
            cmd = command.split()
            cmd.insert(0, './42sh') #getting from 'cmd' to './42sh cmd'
-           # if no ouput specified or if it matches
-           if (output[0] == "" or subprocess.check_output(cmd) == output[0]):
-               # if the return value matches the expected one (0 by default) 
-               if (subprocess.call(cmd,stdout=subprocess.PIPE, \
-                        stderr=subprocess.PIPE) == return_value[0]):
-                   if (err_out == "" or subprocess.call(cmd,stdout=subprocess.PIPE, \
-                           stderr=subprocess.STDOUT) == err_output):
+           if timeout == -1 or timeout_test(cmd, timeout):
+                # if no ouput specified or if it matches
+                if (output[0] == "" or subprocess.check_output(cmd) == output[0]):
+                    # if the return value matches the expected one (0 by default) 
+                    if (subprocess.call(cmd,stdout=subprocess.PIPE, \
+                             stderr=subprocess.PIPE) == return_value[0]):
+                        if (err_out[0] == "" or subprocess.call(cmd,stdout=subprocess.PIPE, \
+                                   stderr=subprocess.STDOUT) == err_output):
+                            if not c_categories and not final:
+                                print(command[:-1] + ': SUCCESS')
+                            succ_tests[0] += 1
+                            succ_tests_cat[0] += 1
+                        else:
+                            if not c_categories and not final:
+                                print(command[:-1] + ': FAILURE -> Unexpected error output')
+                    else:
                         if not c_categories and not final:
-                            print(command[:-1] + ': SUCCESS')
-                        succ_tests[0] += 1
-                        succ_tests_cat[0] += 1
-                   else:
-                       if not c_categories and not final:
-                            print(command[:-1] + ': FAILURE -> Unexpected error output')
-               else:
-                   if not c_categories and not final:
-                       print(command[:-1] + ': FAILURE -> Unexpected return value')
+                            print(command[:-1] + ': FAILURE -> Unexpected return value')
+                else:
+                    if not c_categories and not final:
+                        print(command[:-1] + ': FAILURE -> Unexpected output')
            else:
-               if not c_categories and not final:
-                   print(command[:-1] + ': FAILURE -> Unexpected output')
+                if not c_categories and not final:
+                    print(command[:-1] + ': FAILURE -> Timeout')
            output[0] = ""
            err_output[0] = ""
            return_value[0] = -1
@@ -49,18 +63,22 @@ e_categories = False
 categories = []
 final = False
 o_all = False
+timeout = -1 
 
 for option in options:
-    if e_categories:
-        categories.append(option)
-    elif option == "-c" or option == "--categories":
+    if option == "-c" or option == "--categories":
         c_categories = True
+        e_categories = False
     elif option == "-e" or option == "--select":
         e_categories = True
     elif option == "-f" or option == "--final":
         final = True
+        e_categories = False
     elif option == "-n" or option == "--number":
         number = True
+        e_categories = False
+    elif e_categories:
+        categories.append(option)
 
 if categories == []:
     files = os.listdir('tests')
@@ -87,7 +105,7 @@ for category in categories:
     for line in test_list:
         if line == "\n": #command to execute?
             test_command(command, tests, tests_cat, succ_tests, succ_tests_cat, output, return_value, \
-                    c_categories)
+                    c_categories, err_output)
             command = ""
         elif line[:4] == "CMD=":
             command = line[4:]

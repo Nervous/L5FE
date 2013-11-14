@@ -15,7 +15,6 @@ Pattern :
 Exemple :
 
 CMD=echo test
-RV=0
 OP=test
-
+RV=0
 
