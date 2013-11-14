@@ -6,8 +6,13 @@ def make_dir_list(files, dir_list, path):
     for e in files:
         if not os.path.isfile(os.path.join(path,e)):
             dir_list.append(e)
+def get_percentage(a, b):
+    perc_str = str( (a/b) * 100)
+    perc_str = perc_str[:5]
+    return perc_str
 
-def test_command(command, tests, tests_cat, succ_tests, succ_tests_cat, output, return_value):
+def test_command(command, tests, tests_cat, succ_tests, succ_tests_cat, output, return_value, \
+        c_categories):
  if command != "":
            tests[0] += 1
            tests_cat[0] += 1
@@ -20,25 +25,47 @@ def test_command(command, tests, tests_cat, succ_tests, succ_tests_cat, output, 
                         stderr=subprocess.PIPE) == return_value[0]):
                    if (err_out == "" or subprocess.call(cmd,stdout=subprocess.PIPE, \
                            stderr=subprocess.STDOUT) == err_output):
-                        print(command[:-1] + ': SUCCESS')
+                        if not c_categories and not final:
+                            print(command[:-1] + ': SUCCESS')
                         succ_tests[0] += 1
                         succ_tests_cat[0] += 1
                    else:
-                       print(command[:-1] + ': FAILURE -> Unexpected error output')
+                       if not c_categories and not final:
+                            print(command[:-1] + ': FAILURE -> Unexpected error output')
                else:
-                   print(command[:-1] + ': FAILURE -> Unexpected return value')
+                   if not c_categories and not final:
+                       print(command[:-1] + ': FAILURE -> Unexpected return value')
            else:
-               print(command[:-1] + ': FAILURE -> Unexpected output')
+               if not c_categories and not final:
+                   print(command[:-1] + ': FAILURE -> Unexpected output')
            output[0] = ""
            err_output[0] = ""
            return_value[0] = -1
-
-#Variables used during test with test category, command to execute,
-#expected output and expected return value
+#OPTIONS
+options = sys.argv[1:]
+number = False
+c_categories = False
+e_categories = False
 categories = []
-files = os.listdir('tests')
-#extracting directories from files list
-make_dir_list(files, categories, 'tests')
+final = False
+o_all = False
+
+for option in options:
+    if e_categories:
+        categories.append(option)
+    elif option == "-c" or option == "--categories":
+        c_categories = True
+    elif option == "-e" or option == "--select":
+        e_categories = True
+    elif option == "-f" or option == "--final":
+        final = True
+    elif option == "-n" or option == "--number":
+        number = True
+
+if categories == []:
+    files = os.listdir('tests')
+    #extracting directories from files list
+    make_dir_list(files, categories, 'tests')
 succ_tests = [0]
 succ_tests_cat = [0]
 tests = [0]
@@ -50,7 +77,8 @@ err_output = [""]
 return_value = [-1]
 
 for category in categories:
-    print('[' + category + ']')
+    if not final:
+        print('[' + category + ']')
     #Opening the file in read only
     test_file = open("tests/" + category + "/tests", "r")
     #test_list is the content of test_file line by line
@@ -58,7 +86,8 @@ for category in categories:
     test_file.close()
     for line in test_list:
         if line == "\n": #command to execute?
-            test_command(command, tests, tests_cat, succ_tests, succ_tests_cat, output, return_value)
+            test_command(command, tests, tests_cat, succ_tests, succ_tests_cat, output, return_value, \
+                    c_categories)
             command = ""
         elif line[:4] == "CMD=":
             command = line[4:]
@@ -68,11 +97,21 @@ for category in categories:
             output[0] = line[3:]
         elif line[:4] == "EOP=":
             err_output[0] = line[4:]
+    if not final:
+        if number:
+            print('\n' + category + ' -> Successful tests : '\
+                    + str(succ_tests_cat[0]) + '/' + str(tests_cat[0]))
+        else:
 
-    print('\n' + category + ' -> Successful tests : '\
-            + str(succ_tests_cat[0]) + '/' + str(tests_cat[0]))
+            print('\n' + category + ' -> Successful tests : '\
+                    + get_percentage(succ_tests_cat[0], tests_cat[0]) + '%')
     tests_cat[0] = 0
     succ_tests_cat[0] = 0
 
-print('\nGlobal results -> Successful tests : '\
+if number:
+    print('\nGlobal results -> Successful tests : '\
         + str(succ_tests[0]) + '/' + str(tests[0]))
+else:
+
+    print('\nGlobal results -> Successful tests : '\
+            + get_percentage(succ_tests[0], tests[0]) + '%')
