@@ -28,7 +28,7 @@ def test_command(command, tests, tests_cat, succ_tests, succ_tests_cat, output, 
            tests_cat[0] += 1
            cmd = command.split()
            cmd.insert(0, './42sh') #getting from 'cmd' to './42sh cmd'
-           if timeout == -1 or timeout_test(cmd, timeout):
+           if timeout < 0 or timeout_test(cmd, timeout):
                 # if no ouput specified or if it matches
                 if (output[0] == "" or subprocess.check_output(cmd) == output[0]):
                     # if the return value matches the expected one (0 by default) 
@@ -63,7 +63,7 @@ e_categories = False
 categories = []
 final = False
 o_all = False
-timeout = -1 
+timeout = -1
 
 for option in options:
     if option == "-c" or option == "--categories":
@@ -77,6 +77,10 @@ for option in options:
     elif option == "-n" or option == "--number":
         number = True
         e_categories = False
+    elif option == "-t" or option == "--time":
+        timeout = -2
+    elif timeout == -2:
+        timeout = float(option)
     elif e_categories:
         categories.append(option)
 
