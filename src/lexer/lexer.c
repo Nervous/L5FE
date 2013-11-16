@@ -77,7 +77,8 @@ static char *create_quote_token(char *str)
     str++;
     unsigned int len = strlen(str);
 
-    while (i < len && !(str[i] == str[0] && str[i - 1] != '\\'))
+    while (i < len && !(str[i] == str[0]
+                        && (str[i - 1] != '\\' || str[0] == '\'')))
         i++;
 
     if (i == len && str[i] != str[0])
@@ -87,6 +88,7 @@ static char *create_quote_token(char *str)
             i++;
             char *value = malloc(sizeof (char) * i);
             strncpy(value, str, i);
+            value[i] = '\0';
             g_global->pos += i;
 
             return value;
@@ -155,10 +157,11 @@ static char *set_token_value(char *str, unsigned int pos)
         && ((is_separator(str[0]) == 1
              && isspace(str[0]) == 0) || str[0] == '\n'))
         return special_separator(str);
-// BUG HERE ON FREEBSD
+
     g_global->pos = i;
     value = malloc(sizeof (char) * (i - pos) + 1);
     strncpy(value, str, (i - pos));
+    value[i - pos] = '\0';
     return value;
 }
 
