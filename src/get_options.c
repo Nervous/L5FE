@@ -13,28 +13,28 @@ static int print_usage(char * msg, char *str)
     return 2;
 }
 
-/* static char *get_string(int argc, char **argv, int i) */
-/* { */
-/*     int cur_arg = i + 1; */
-/*     int count = 0; */
+static char *get_string(int argc, char **argv, int i)
+{
+    int cur_arg = i + 1;
+    int count = 0;
 
-/*     for (; cur_arg < argc; cur_arg++) */
-/*     { */
-/*         for (unsigned int j = 0; j < strlen(argv[cur_arg]); j++) */
-/*             count++; */
-/*         count++; */
-/*     } */
+    for (; cur_arg < argc; cur_arg++)
+    {
+        for (unsigned int j = 0; j < strlen(argv[cur_arg]); j++)
+            count++;
+        count++;
+    }
 
-/*     char *value = malloc(sizeof (char) * count); */
-/*     value = strcpy(value, argv[i]); */
-/*     for (cur_arg = i + 1; cur_arg < argc; cur_arg++) */
-/*     { */
-/*         value = strcat(value, " "); */
-/*         value = strcat(value, argv[cur_arg]); */
-/*     } */
+    char *value = malloc(sizeof (char) * count);
+    value = strcpy(value, argv[i]);
+    for (cur_arg = i + 1; cur_arg < argc; cur_arg++)
+    {
+        value = strcat(value, " ");
+        value = strcat(value, argv[cur_arg]);
+    }
 
-/*     return value; */
-/* } */
+    return value;
+}
 
 /* static int options2(int argc, char **argv, int i) */
 /* { */
