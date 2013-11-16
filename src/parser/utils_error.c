@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include "utils_error.h"
 
-void parse_error(char *msg)
+int parse_error(char *msg)
 {
-    printf("%s\nExiting ...", msg);
+    printf("%s\nExiting ...\n", msg);
     exit(1);
+    return -1;
 }

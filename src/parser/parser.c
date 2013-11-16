@@ -8,7 +8,7 @@ static int parse_list(s_token **tok)
     bool no_andor = false;
 
     if (parse_andor(tok, true) == -1)
-        parse_error("PARSE ERROR : Expected an ANDOR structure");
+        return parse_error("PARSE ERROR : Expected an ANDOR structure");
 
     while (true)
     {
@@ -44,11 +44,11 @@ static int parse_input(void)
     {
         ast_add_step("Input");
         if (parse_list(&tok) == -1)
-            parse_error("PARSE ERROR : Expected a list");
+            return parse_error("PARSE ERROR : Expected a list");
         if (tok->type == EOL || tok->type == E_EOF)
             eat_token(tok);
         else
-            parse_error("PARSE ERROR : Expected '\\n' or EOF");
+            return parse_error("PARSE ERROR : Expected '\\n' or EOF");
         return 0;
     }
 }
