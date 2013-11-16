@@ -36,60 +36,60 @@ static char *get_string(int argc, char **argv, int i)
     return value;
 }
 
-/* static int options2(int argc, char **argv, int i) */
-/* { */
-/*     if (strcmp(argv[i], "-c") == 0) */
-/*     { */
-/*         if (i + 1 < argc) */
-/*         { */
-/*             /\* Need to be updated to reflect the correct behaviour of 42sh*\/ */
-/*             g_global->readline = get_string(argc, argv, i + 1); */
-/*             parse(); */
-/*             return -1; */
-/*         } */
-/*         else */
-/*             return print_usage("%s option needs a parameter\n", argv[i]); */
-/*     } */
-/*     else if (strcmp(argv[i], "-O") == 0 || strcmp(argv[i], "+O") == 0) */
-/*     { */
-/*         if (i + 1 < argc) */
-/*         { */
-/*             /\* Not implemented yet *\/ */
-/*             parse(); */
-/*             return 42; */
-/*         } */
-/*         else */
-/*             return print_usage("%s option needs a parameter\n", argv[i]); */
-/*     } */
+static int options2(int argc, char **argv, int i)
+{
+    if (strcmp(argv[i], "-c") == 0)
+    {
+        if (i + 1 < argc)
+        {
+            /* Need to be updated to reflect the correct behaviour of 42sh*/
+            g_global->readline = get_string(argc, argv, i + 1);
+            parse();
+            return -1;
+        }
+        else
+            return print_usage("%s option needs a parameter\n", argv[i]);
+    }
+    else if (strcmp(argv[i], "-O") == 0 || strcmp(argv[i], "+O") == 0)
+    {
+        if (i + 1 < argc)
+        {
+            /* Not implemented yet */
+            parse();
+            return 42;
+        }
+        else
+            return print_usage("%s option needs a parameter\n", argv[i]);
+    }
 
-/*     return print_usage("Option %s is not a valid option\n", argv[i]); */
-/* } */
+    return print_usage("Option %s is not a valid option\n", argv[i]);
+}
 
-/* /\** */
-/* ** @brief Compare the current option to every known option and perform the */
-/* ** appropriate action */
-/* *\/ */
+/**
+** @brief Compare the current option to every known option and perform the
+** appropriate action
+*/
 
-/* static int options(int argc, char **argv, int i) */
-/* { */
-/*     if (strcmp(argv[i], "--version") == 0) */
-/*     { */
-/*         printf("Version 0.5\n"); */
-/*         exit(0); /\* NEED TO FREE GLOBAL *\/ */
-/*     } */
-/*     else if (strcmp(argv[i], "--ast-print") == 0) */
-/*     { */
-/*         g_global->ast = 1; */
-/*         return 0; */
-/*     } */
-/*     else if (strcmp(argv[i], "--norc") == 0) */
-/*     { */
-/*         g_global->norc = 1; */
-/*         return 0; */
-/*     } */
+static int options(int argc, char **argv, int i)
+{
+    if (strcmp(argv[i], "--version") == 0)
+    {
+        printf("Version 0.5\n");
+        exit(0); /* NEED TO FREE GLOBAL */
+    }
+    else if (strcmp(argv[i], "--ast-print") == 0)
+    {
+        g_global->ast = 1;
+        return 0;
+    }
+    else if (strcmp(argv[i], "--norc") == 0)
+    {
+        g_global->norc = 1;
+        return 0;
+    }
 
-/*     return options2(argc, argv, i); */
-/* } */
+    return options2(argc, argv, i);
+}
 
 /* /\** */
 /* ** @brief Reads the file passed as an argument to 42sh and stores it into a */
