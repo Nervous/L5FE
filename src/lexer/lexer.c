@@ -63,37 +63,37 @@ char *create_comment(char *str, unsigned int i)
     }
 }
 
-/* /\** */
-/* ** @brief Create a token which begins with a quoting character */
-/* *\/ */
+/**
+** @brief Create a token which begins with a quoting character
+*/
 
-/* static char *create_quote_token(char *str) */
-/* { */
-/*     unsigned int i = 1; */
+static char *create_quote_token(char *str)
+{
+    unsigned int i = 1;
 
-/*     if (str[1] == '#') */
-/*         return create_comment(str, i); */
+    if (str[1] == '#')
+        return create_comment(str, i);
 
-/*     str++; */
-/*     unsigned int len = strlen(str); */
+    str++;
+    unsigned int len = strlen(str);
 
-/*     while (i < len && !(str[i] == str[0] && str[i - 1] != '\\')) */
-/*         i++; */
+    while (i < len && !(str[i] == str[0] && str[i - 1] != '\\'))
+        i++;
 
-/*     if (i == len && str[i] != str[0]) */
-/*         printf("Lexer error, unable to find corresponding %c\n", str[0]); */
-/*     else */
-/*         { */
-/*             i++; */
-/*             char *value = malloc(sizeof (char) * i); */
-/*             strncpy(value, str, i); */
-/*             g_global->pos += i; */
+    if (i == len && str[i] != str[0])
+        printf("Lexer error, unable to find corresponding %c\n", str[0]);
+    else
+        {
+            i++;
+            char *value = malloc(sizeof (char) * i);
+            strncpy(value, str, i);
+            g_global->pos += i;
 
-/*             return value; */
-/*         } */
+            return value;
+        }
 
-/*     return ""; */
-/* } */
+    return "";
+}
 
 /* /\** */
 /* ** @brief Tests if the value of the token is a special parameter such as '|', */
