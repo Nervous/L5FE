@@ -1,8 +1,8 @@
-#include "parser.h"
+#include "parser/parser.h"
 #include "ast/ast.h"
-#include "lexer.h"
+#include "lexer/lexer.h"
 #include "struct.h"
-#include "parser.h"
+#include "parser/parser.h"
 #include "get_options.h"
 
 s_global *g_global = NULL;
