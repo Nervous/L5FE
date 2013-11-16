@@ -6,18 +6,18 @@
 
 extern s_global *g_global;
 
-/* /\\** */
-/* ** @brief Find the position of the beginning of the next token */
-/* *\/ */
+/**
+** @brief Find the position of the beginning of the next token
+*/
 
-/* static void find_next_token(char *s) */
-/* { */
-/*     unsigned int len = strlen(s); */
+static void find_next_token(char *s)
+{
+    unsigned int len = strlen(s);
 
-/*       while (g_global->pos < len */
-/*              && (s[g_global->pos] == ' ' || s[g_global->pos] == '\t')) */
-/*       g_global->pos += 1; */
-/* } */
+      while (g_global->pos < len
+             && (s[g_global->pos] == ' ' || s[g_global->pos] == '\t'))
+      g_global->pos += 1;
+}
 
 /* /\** */
 /* ** @brief Creates a new malloc'ed string which will serve as the token value and */
