@@ -11,6 +11,7 @@ add_subdirectory(parser)
 add_subdirectory(ast)
 add_subdirectory(lexer)
 add_subdirectory(readline)
+
 # defines the files to compile, just add the files you want to include
 #in the compilation
 #file(
