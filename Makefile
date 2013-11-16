@@ -16,6 +16,9 @@ clean:
 distclean:
 	$(RM) -r $(BUILD)
 	$(RM) $(EXEC)
+	@$(RM) tree.dot
+	@$(RM) tree.png
+
 # is using -r after $(RM) correct?
 
 doc:
