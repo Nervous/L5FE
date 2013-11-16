@@ -30,5 +30,6 @@ int main(int argc, char **argv)
     if (g_global->ast)
         print_ast(get_root(g_global->current_node), "tree.dot");
 
+    release_ast(get_root(g_global->current_node));
     return ret;
 }

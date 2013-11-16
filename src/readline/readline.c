@@ -8,7 +8,6 @@
 #include <curses.h>
 #include <term.h>
 #include <string.h>
-#define BUFFER_SIZE 10
 
 extern s_global *g_global;
 
@@ -22,7 +21,6 @@ static void init_term(void)
     init_history();
 }
 
-static char term_buffer[BUFFER_SIZE];
 
 int my_putchar(int ch)
 {
@@ -51,7 +49,7 @@ static callback match_key(char c, char **buf)
 {
     if (c == '\177')
         return backspace;
-    if (c == '\n')
+    if (c == '\n'|| c == '\r')
         return new_line;
     if (c == '\033')
     {
@@ -78,7 +76,7 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
 {
     char tmp;
     char *buf = *buf_p;
-    while ((tmp = get_char()) != '\n')
+    while ((tmp = get_char()) != '\n' && tmp != '\r')
     {
         if (tmp < 32 || tmp == '\177')
         {
@@ -106,9 +104,8 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
 static char *read_input(void)
 {
     write(STDIN_FILENO, "42sh$ ", 6);
-    char *buf = calloc(100, sizeof (char));
-    char *type = getenv("TERM");
-    tgetent(term_buffer, type);
+    char *buf = NULL;
+    buf = calloc(100, sizeof (char));
     int buf_size = 0;
     int cur_pos = 0;
     int max_size = 100;
@@ -122,6 +119,9 @@ static char *read_input(void)
 void readline(void)
 {
     init_term();
+    char *type = getenv("TERM");
+    char term_buffer[2048];
+    tgetent(term_buffer, type);
     char *buf;
     do {
         buf = read_input();
