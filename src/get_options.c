@@ -55,8 +55,8 @@ static int options2(int argc, char **argv, int i)
         if (i + 1 < argc)
         {
             /* Not implemented yet */
-            parse();
-            return 42;
+            //parse();
+            return 0;
         }
         else
             return print_usage("%s option needs a parameter\n", argv[i]);
