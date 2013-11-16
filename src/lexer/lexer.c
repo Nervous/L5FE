@@ -95,41 +95,41 @@ static char *create_quote_token(char *str)
     return "";
 }
 
-/* /\** */
-/* ** @brief Tests if the value of the token is a special parameter such as '|', */
-/* ** '&', '<', '>' or ';' and create the appropriate string tu put as the token */
-/* ** value */
-/* *\/ */
+/**
+** @brief Tests if the value of the token is a special parameter such as '|',
+** '&', '<', '>' or ';' and create the appropriate string tu put as the token
+** value
+*/
 
-/* static char *special_separator(char *str) */
-/* { */
-/*     if (strlen(str) > 1 && (str[0] == '&' || str[0] == '|' || str[0] == '>' */
-/*                             || str[0] == '<' || str[0] == ';') */
-/*         && str[0] == str[1]) */
-/*         { */
-/*             if (strlen(str) > 2 && str[0] == '<' */
-/*                 && str[2] == '-') */
-/*                 return create_special_string(str, 3); */
-/*             else */
-/*                 return create_special_string(str, 2); */
-/*         } */
-/*     else if (strlen(str) > 1) */
-/*         { */
-/*             if (strncmp(str, "<&", 2) == 0) */
-/*                 return create_special_string(str, 2); */
-/*             else if (strncmp(str, ">&", 2) == 0) */
-/*                 return create_special_string(str, 2); */
-/*             else if (strncmp(str, "<>", 2) == 0) */
-/*                 return create_special_string(str, 2); */
-/*             else if (strncmp(str, ">|", 2) == 0) */
-/*                 return create_special_string(str, 2); */
-/*         } */
+static char *special_separator(char *str)
+{
+    if (strlen(str) > 1 && (str[0] == '&' || str[0] == '|' || str[0] == '>'
+                            || str[0] == '<' || str[0] == ';')
+        && str[0] == str[1])
+        {
+            if (strlen(str) > 2 && str[0] == '<'
+                && str[2] == '-')
+                return create_special_string(str, 3);
+            else
+                return create_special_string(str, 2);
+        }
+    else if (strlen(str) > 1)
+        {
+            if (strncmp(str, "<&", 2) == 0)
+                return create_special_string(str, 2);
+            else if (strncmp(str, ">&", 2) == 0)
+                return create_special_string(str, 2);
+            else if (strncmp(str, "<>", 2) == 0)
+                return create_special_string(str, 2);
+            else if (strncmp(str, ">|", 2) == 0)
+                return create_special_string(str, 2);
+        }
 
-/*     if (str[0] == '"' || str[0] == '`' || str[0] == '\'' || str[0] == '#') */
-/*         return create_quote_token(--str); */
+    if (str[0] == '"' || str[0] == '`' || str[0] == '\'' || str[0] == '#')
+        return create_quote_token(--str);
 
-/*     return create_special_string(str, 1); */
-/* } */
+    return create_special_string(str, 1);
+}
 
 /* /\** */
 /* ** @brief Returns the new malloc'ed string which will serve as the nex token */
