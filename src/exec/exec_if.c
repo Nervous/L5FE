@@ -2,8 +2,19 @@
 
 int exec_else(s_list else_list)
 {
-    s_list current
-    //if(
+    int condition = 0;
+    s_list current = else_list->node->son_list;
+    while (current != NULL && current->node->type != ELSE)
+    {
+        condition = exec_compound(current->brothers):
+        if (condition) //current elif -> compound -> then -> compound
+            return exec_compound(current->brothers->brothers->brothers);
+        /* current elif -> compound -> then -> compound -> else of elif*/
+        current = current->brothers->brothers->brothers->brothers;
+    }
+    if (current == NULL)
+        return 0;
+    return exec_compound(current->brothers);
 }
 
 int exec_if(s_list rule_if)
@@ -18,7 +29,7 @@ int exec_if(s_list rule_if)
     /* if current (which is now eq to fi or else) == "Else_clause" */
     else if (strcmp((current = current->brothers->brothers)->node->str,
                     "Else_clause"))
-        return exec_compound(current->brothers);
+        return exec_else(current->brothers);
     else
         return 0;
 }
