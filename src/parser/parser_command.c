@@ -14,7 +14,7 @@ static int parse_simplecommand(s_token **tok)
         while (parse_element(tok) == 0)
             ;
 
-//        climb_ast(1);
+        //        climb_ast(1);
         return 0;
     }
 
@@ -49,15 +49,18 @@ static int parse_command(s_token **tok)
 
 static void parse_orcommand(s_token **tok)
 {
-    if ((*tok)->type != BIT_PIPE)
-        return;
+    while (true)
+    {
+        if ((*tok)->type != BIT_PIPE)
+            return;
 
-    *tok = eat_token(*tok);
-    *tok = get_token(PIPELINE);
-    climb_ast(1);
-    parse_loop_EOL(tok);
-    if (parse_command(tok) == -1)
-        parse_error("PARSE ERROR : Was expecting a command");
+        *tok = eat_token(*tok);
+        *tok = get_token(PIPELINE);
+        climb_ast(1);
+        parse_loop_EOL(tok);
+        if (parse_command(tok) == -1)
+            parse_error("PARSE ERROR : Was expecting a command");
+    }
 }
 
 int parse_pipeline(s_token **tok, bool mandatory)

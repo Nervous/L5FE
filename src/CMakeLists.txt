@@ -10,6 +10,7 @@ set(SRCS struct.h main.c get_options.c get_options.h)
 add_subdirectory(parser)
 add_subdirectory(ast)
 add_subdirectory(lexer)
+
 # defines the files to compile, just add the files you want to include
 #in the compilation
 #file(

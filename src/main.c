@@ -1,8 +1,8 @@
-#include "parser.h"
+#include "parser/parser.h"
 #include "ast/ast.h"
-#include "lexer.h"
+#include "lexer/lexer.h"
 #include "struct.h"
-#include "parser.h"
+#include "parser/parser.h"
 #include "get_options.h"
 
 s_global *g_global = NULL;
@@ -27,8 +27,7 @@ int main(int argc, char **argv)
     int ret = get_options(argc, argv);
 
     if (g_global->ast)
-        print_ast(get_root(g_global->current_node), "test.dot");
-    else
-        release_ast(get_root(g_global->current_node));
+        print_ast(get_root(g_global->current_node), "tree.dot");
+
     return ret;
 }

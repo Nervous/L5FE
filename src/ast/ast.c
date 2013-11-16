@@ -61,55 +61,9 @@ static s_token *copy_token(s_token *token)
     if (!(new_node = malloc(sizeof (s_token))))
         return NULL;
     new_node->type = token->type;
-    if (strcmp(token->str, ";") == 0)
-    {
-        if (!(new_node->str = malloc(sizeof (char) * 3)))
-            return NULL;
-        strcpy(new_node->str, "\";\"");
-    }
-    else if (strcmp(token->str, "(") == 0)
-    {
-        if (!(new_node->str = malloc(sizeof (char) * 3)))
-            return NULL;
-        strcpy(new_node->str, "\"(\"");
-    }
-    else if (strcmp(token->str, ")") == 0)
-    {
-        if (!(new_node->str = malloc(sizeof (char) * 3)))
-            return NULL;
-        strcpy(new_node->str, "\")\"");
-    }
-    else if (strcmp(token->str, "|") == 0)
-    {
-        if (!(new_node->str = malloc(sizeof (char) * 3)))
-            return NULL;
-        strcpy(new_node->str, "\"|\"");
-    }
-    else if (strcmp(token->str, "||") == 0)
-    {
-        if (!(new_node->str = malloc(sizeof (char) * 4)))
-            return NULL;
-        strcpy(new_node->str, "\"||\"");
-    }
-    else if (strcmp(token->str, "&") == 0)
-    {
-        if (!(new_node->str = malloc(sizeof (char) * 3)))
-            return NULL;
-        strcpy(new_node->str, "\"&\"");
-    }
-    else if (strcmp(token->str, "&&") == 0)
-    {
-        if (!(new_node->str = malloc(sizeof (char) * 4)))
-            return NULL;
-        strcpy(new_node->str, "\"&&\"");
-    }
-    else
-    {
-        if (!(new_node->str = malloc(sizeof (char) * strlen(token->str))))
+        if (!(new_node->str = malloc(sizeof (char) * strlen(token->str) + 1)))
             return NULL;
         strcpy(new_node->str, token->str);
-    }
-   // new_node->son_list = list_copy(token->son_list);
     new_node->son_list = token->son_list;
     return new_node;
 }
@@ -140,24 +94,39 @@ static void release_node(s_list *node)
 }
 void remove_node(s_list *node)
 {
+    if (!node)
+        return;
     if (!node->father)
         release_node(node);
     else
     {
         s_list *current_node_tmp = node->father;
         s_list *tmp = node->father;
+        s_list *tmp_son = node->father;
         s_list *previous = NULL;
+        s_list *first_son = node->father->node->son_list;
+        while (tmp_son->node->son_list
+               && tmp_son->node->son_list->id != node->id)
+        {
+            previous = tmp_son->node->son_list;
+            tmp_son->node->son_list = tmp_son->node->son_list->brothers;
+        }
         s_list *next = NULL;
+        if (tmp->node->son_list->brothers)
+            next = tmp->node->son_list->brothers;
         while (tmp)
         {
             if (tmp->node->son_list->id == node->id)
             {
-                tmp->node->son_list = previous;
-                if (tmp->node->son_list)
-                    tmp->node->son_list->brothers = next;
+                if (previous)
+                {
+                    tmp->node->son_list = first_son;
+                    previous->brothers = next;
+                }
+                else
+                    tmp->node->son_list = next;
                 break;
             }
-            previous = tmp->node->son_list;
             tmp->node->son_list = tmp->node->son_list->brothers;
             if (tmp->node->son_list)
                 next = tmp->node->son_list->brothers;
@@ -165,6 +134,7 @@ void remove_node(s_list *node)
         release_node(node);
         g_global->current_node = current_node_tmp;
         g_global->current_node->node = copy_token(current_node_tmp->node);
+        //parcourir la nouvelle liste de fils, puis trouver celui a eliminer
     }
     g_global = g_global;
 }
