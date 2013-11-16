@@ -131,36 +131,36 @@ static char *special_separator(char *str)
     return create_special_string(str, 1);
 }
 
-/* /\** */
-/* ** @brief Returns the new malloc'ed string which will serve as the nex token */
-/* ** value */
-/* *\/ */
+/**
+** @brief Returns the new malloc'ed string which will serve as the nex token
+** value
+*/
 
-/* static char *set_token_value(char *str, unsigned int pos) */
-/* { */
-/*     char *value; */
-/*     unsigned int i = 0; */
-/*     unsigned int len = strlen(str); */
+static char *set_token_value(char *str, unsigned int pos)
+{
+    char *value;
+    unsigned int i = 0;
+    unsigned int len = strlen(str);
 
-/*     while (i < pos) */
-/*         { */
-/*             i++; */
-/*             str++; */
-/*         } */
+    while (i < pos)
+        {
+            i++;
+            str++;
+        }
 
-/*     while (i < len && is_separator(str[i - pos]) == 0) */
-/*         i++; */
+    while (i < len && is_separator(str[i - pos]) == 0)
+        i++;
 
-/*     if ((i - pos) == 0 */
-/*         && ((is_separator(str[0]) == 1 */
-/*              && isspace(str[0]) == 0) || str[0] == '\n')) */
-/*         return special_separator(str); */
-/* // BUG HERE ON FREEBSD */
-/*     g_global->pos = i; */
-/*     value = malloc(sizeof (char) * (i - pos) + 1); */
-/*     strncpy(value, str, (i - pos)); */
-/*     return value; */
-/* } */
+    if ((i - pos) == 0
+        && ((is_separator(str[0]) == 1
+             && isspace(str[0]) == 0) || str[0] == '\n'))
+        return special_separator(str);
+// BUG HERE ON FREEBSD
+    g_global->pos = i;
+    value = malloc(sizeof (char) * (i - pos) + 1);
+    strncpy(value, str, (i - pos));
+    return value;
+}
 
 /* /\** */
 /* ** @brief Checks if the current token is no a special delimiter when the parser */
