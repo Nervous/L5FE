@@ -25,8 +25,9 @@ static void find_next_token(char *s)
 
 static char *create_special_string(char *str, int nb)
 {
-    char *value = malloc(sizeof (char) * nb);
+    char *value = malloc(sizeof (char) * nb + 1);
     value = strncpy(value, str, nb);
+    value[nb] = '\0';
     g_global->pos += nb;
 
     return value;
@@ -42,8 +43,9 @@ char *create_comment(char *str, unsigned int i)
     if (str[0] == '$' || str[0] == '\\')
     {
         str++;
-        char *value = malloc(sizeof (char));
+        char *value = malloc(sizeof (char) * 2);
         strncpy(value, str, 1);
+        value[1] = '\0';
         g_global->pos += 1;
 
         return value;
@@ -57,6 +59,7 @@ char *create_comment(char *str, unsigned int i)
             i++;
         char *value = malloc(sizeof (char) * i);
         strncpy(value, str, i);
+        value[i] = '\0';
         g_global->pos += i;
 
         return value;
@@ -221,6 +224,8 @@ s_token *eat_token(s_token *tok)
     {
         ast_add_node(tok);
     }
-        free(tok);
-        return NULL;
+
+    free(tok->str);
+    free(tok);
+    return NULL;
 }
