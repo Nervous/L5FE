@@ -32,36 +32,36 @@ static char *create_special_string(char *str, int nb)
     return value;
 }
 
-/* /\** */
-/* ** @brief Creates a token which will be interpreted as a comment and will not */
-/* ** be parsed. */
-/* *\/ */
+/**
+** @brief Creates a token which will be interpreted as a comment and will not
+** be parsed.
+*/
 
-/* char *create_comment(char *str, unsigned int i) */
-/* { */
-/*     if (str[0] == '$' || str[0] == '\\') */
-/*     { */
-/*         str++; */
-/*         char *value = malloc(sizeof (char)); */
-/*         strncpy(value, str, 1); */
-/*         g_global->pos += 1; */
+char *create_comment(char *str, unsigned int i)
+{
+    if (str[0] == '$' || str[0] == '\\')
+    {
+        str++;
+        char *value = malloc(sizeof (char));
+        strncpy(value, str, 1);
+        g_global->pos += 1;
 
-/*         return value; */
-/*     } */
-/*     else */
-/*     { */
-/*         str++; */
-/*         unsigned int len = strlen(str); */
+        return value;
+    }
+    else
+    {
+        str++;
+        unsigned int len = strlen(str);
 
-/*         while (i < len && str[i] != '\n') */
-/*             i++; */
-/*         char *value = malloc(sizeof (char) * i); */
-/*         strncpy(value, str, i); */
-/*         g_global->pos += i; */
+        while (i < len && str[i] != '\n')
+            i++;
+        char *value = malloc(sizeof (char) * i);
+        strncpy(value, str, i);
+        g_global->pos += i;
 
-/*         return value; */
-/*     } */
-/* } */
+        return value;
+    }
+}
 
 /* /\** */
 /* ** @brief Create a token which begins with a quoting character */
