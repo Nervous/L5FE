@@ -135,34 +135,34 @@ int get_file(char *filename)
     return parse();
 }
 
-/* /\** */
-/* ** @brief Parses the argument passed to 42sh to find the options. If no */
-/* ** argument is provided, 42sh will run in interactive mode */
-/* *\/ */
+/**
+** @brief Parses the argument passed to 42sh to find the options. If no
+** argument is provided, 42sh will run in interactive mode
+*/
 
-/* int get_options(int argc, char **argv) */
-/* { */
-/*     if (argc == 1) */
-/*     { */
-/*         return 42; //calling readline */
-/*         //readline(); */
-/*     } */
+int get_options(int argc, char **argv)
+{
+    if (argc == 1)
+    {
+        return 42; //calling readline
+        //readline();
+    }
 
-/*     int ret; */
+    int ret;
 
-/*     for (int i = 1; i < argc; i++) */
-/*     { */
-/*         char *opt = argv[i]; */
-/*         if (strncmp(opt, "-", 1) == 0 || strncmp(opt, "+", 1) == 0) */
-/*         { */
-/*             if ((ret = options(argc, argv, i)) != 0) */
-/*                 return ret + (ret == -1); */
-/*         } */
-/*         else */
-/*             return get_file(argv[i]); //executing first arg as command file */
-/*     } */
+    for (int i = 1; i < argc; i++)
+    {
+        char *opt = argv[i];
+        if (strncmp(opt, "-", 1) == 0 || strncmp(opt, "+", 1) == 0)
+        {
+            if ((ret = options(argc, argv, i)) != 0)
+                return ret + (ret == -1);
+        }
+        else
+            return get_file(argv[i]); //executing first arg as command file
+    }
 
-/*     //calling readline */
-/*     //readline(); */
-/*     return 42; */
-/* } */
+    //calling readline
+    //readline();
+    return 42;
+}
