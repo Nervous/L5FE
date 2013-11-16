@@ -162,55 +162,55 @@ static char *set_token_value(char *str, unsigned int pos)
     return value;
 }
 
-/* /\** */
-/* ** @brief Checks if the current token is no a special delimiter when the parser */
-/* ** calls for a WORD token */
-/* *\/ */
+/**
+** @brief Checks if the current token is no a special delimiter when the parser
+** calls for a WORD token
+*/
 
-/* static enum e_type is_expected(enum e_type type) */
-/* { */
-/*     if (type == EOL || type == E_EOF || type == BIT_PIPE || type == BIT_AND */
-/*         || type == SEMICOLON || type == TOKEN_REDIR || type == PIPE_DOUBLE */
-/*         || type == AND_DOUBLE) */
-/*         return type; */
-/*     return WORD; */
-/* } */
+static enum e_type is_expected(enum e_type type)
+{
+    if (type == EOL || type == E_EOF || type == BIT_PIPE || type == BIT_AND
+        || type == SEMICOLON || type == TOKEN_REDIR || type == PIPE_DOUBLE
+        || type == AND_DOUBLE)
+        return type;
+    return WORD;
+}
 
-/* /\** */
-/* ** @brief Analyzes lexically the input str and returns the next token it has */
-/* ** recognized. If the parser explicitely called for a WORD token, a WORD token */
-/* ** should be recognized only if recognized token's type is not a special */
-/* ** delimiter determined by is_expected() */
-/* *\/ */
+/**
+** @brief Analyzes lexically the input str and returns the next token it has
+** recognized. If the parser explicitely called for a WORD token, a WORD token
+** should be recognized only if recognized token's type is not a special
+** delimiter determined by is_expected()
+*/
 
-/* s_token *get_token(enum e_type expected) */
-/* { */
-/*     s_token *token; */
-/*     char *str = g_global->readline; */
+s_token *get_token(enum e_type expected)
+{
+    s_token *token;
+    char *str = g_global->readline;
 
-/*     if ((token = malloc(sizeof (s_token))) == NULL) */
-/*         printf("Error when creating token\n"); */
+    if ((token = malloc(sizeof (s_token))) == NULL)
+        printf("Error when creating token\n");
 
-/*     find_next_token(str); */
+    find_next_token(str);
 
-/*     token->pos = g_global->pos; */
-/*     token->str = set_token_value(str, token->pos); */
-/*     token->type = set_token_type(token->str); */
-/*     token->son_list = NULL; */
-/*     if (strlen(token->str) == 0) */
-/*         token->type = E_EOF; */
+    token->pos = g_global->pos;
+    token->str = set_token_value(str, token->pos);
+    token->type = set_token_type(token->str);
+    token->son_list = NULL;
+    if (strlen(token->str) == 0)
+        token->type = E_EOF;
 
-/*     if (expected == WORD) */
-/*         token->type = is_expected(token->type); */
-/*     else if (token->str[0] == '#') */
-/*     { */
-/*         free(token->str); */
-/*         free(token); */
-/*         return get_token(expected); */
-/*     } */
+    if (expected == WORD)
+        token->type = is_expected(token->type);
+    else if (token->str[0] == '#')
+    {
+        free(token->str);
+        free(token);
+        return get_token(expected);
+    }
 
-/*     return token; */
-/* } */
+    return token;
+}
 
 /* s_token *eat_token(s_token *tok) */
 /* { */
