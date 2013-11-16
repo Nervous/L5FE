@@ -120,6 +120,7 @@ int get_file(char *filename)
     }*/
 
     char *value = malloc(sizeof (char));
+    value = strcpy(value, "");
     char *tmp = NULL;
     size_t len = 0;
     ssize_t read;
