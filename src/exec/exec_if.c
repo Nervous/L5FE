@@ -9,7 +9,7 @@ int exec_else(s_list else_list)
         condition = exec_compound(current->brothers):
         if (condition) //current elif -> compound -> then -> compound
             return exec_compound(current->brothers->brothers->brothers);
-        /* current elif -> compound -> then -> compound -> else of elif*/
+        /* current elif -> compound -> then -> compound -> else of elif */
         current = current->brothers->brothers->brothers->brothers;
     }
     if (current == NULL)
