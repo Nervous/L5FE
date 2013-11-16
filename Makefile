@@ -22,7 +22,7 @@ doc:
 	#TO BE DONE
 
 check:
-	#TO BE DONE
+	python tests/test.py
 
 export:
 	git archive HEAD --prefix=$(ARCHIVE)/ | bzip2 > $(ARCHIVE).tar.bz2
