@@ -91,49 +91,49 @@ static int options(int argc, char **argv, int i)
     return options2(argc, argv, i);
 }
 
-/* /\** */
-/* ** @brief Reads the file passed as an argument to 42sh and stores it into a */
-/* ** single single to parse and execute */
-/* *\/ */
+/**
+** @brief Reads the file passed as an argument to 42sh and stores it into a
+** single single to parse and execute
+*/
 
-/* int get_file(char *filename) */
-/* { */
-/*     FILE *file; */
+int get_file(char *filename)
+{
+    FILE *file;
 
-/*     if ((file = fopen(filename, "r")) == NULL) */
-/*     { */
-/*         fprintf(stderr, "%s: File not found\n", filename); */
-/*         exit(127); */
-/*     } */
+    if ((file = fopen(filename, "r")) == NULL)
+    {
+        fprintf(stderr, "%s: File not found\n", filename);
+        exit(127);
+    }
 
-/*     /\*size_t size = 1024; */
-/*     char *buf = malloc(sizeof (char) * size); */
-/*     char *value = malloc(sizeof (char) * size); */
-/*     while (fgets(buf, size, file) != NULL) */
-/*     { */
-/*         if (strlen(value) + strlen(buf) > size) */
-/*         { */
-/*             value = realloc(buf, 1024); */
-/*             size += 1024; */
-/*         } */
-/*         value = strcat(value, buf); */
-/*     }*\/ */
+    /*size_t size = 1024;
+    char *buf = malloc(sizeof (char) * size);
+    char *value = malloc(sizeof (char) * size);
+    while (fgets(buf, size, file) != NULL)
+    {
+        if (strlen(value) + strlen(buf) > size)
+        {
+            value = realloc(buf, 1024);
+            size += 1024;
+        }
+        value = strcat(value, buf);
+    }*/
 
-/*     char *value = malloc(sizeof (char)); */
-/*     char *tmp = NULL; */
-/*     size_t len = 0; */
-/*     ssize_t read; */
+    char *value = malloc(sizeof (char));
+    char *tmp = NULL;
+    size_t len = 0;
+    ssize_t read;
 
-/*     while ((read = getline(&tmp, &len, file)) != -1) */
-/*     { */
-/*         value = realloc(value, sizeof (char) * (strlen(value) + len)); */
-/*         value = strcat(value, tmp); */
-/*     } */
+    while ((read = getline(&tmp, &len, file)) != -1)
+    {
+        value = realloc(value, sizeof (char) * (strlen(value) + len));
+        value = strcat(value, tmp);
+    }
 
-/*     g_global->readline = value; */
+    g_global->readline = value;
 
-/*     return parse(); */
-/* } */
+    return parse();
+}
 
 /* /\** */
 /* ** @brief Parses the argument passed to 42sh to find the options. If no */
