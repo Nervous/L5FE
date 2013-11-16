@@ -5,7 +5,7 @@ project(42sh)
 set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -std=c99 -pedantic")
 
 #creates a list named SRCS that contains main.c
-set(SRCS main.c)
+set(SRCS main.c get_options.c get_options.h)
 
 add_subdirectory(struct)
 
