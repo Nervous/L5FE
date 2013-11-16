@@ -24,7 +24,7 @@ int parse_element(s_token **tok)
     if ((*tok)->type == WORD)
     {
         *tok = eat_token(*tok);
-        *tok = get_token(WORD);
+        *tok = get_token(EOL);
         if (g_global->current_node->father)
             g_global->current_node = g_global->current_node->father;
         return 0;

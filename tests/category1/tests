@@ -14,8 +14,7 @@ Pattern :
 
 Exemple :
 
-CMD=echo test
+CMD=-c echo test
 RV=0
-OP=test
 
 
