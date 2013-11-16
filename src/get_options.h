@@ -7,7 +7,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# include "struct/struct.h"
+# include "struct.h"
 # include "parser/parser.h"
 
 int get_options(int argc, char **argv);

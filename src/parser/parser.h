@@ -4,11 +4,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include "struct.h"
+# include "../struct.h"
 # include "../lexer/lexer.h"
+# include "../ast/ast.h"
 # include "utils_string.h"
 # include "utils_error.h"
-# include "ast/ast.h"
+
 
 int parse(void);
 

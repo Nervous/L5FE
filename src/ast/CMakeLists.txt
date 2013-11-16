@@ -1,7 +1,7 @@
-set(ast_printer_source_files
-    ast.c
+set(ast_source_files
     ast.h
+    ast.c
     print_ast.c
 )
 
-add_library(ast_printer ${ast_printer_source_files})
+add_library(ast ${ast_source_files})

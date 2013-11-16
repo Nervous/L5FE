@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "struct.h"
-#include "ast/ast.h"
+#include "../struct.h"
+#include "../ast/ast.h"
 #include "lexer.h"
 
 extern s_global *g_global;

@@ -4,7 +4,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# include "struct.h"
+# include "../struct.h"
 # include "token.h"
 
 s_token *get_token(enum e_type TYPE);
