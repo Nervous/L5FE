@@ -1,4 +1,5 @@
 #include "get_options.h"
+#include "readline/readline.c"
 
 extern s_global *g_global;
 
@@ -145,8 +146,8 @@ int get_options(int argc, char **argv)
 {
     if (argc == 1)
     {
+        readline();
         return 42; //calling readline
-        //readline();
     }
 
     int ret;
@@ -163,7 +164,6 @@ int get_options(int argc, char **argv)
             return get_file(argv[i]); //executing first arg as command file
     }
 
-    //calling readline
-    //readline();
+    readline();
     return 42;
 }

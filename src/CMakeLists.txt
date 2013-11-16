@@ -10,6 +10,7 @@ set(SRCS struct.h main.c get_options.c get_options.h)
 add_subdirectory(parser)
 add_subdirectory(ast)
 add_subdirectory(lexer)
+add_subdirectory(readline)
 
 # defines the files to compile, just add the files you want to include
 #in the compilation
@@ -31,3 +32,4 @@ add_executable(
 target_link_libraries(42sh ast)
 target_link_libraries(42sh lexer)
 target_link_libraries(42sh parser)
+target_link_libraries(42sh readline)

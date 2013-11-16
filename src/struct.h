@@ -1,5 +1,7 @@
 #ifndef STRUCT_H
 # define STRUCT_H
+# include <stdio.h>
+# include <termios.h>
 
 void init_global(void);
 
@@ -83,6 +85,8 @@ typedef struct global
     int norc;
     char *readline;
     int prev_return;
+    FILE *hist;
+    struct termios attribute;
 } s_global;
 
 #endif /* !STRUCT_H */

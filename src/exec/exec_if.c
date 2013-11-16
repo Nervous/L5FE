@@ -1,6 +1,6 @@
 #include "exec.h"
 
-int exec_else(s_list else_list)
+int exec_else(s_list *else_list)
 {
     int condition = 0;
     s_list current = else_list->node->son_list;
@@ -9,7 +9,7 @@ int exec_else(s_list else_list)
         condition = exec_compound(current->brothers):
         if (condition) //current elif -> compound -> then -> compound
             return exec_compound(current->brothers->brothers->brothers);
-        /* current elif -> compound -> then -> compound -> else of elif*/
+        /* current elif -> compound -> then -> compound -> else of elif */
         current = current->brothers->brothers->brothers->brothers;
     }
     if (current == NULL)
@@ -17,7 +17,7 @@ int exec_else(s_list else_list)
     return exec_compound(current->brothers);
 }
 
-int exec_if(s_list rule_if)
+int exec_if(s_list *rule_if)
 {
     s_list current = rule_if->node->son_list;
     /* current on if */
