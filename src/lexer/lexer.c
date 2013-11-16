@@ -19,18 +19,18 @@ static void find_next_token(char *s)
       g_global->pos += 1;
 }
 
-/* /\** */
-/* ** @brief Creates a new malloc'ed string which will serve as the token value and */
-/* *\/ */
+/**
+** @brief Creates a new malloc'ed string which will serve as the token value and
+*/
 
-/* static char *create_special_string(char *str, int nb) */
-/* { */
-/*     char *value = malloc(sizeof (char) * nb); */
-/*     value = strncpy(value, str, nb); */
-/*     g_global->pos += nb; */
+static char *create_special_string(char *str, int nb)
+{
+    char *value = malloc(sizeof (char) * nb);
+    value = strncpy(value, str, nb);
+    g_global->pos += nb;
 
-/*     return value; */
-/* } */
+    return value;
+}
 
 /* /\** */
 /* ** @brief Creates a token which will be interpreted as a comment and will not */
