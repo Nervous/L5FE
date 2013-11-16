@@ -17,6 +17,7 @@ void init_global(void)
     g_global->ast = 0;
     g_global->norc = 0;
     g_global->readline = NULL;
+    g_global->hist = NULL;
 }
 
 
