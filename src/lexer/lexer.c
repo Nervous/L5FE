@@ -212,12 +212,12 @@ s_token *get_token(enum e_type expected)
     return token;
 }
 
-/* s_token *eat_token(s_token *tok) */
-/* { */
-/*     if (strlen(tok->str) > 0 && strcmp(tok->str, "\n") != 0) */
-/*     { */
-/*         ast_add_node(tok); */
-/*     } */
-/*         free(tok); */
-/*         return NULL; */
-/* } */
+s_token *eat_token(s_token *tok)
+{
+    if (strlen(tok->str) > 0 && strcmp(tok->str, "\n") != 0)
+    {
+        ast_add_node(tok);
+    }
+        free(tok);
+        return NULL;
+}
