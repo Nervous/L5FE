@@ -28,6 +28,7 @@ int main(int argc, char **argv)
     init_global();
 
     int ret = get_options(argc, argv);
+    exec_input(get_root(g_global->current_node));
 
     if (g_global->ast)
         print_ast(get_root(g_global->current_node), "tree.dot");
