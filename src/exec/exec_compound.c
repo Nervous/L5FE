@@ -10,5 +10,5 @@ int exec_compound_aux(s_list *p_and_or)
 
 int exec_compound(s_list *compound)
 {
-    return exec_compound_aux(compound->node->son_list);
+    return exec_compound_aux(compound);
 }
