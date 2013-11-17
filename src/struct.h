@@ -49,8 +49,6 @@ enum e_type
     RIGHT_BRACKET,
     LEFT_PAR,
     RIGHT_PAR,
-    LEFT_SQ_BRACKET,
-    RIGHT_SQ_BRACKET,
     B_SLASH,
     SLASH,
     IONUMBER,
