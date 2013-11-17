@@ -38,12 +38,14 @@ s_var *add_var(s_var *list, char *key, char *value)
         head->key = key;
         head->value = value;
         head->next = list;
+        return head;
     }
     else
     {
         free(tmp->value);
         free(key);
         tmp->value = value;
+        return list;
     }
 }
 
