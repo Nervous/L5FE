@@ -1,5 +1,5 @@
+#include "../struct.h"
 #include "variable.h"
-#include "struct.h"
 #include <stdlib.h>
 #include <string.h>
 

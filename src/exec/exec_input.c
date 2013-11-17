@@ -1,4 +1,5 @@
 #include "exec.h"
+#include <string.h>
 
 int exec_input(s_list *ast)
 {

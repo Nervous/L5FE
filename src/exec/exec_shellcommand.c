@@ -17,8 +17,9 @@ int exec_shellcommand(s_list *ast)
              || strcmp(ast->node->str, "("))
     {
         ast = ast->brothers;
-        int ret = exec_compoundlist(ast->node->son_list);
+        int ret = exec_compound(ast->node->son_list);
         ast = ast->brothers;
         return ret;
     }
+    return 0;
 }

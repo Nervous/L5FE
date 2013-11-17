@@ -2,5 +2,6 @@
 
 int exec_funcdec(s_list *funcdec)
 {
+    funcdec = funcdec;
     return -1;
 }

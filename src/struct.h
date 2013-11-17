@@ -84,7 +84,6 @@ typedef struct global
     int norc;
     int file;
     char *readline;
-    int prev_return;
     FILE *hist;
     struct termios attribute;
     s_var *var;

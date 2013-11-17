@@ -1,5 +1,6 @@
 set(exec_source_files
     exec.h
+    variable.h
     exec_andor.c
     exec_command.c
     exec_compound.c
@@ -14,8 +15,9 @@ set(exec_source_files
     exec_shellcommand.c
     exec_until.c
     exec_while.c
+    exec_for.c
+    exec_case.c
     variable.c
-    variable.h
     exec_funcdec.c
 )
 

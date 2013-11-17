@@ -4,6 +4,7 @@
 #include "struct.h"
 #include "parser/parser.h"
 #include "get_options.h"
+#include "exec/exec.h"
 
 s_global *g_global = NULL;
 

@@ -28,26 +28,30 @@ int do_fork(char **argv)
     {
         if (execve(argv[0], argv, environ) == -1)
             exit(-1);
+        return -1;
     }
 }
 
 char **build_argv(s_list *ast)
 {
-    int i = 0;
     int str_size = 0;
-    s_list *tmp = ast;
 
     char **ret = malloc(4 * sizeof (char *));
     ret[0] = "/bin/sh";
     ret[1] = "-c";
-    ret[2] = "\0";
+    ret[2] = malloc(sizeof (char));
+    ret[2][0] = '\0';
     ret[3] = NULL;
 
     while (ast != NULL)
     {
         str_size += strlen(ast->node->str);
+        if (ast->brothers != NULL)
+            str_size += 1;
         ret[2] = realloc(ret[2], str_size);
         ret[2] = strcat(ret[2], ast->node->str);
+        if (ast->brothers != NULL)
+            ret[2] = strcat(ret[2], " ");
         ast = ast->brothers;
     }
 

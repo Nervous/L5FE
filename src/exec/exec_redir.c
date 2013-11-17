@@ -2,5 +2,6 @@
 
 int exec_redir(s_list *redirection)
 {
-    //TODO
+    redirection = redirection;   //TODO
+    return -1;
 }
