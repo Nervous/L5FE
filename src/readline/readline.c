@@ -1,6 +1,8 @@
 #include "readline.h"
 #include "../struct.h"
 #include "../parser/parser.h"
+#include "../exec/exec.h"
+#include "../ast/ast.h"
 #include "functionkey.h"
 #include "history.h"
 #include <termios.h>
@@ -82,8 +84,6 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
 {
     char tmp;
     char *buf = *buf_p;
-    char test[5];
-    read(STDIN_FILENO, test, 5);
     while ((tmp = get_char()) != '\n' && tmp != '\r')
     {
         if (tmp < 32 || tmp == '\177')
@@ -154,7 +154,11 @@ void readline(void)
         if (!strcmp(g_global->readline, "exit"))
             break;
         while (parse() == -1)
+        {
+            g_global->pos = 0;
             read_ps2();
+        }
+        exec_input(get_root(g_global->current_node));
         write_history(g_global->readline);
     }
     while (1);
