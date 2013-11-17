@@ -4,6 +4,10 @@ extern s_global *g_global;
 static int parse_simplecommand(s_token **tok)
 {
     ast_add_step("Simple_command");
+
+    while (parse_prefix(tok) == 0)
+        ;
+
     if (parse_prefix(tok) == -1)
     {
         if (parse_element(tok) == -1)
@@ -18,8 +22,6 @@ static int parse_simplecommand(s_token **tok)
         return 0;
     }
 
-    while (parse_prefix(tok) == 0)
-        ;
     climb_ast(1);
     return 0;
 }

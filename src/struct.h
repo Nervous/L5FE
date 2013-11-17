@@ -17,6 +17,7 @@ enum e_type
 {
     EOL,
     E_EOF,
+    ASSIGNMENT_WORD,
     CASE,
     ESAC,
     DO,
@@ -53,7 +54,6 @@ enum e_type
     B_SLASH,
     SLASH,
     IONUMBER,
-    ASSIGNMENT_WORD,
     WORD,
     ABSTRACT
 };
@@ -83,6 +83,7 @@ typedef struct global
     unsigned int pos;
     int ast;
     int norc;
+    int file;
     char *readline;
     int prev_return;
     FILE *hist;

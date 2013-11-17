@@ -2,8 +2,18 @@
 #include <stdio.h>
 #include "utils_error.h"
 
-void parse_error(char *msg)
+extern s_global *g_global;
+
+int parse_error(char *msg)
 {
-    printf("%s\nExiting ...", msg);
-    exit(1);
+    if (g_global->file == 1)
+    {
+        printf("%s\nExiting ...\n", msg);
+        exit(1);
+        return 0;
+    }
+    else
+    {
+        return -1;
+    }
 }
