@@ -50,6 +50,7 @@ void remove_node(s_list *node)
         }
         s_list *next = NULL;
         if (tmp->node->son_list->brothers)
+            next = tmp->node->son_list->brothers;
         while (tmp)
         {
             if (tmp->node->son_list->id == node->id)
