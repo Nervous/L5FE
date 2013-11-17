@@ -121,8 +121,9 @@ static void parse_elseclause(s_token **tok)
         *tok = get_token(EOL);
         climb_ast(1);
         parse_compoundlist(tok, true);
-        climb_ast(1);
+//        climb_ast(1);
         parse_elseclause(tok);
+        climb_ast(1);
     }
 }
 

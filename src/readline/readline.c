@@ -51,7 +51,7 @@ static void write_buf(char *buf, int cur_pos, int buf_size)
 */
 static callback match_key(char c, char **buf)
 {
-    if (c == '\177')
+    if (c == '\177' || c == '\b')
         return backspace;
     if (c == '\n'|| c == '\r')
         return new_line;
@@ -67,6 +67,8 @@ static callback match_key(char c, char **buf)
                 return right_key;
             if (tmp2 == '\n')
                 return new_line;
+            if (tmp2 == '3' && get_char() == '~')
+                return delete;
         }
         if (tmp == '\n')
             return new_line;
@@ -80,6 +82,8 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
 {
     char tmp;
     char *buf = *buf_p;
+    char test[5];
+    read(STDIN_FILENO, test, 5);
     while ((tmp = get_char()) != '\n' && tmp != '\r')
     {
         if (tmp < 32 || tmp == '\177')
