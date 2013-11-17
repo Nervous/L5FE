@@ -54,6 +54,7 @@ enum e_type
     SLASH,
     IONUMBER,
     WORD,
+    ERROR,
     ABSTRACT
 };
 
