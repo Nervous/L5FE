@@ -27,8 +27,8 @@ int exec_if(s_list *current)
         return exec_compound(current->brothers->node->son_list);
     /* if current (which is now eq to fi or else) == "Else_clause" */
     else if (strcmp((current = current->brothers->brothers)->node->str,
-                    "Else_clause"))
-        return exec_else(current->brothers);
+                    "Else_clause") == 0)
+        return exec_else(current->node->son_list->brothers);
     else
         return 0;
 }
