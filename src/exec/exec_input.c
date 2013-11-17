@@ -7,9 +7,14 @@ int exec_input(s_list *ast)
         return -1;
     else
         ast = ast->node->son_list;
-
-    if (strcmp(ast->node->str, "List") == 0)
-        return exec_list(ast->node->son_list);
-    else
-        return 0;
+    int ret = 0;
+    while (ast)
+    {
+        if (strcmp(ast->node->str, "List") == 0)
+            ret = exec_list(ast->node->son_list);
+        else
+            return 0;
+        ast = ast->brothers;
+    }
+    return ret;
 }

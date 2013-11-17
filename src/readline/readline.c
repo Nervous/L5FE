@@ -1,6 +1,8 @@
 #include "readline.h"
 #include "../struct.h"
 #include "../parser/parser.h"
+#include "../exec/exec.h"
+#include "../ast/ast.h"
 #include "functionkey.h"
 #include "history.h"
 #include <termios.h>
@@ -46,9 +48,12 @@ static void write_buf(char *buf, int cur_pos, int buf_size)
     tputs(tgetstr("rc", NULL), 1, my_putchar);
 }
 
+/**
+** @brief This function match key with special keys
+*/
 static callback match_key(char c, char **buf)
 {
-    if (c == '\177')
+    if (c == '\177' || c == '\b')
         return backspace;
     if (c == '\n'|| c == '\r')
         return new_line;
@@ -64,6 +69,8 @@ static callback match_key(char c, char **buf)
                 return right_key;
             if (tmp2 == '\n')
                 return new_line;
+            if (tmp2 == '3' && get_char() == '~')
+                return delete;
         }
         if (tmp == '\n')
             return new_line;
@@ -99,9 +106,9 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
 }
 
 /**
- ** This funcution is responsible of setting up the variables for processing
- ** the input
- */
+** @brief This function is responsible of setting up the variables for processing
+** the input in PS1
+*/
 static void read_input(void)
 {
     write(STDIN_FILENO, "42sh$ ", 6);
@@ -117,6 +124,10 @@ static void read_input(void)
     g_global->readline = buf;
 }
 
+/**
+** @brief This function is responsible of setting up the variables for processing
+** the input in PS2
+*/
 static void read_ps2(void)
 {
     write(STDIN_FILENO, "> ", 2);
@@ -143,7 +154,11 @@ void readline(void)
         if (!strcmp(g_global->readline, "exit"))
             break;
         while (parse() == -1)
+        {
+            g_global->pos = 0;
             read_ps2();
+        }
+        exec_input(get_root(g_global->current_node));
         write_history(g_global->readline);
     }
     while (1);

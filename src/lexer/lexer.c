@@ -77,8 +77,7 @@ static char *create_quote_token(char *str)
     if (str[1] == '#')
         return create_comment(str, i);
 
-    str++;
-    unsigned int len = strlen(str);
+    unsigned int len = strlen(++str);
 
     while (i < len && !(str[i] == str[0]
                         && (str[i - 1] != '\\' || str[0] == '\'')))
@@ -90,6 +89,7 @@ static char *create_quote_token(char *str)
         strncpy(value, "!@#*()%^", 8);
         value[9] = '\0';
         g_global->pos += i;
+        return value;
     }
     else
     {
