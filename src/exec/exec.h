@@ -4,6 +4,7 @@
 # include <stdlib.h>
 # include "../struct.h"
 # include "../ast/ast.h"
+# include "variable.h"
 
 int exec_redir(s_list *redirection);
 int exec_if(s_list *rule_if);
