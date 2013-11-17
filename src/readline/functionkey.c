@@ -53,6 +53,21 @@ void backspace (char **buf_p, int *cur_pos, int *buf_s, int *max_s)
     }
 }
 
+void delete (char **buf_p, int *cur_pos, int *buf_size, int *max_size)
+{
+    max_size = max_size;
+    char *buf = *buf_p;
+    if (*cur_pos < *buf_size)
+    {
+        memcpy(buf + *cur_pos, buf + *cur_pos + 1, *buf_size - *cur_pos + 1);
+        *buf_size -= 1;
+        tputs(tgetstr("sc", NULL), 1, my_putchar);
+        write(STDOUT_FILENO, buf + *cur_pos, strlen(buf + *cur_pos));
+        write(STDOUT_FILENO, " ", 1);
+        tputs(tgetstr("rc", NULL), 1, my_putchar);
+    }
+}
+
 void new_line (char **buf, int *cur_pos, int *buf_size, int *max_size)
 {
     buf = buf;
