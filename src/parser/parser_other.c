@@ -15,6 +15,10 @@ int parse_redirection(s_token **tok)
 
        *tok = eat_token(*tok);
        *tok = get_token(WORD);
+       if ((*tok)->type != WORD)
+           return -1;
+       *tok = eat_token(*tok);
+       *tok = get_token(EOL);
        climb_ast(1);
         return 0;
 }

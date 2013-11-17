@@ -1,3 +1,4 @@
+#include <string.h>
 #include "exec.h"
 
 void exec_command(s_list *ast)
