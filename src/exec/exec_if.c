@@ -20,11 +20,11 @@ int exec_else(s_list *current)
 int exec_if(s_list *current)
 {
     /* current on if */
-    int condition = exec_compound(current->brothers);
+    int condition = exec_compound(current->brothers->node->son_list);
     current = current->brothers->brothers;
     /*current on then*/
     if (condition == 0)
-        return exec_compound(current->brothers);
+        return exec_compound(current->brothers->node->son_list);
     /* if current (which is now eq to fi or else) == "Else_clause" */
     else if (strcmp((current = current->brothers->brothers)->node->str,
                     "Else_clause"))

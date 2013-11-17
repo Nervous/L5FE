@@ -31,5 +31,6 @@ int parse_function(s_token **tok)
     parse_loop_EOL(tok);
     if (parse_shellcommand(tok) == -1)
         parse_error("PARSE ERROR : Expected a shell command !");
+    // REGISTER : g_global->current_node->node->son_list;
     return 0;
 }
