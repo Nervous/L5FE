@@ -35,6 +35,7 @@ static int parse_list(s_token **tok)
 
 static int parse_input(void)
 {
+    ast_add_step("Input");
     s_token *tok = get_token(INPUT);
     while (tok->type != E_EOF)
     {
@@ -47,7 +48,6 @@ static int parse_input(void)
             break;
         else
         {
-            ast_add_step("Input");
             if (parse_list(&tok) == -1)
                 return parse_error("PARSE ERROR : Expected a list");
             if (tok->type == EOL || tok->type == E_EOF)
@@ -58,6 +58,7 @@ static int parse_input(void)
             else
                 return parse_error("PARSE ERROR : Expected '\\n' or EOF");
         }
+        climb_ast(1);
     }
     tok = eat_token(tok);
     return 0;
