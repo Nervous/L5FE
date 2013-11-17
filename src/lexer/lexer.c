@@ -224,8 +224,8 @@ s_token *get_token(enum e_type expected)
         token->type = ERROR;
 
     //DEBUG & TESTING
-    /*printf("New token created:\nTYPE = %d\nSTR = %s\n\n",
-           token->type, token->str);*/
+    printf("New token created:\nTYPE = %d\nSTR = %s\n\n",
+           token->type, token->str);
 
 
     return token;
@@ -233,6 +233,8 @@ s_token *get_token(enum e_type expected)
 
 s_token *eat_token(s_token *tok)
 {
+    if (tok == NULL)
+        return NULL;
     if (strlen(tok->str) > 0 && strcmp(tok->str, "\n") != 0
         && strcmp(tok->str, "fi") != 0 && strcmp(tok->str, "done") != 0)
     {
