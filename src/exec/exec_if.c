@@ -14,7 +14,7 @@ int exec_else(s_list *current)
     }
     if (current == NULL)
         return 0;
-    return exec_compound(current->brothers);
+    return exec_compound(current->node->son_list);
 }
 
 int exec_if(s_list *current)

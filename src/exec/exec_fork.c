@@ -19,7 +19,7 @@ int do_fork(char **argv)
         ret = waitpid(child, &status, 0);
         free(argv[2]);
         free(argv);
-        if (ret == child)
+        if (ret != 0)
             return -1;
         else
             return 0;
@@ -35,12 +35,11 @@ int do_fork(char **argv)
 char **build_argv(s_list *ast)
 {
     int str_size = 0;
-
     char **ret = malloc(4 * sizeof (char *));
     ret[0] = "/bin/sh";
     ret[1] = "-c";
-    ret[2] = malloc(sizeof (char));
-    ret[2][0] = '\0';
+    //ret[2] = malloc(sizeof (char));
+    //ret[2][0] = '\0';
     ret[3] = NULL;
 
     while (ast != NULL)
