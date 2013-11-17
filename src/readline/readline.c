@@ -106,8 +106,8 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
 }
 
 /**
-** @brief This function is responsible of setting up the variables for processing
-** the input in PS1
+** @brief This function is responsible of setting up the variables for
+** processing the input in PS1
 */
 static void read_input(void)
 {
@@ -125,8 +125,8 @@ static void read_input(void)
 }
 
 /**
-** @brief This function is responsible of setting up the variables for processing
-** the input in PS2
+** @brief This function is responsible of setting up the variables for
+** processing the input in PS2
 */
 static void read_ps2(void)
 {
