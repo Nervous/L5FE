@@ -12,7 +12,7 @@ static void print_node_text(s_list *ast, FILE *f)
     fprintf(f, "%u", ast->id);
     fprintf(f, "\n");
     fprintf(f, "%u [label = \"%s\"]",
-        ast->father->id, ast->father->node->str);
+            ast->father->id, ast->father->node->str);
     fprintf(f, "\n");
     fprintf(f, "%u [label = \"%s\"]", ast->id, ast->node->str);
     fprintf(f, "\n");
