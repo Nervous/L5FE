@@ -225,6 +225,8 @@ s_token *get_token(enum e_type expected)
 
 s_token *eat_token(s_token *tok)
 {
+    if (tok == NULL)
+        return NULL;
     if (strlen(tok->str) > 0 && strcmp(tok->str, "\n") != 0
         && strcmp(tok->str, "fi") != 0 && strcmp(tok->str, "done") != 0)
     {
