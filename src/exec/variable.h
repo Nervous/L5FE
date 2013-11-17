@@ -1,14 +1,12 @@
 #ifndef VARIABLE_H
 # define VARIABLE_H
 
-typedef struct var s_var;
-
-struct var
+typedef struct var
 {
     char *key;
     char *value;
-    s_var *next;
-};
+    struct var *next;
+} s_var;
 
 s_var *search_var(s_var *list, char *key);
 s_var *add_var(s_var *list, char *key, char *value);

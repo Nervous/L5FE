@@ -1,6 +1,6 @@
 #include "exec.h"
 
-int exec_ruleuntil(s_list *until)
+int exec_until(s_list *until)
 {
     int condition = 1;
     while (condition != 0)

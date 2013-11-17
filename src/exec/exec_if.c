@@ -1,11 +1,12 @@
 #include "exec.h"
+#include <string.h>
 
 int exec_else(s_list *current)
 {
     int condition = 1;
     while (current != NULL && current->node->type != ELSE)
     {
-        condition = exec_compound(current->brothers):
+        condition = exec_compound(current->brothers);
         if (condition == 0) //current elif -> compound -> then -> compound
             return exec_compound(current->brothers->brothers->brothers);
         /* current elif -> compound -> then -> compound -> else of elif */

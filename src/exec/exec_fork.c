@@ -28,14 +28,13 @@ int do_fork(char **argv)
     {
         if (execve(argv[0], argv, environ) == -1)
             exit(-1);
+        return -1;
     }
 }
 
 char **build_argv(s_list *ast)
 {
-    int i = 0;
     int str_size = 0;
-    s_list *tmp = ast;
 
     char **ret = malloc(4 * sizeof (char *));
     ret[0] = "/bin/sh";
