@@ -85,17 +85,22 @@ static char *create_quote_token(char *str)
         i++;
 
     if (i == len && str[i] != str[0])
-        printf("Lexer error, unable to find corresponding %c\n", str[0]);
+    {
+        char *value = malloc(sizeof (char) * 9);
+        strncpy(value, "!@#*()%^", 8);
+        value[9] = '\0';
+        g_global->pos += i;
+    }
     else
-        {
-            i++;
-            char *value = malloc(sizeof (char) * i);
-            strncpy(value, str, i);
-            value[i] = '\0';
-            g_global->pos += i;
+    {
+        i++;
+        char *value = malloc(sizeof (char) * i);
+        strncpy(value, str, i);
+        value[i] = '\0';
+        g_global->pos += i;
 
-            return value;
-        }
+        return value;
+    }
 
     return "";
 }
@@ -215,9 +220,12 @@ s_token *get_token(enum e_type expected)
         return get_token(expected);
     }
 
+    if (strcmp(token->str, "!@#*()%^") == 0)
+        token->type = ERROR;
+
     //DEBUG & TESTING
-    printf("New token created:\nTYPE = %d\nSTR = %s\n\n",
-           token->type, token->str);
+    /*printf("New token created:\nTYPE = %d\nSTR = %s\n\n",
+      token->type, token->str);*/
 
 
     return token;
@@ -225,6 +233,8 @@ s_token *get_token(enum e_type expected)
 
 s_token *eat_token(s_token *tok)
 {
+    if (tok == NULL)
+        return NULL;
     if (strlen(tok->str) > 0 && strcmp(tok->str, "\n") != 0
         && strcmp(tok->str, "fi") != 0 && strcmp(tok->str, "done") != 0)
     {
