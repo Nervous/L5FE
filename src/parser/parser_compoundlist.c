@@ -16,15 +16,19 @@ static void loop_coumpoundlist(s_token **tok, bool mandatory)
        }
        int climb = 0;
         if ((*tok)->type == SEMICOLON)
+        {
             climb = 1;
+            climb_ast(2);
+        }
         *tok = eat_token(*tok);
         *tok = get_token(EOL);
+        if (!climb)
         climb_ast(1);
         parse_loop_EOL(tok);
         if (parse_andor(tok, false) == -1)
         {
-            if (climb)
-                climb_ast(1);
+        //    if (climb)
+          //      climb_ast(1);
             break;
         }
 //        else
@@ -37,7 +41,6 @@ static void check_end_coumpoundlist(s_token **tok)
     if (!((*tok)->type == EOL || (*tok)->type == BIT_AND
                 || (*tok)->type == SEMICOLON))
         return;
-
     *tok = eat_token(*tok);
     *tok = get_token(EOL);
     climb_ast(1);
