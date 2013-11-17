@@ -19,7 +19,7 @@ int do_fork(char **argv)
         ret = waitpid(child, &status, 0);
         free(argv[2]);
         free(argv);
-        if (ret == child)
+        if (ret != 0)
             return -1;
         else
             return 0;
