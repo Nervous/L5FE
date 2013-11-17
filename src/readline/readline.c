@@ -1,5 +1,6 @@
 #include "readline.h"
 #include "../struct.h"
+#include "../parser/parser.h"
 #include "functionkey.h"
 #include "history.h"
 #include <termios.h>
@@ -25,7 +26,7 @@ static void init_term(void)
 int my_putchar(int ch)
 {
     char c = ch;
-    return (write(STDOUT_FILENO, &c, 1));
+    return write(STDOUT_FILENO, &c, 1);
 }
 
 char get_char(void)
@@ -115,6 +116,20 @@ static char *read_input(void)
     return buf;
 }
 
+static char *read_ps2(void)
+{
+    write(STDIN_FILENO, "> ", 2);
+    char *buf = calloc(100, sizeof (char));
+    int buf_size = 0;
+    int cur_pos = 0;
+    int max_size = 100;
+    process_input(&buf, &cur_pos, &buf_size, &max_size);
+    write(STDOUT_FILENO, "\n" ,1);
+    g_global->readline = realloc(g_global->readline,
+            sizeof (char) * (strlen(g_global->readline) + buf_size + 1));
+    strcat(g_global->readline, buf);
+    free(buf);
+}
 
 void readline(void)
 {
@@ -132,6 +147,8 @@ void readline(void)
             break;
         }
         free(buf);
+        while (parse() == -1)
+            read_ps2();
     }
     while (1);
     fflush(g_global->hist);
