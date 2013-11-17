@@ -1,8 +1,9 @@
 #ifndef EXEC_H
 # define EXEC_H
 
-# include "variable.h"
+# include "string.h"
 # include <stdlib.h>
+# include "variable.h"
 # include "../struct.h"
 # include "../ast/ast.h"
 
