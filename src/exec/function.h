@@ -1,6 +1,8 @@
 #ifndef FUNCTION_H
 # define FUNCTION_H
 
+# include "../struct.h"
+
 typedef struct function s_function;
 
 struct function

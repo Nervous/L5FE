@@ -1,5 +1,4 @@
 #include "function.h"
-#include "../struct.h"
 #include <string.h>
 #include <stdlib.h>
 
