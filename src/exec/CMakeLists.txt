@@ -15,6 +15,7 @@ set(exec_source_files
     exec_while.c
     variable.c
     variable.h
+    exec_funcdec.c
 )
 
 add_library(exec ${exec_source_files})
