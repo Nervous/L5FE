@@ -83,6 +83,7 @@ typedef struct global
     unsigned int pos;
     int ast;
     int norc;
+    int file;
     char *readline;
     int prev_return;
     FILE *hist;

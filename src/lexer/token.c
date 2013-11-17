@@ -66,8 +66,6 @@ static enum e_type set_type_simple2(char *str)
         return RIGHT_SQ_BRACKET;
     if (strcmp(str, "<") == 0)
         return TOKEN_REDIR;
-    if (strcmp(str, ">") == 0)
-        return TOKEN_REDIR;
     if (strcmp(str, ";") == 0)
         return SEMICOLON;
     if (strcmp(str, "\\") == 0)
@@ -131,8 +129,6 @@ static int is_separator2(char c)
     case '\'':
         return 1;
     case '#':
-        return 1;
-    case '>':
         return 1;
     case '<':
         return 1;
