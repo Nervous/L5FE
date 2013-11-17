@@ -11,6 +11,7 @@ set(exec_source_files
     exec_pipeline.c
     exec_redir.c
     exec_simplecommand.c
+    exec_shellcommand.c
     exec_until.c
     exec_while.c
     variable.c
