@@ -9,9 +9,14 @@ int exec_else(s_list *current)
     {
         condition = exec_compound(current->brothers->node->son_list);
         if (condition == 0) //current elif -> compound -> then -> compound
-            return exec_compound(current->brothers->brothers->brothers);
+            return
+exec_compound(current->brothers->brothers->brothers->node->son_list);
         /* current elif -> compound -> then -> compound -> else of elif */
-        current = current->brothers->brothers->brothers->brothers;
+        if (current->brothers->brothers->brothers->brothers)
+            current =
+            current->brothers->brothers->brothers->brothers->node->son_list;
+        else
+            return 0;
     }
     if (current == NULL)
         return 0;
