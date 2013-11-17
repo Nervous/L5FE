@@ -23,7 +23,7 @@ distclean:
 # is using -r after $(RM) correct?
 
 doc:
-	#TO BE DONE
+	doxygen doc/Doxyfile
 
 check:
 	python tests/test.py

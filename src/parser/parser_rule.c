@@ -23,14 +23,19 @@ static void check_in_rulefor(s_token **tok)
 {
     if ((*tok)->type != IN)
         return;
+    int semi = 0;
     *tok = eat_token(*tok);
     *tok = get_token(WORD | SEMICOLON | EOL);
     climb_ast(1);
     parse_loop_WORD(tok);
     if ((*tok)->type != SEMICOLON && (*tok)->type != EOL)
         parse_error("PARSE ERROR : Expected a ';' or a '\\n'");
+    if ((*tok)->type == SEMICOLON)
+        semi = 1;
     *tok = eat_token(*tok);
     *tok = get_token(EOL | SEMICOLON);
+    if (semi)
+        climb_ast(1);
     parse_loop_EOL(tok);
 }
 
