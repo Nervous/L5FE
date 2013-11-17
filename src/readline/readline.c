@@ -102,7 +102,7 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
  ** This funcution is responsible of setting up the variables for processing
  ** the input
  */
-static char *read_input(void)
+static void read_input(void)
 {
     write(STDIN_FILENO, "42sh$ ", 6);
     char *buf = NULL;
@@ -112,11 +112,12 @@ static char *read_input(void)
     int max_size = 100;
     process_input(&buf, &cur_pos, &buf_size, &max_size);
     write(STDOUT_FILENO, "\n", 1);
+    if (g_global->readline != NULL)
+        free(g_global->readline);
     g_global->readline = buf;
-    return buf;
 }
 
-static char *read_ps2(void)
+static void read_ps2(void)
 {
     write(STDIN_FILENO, "> ", 2);
     char *buf = calloc(100, sizeof (char));
@@ -137,18 +138,13 @@ void readline(void)
     char *type = getenv("TERM");
     char term_buffer[2048];
     tgetent(term_buffer, type);
-    char *buf;
     do {
-        buf = read_input();
-        write_history(buf);
-        if (!strcmp(buf, "exit"))
-        {
-            free(buf);
+        read_input();
+        if (!strcmp(g_global->readline, "exit"))
             break;
-        }
-        free(buf);
         while (parse() == -1)
             read_ps2();
+        write_history(g_global->readline);
     }
     while (1);
     fflush(g_global->hist);
