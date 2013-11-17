@@ -1,16 +1,21 @@
 #include "exec.h"
 
-void exec_list(s_list *ast)
+int exec_list(s_list *ast)
 {
-    exec_andor(ast->node->son_list);
+    int ret = 0;
+    ret = exec_andor(ast);
 
-    while (ast->node->son_list->brothers)
+    while (ast->brothers)
     {
-        if (ast->node->son_list->brothers->node->type == BIT_AND
-            || ast->node->son_list->brothers->node->type == SEMICOLON)
-            if (ast->node->son_list->brothers->brothers)
-                exec_andor(ast->node->son_list->brothers->brothers);
+        if (ast->brothers->node->type == BIT_AND)
+            ret = exec_andor(ast->brothers->brothers);
+        /* HANDLE '&' EXECUTION */
 
-        ast = ast->node->son_list->brothers;
+        if (ast->brothers->node->type == SEMICOLON)
+            ret = exec_andor(ast->brothers->brothers);
+
+        ast = ast->brothers;
     }
+
+    return ret;
 }

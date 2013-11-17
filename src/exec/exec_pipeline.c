@@ -1,11 +1,14 @@
 #include "exec.h"
 
-void exec_pipeline(s_list *ast)
+int exec_pipeline(s_list *ast)
 {
-    if (ast->node->son_list->node->type == BANG)
-        exec_command(ast->node->son_list->brothers, 1);
-    else
-        exec_command(ast->node->son_list, 0);
+    int ret = 0;
 
+    if (ast->node->type == BANG)
+        ret = -(exec_command(ast->brothers) + 1);
+    else
+        ret = exec_command(ast->brothers);
+
+    return ret;
     //NEED TO HANDLE PIPED COMMANDS
 }
