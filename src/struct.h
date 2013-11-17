@@ -88,6 +88,7 @@ typedef struct global
     int prev_return;
     FILE *hist;
     struct termios attribute;
+    s_var *var;
 } s_global;
 
 #endif /* !STRUCT_H */
