@@ -3,15 +3,16 @@ ARCHIVE = vallee_a-42sh
 EXEC = 42sh
 
 all: $(BUILD)
-	gmake --directory=build
+	make -C $(BUILD)
 	mv $(BUILD)$(EXEC) $(EXEC)
 
 $(BUILD):
-	echo 'Please use ./configure before gmake'
-	./configure #find a way no to execute all: if $(BUILD) is not present
+	@echo 'Please use ./configure before gmake'
+	@./configure #find a way no to execute all: if $(BUILD) is not present
+
 
 clean:
-	$(RM) -r $(BUILD)
+	make clean -C $(BUILD)
 	$(RM) $(EXEC)
 distclean:
 	$(RM) -r $(BUILD)
