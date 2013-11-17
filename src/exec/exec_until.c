@@ -11,4 +11,6 @@ int exec_until(s_list *until)
         if (condition != 0)
             ret = exec_dogroup(until->brothers->brothers->node->son_list);
     }
+
+    return ret;
 }
