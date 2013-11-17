@@ -5,6 +5,7 @@
 # include "../struct.h"
 # include "../ast/ast.h"
 
+int exec_redir(s_list *redirection);
 int exec_if(s_list *rule_if);
 int exec_compound(s_list *compound);
 int exec_simplecommand(s_list *simple_command);
