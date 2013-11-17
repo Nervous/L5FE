@@ -25,7 +25,7 @@ static void init_term(void)
 int my_putchar(int ch)
 {
     char c = ch;
-    return (write(STDOUT_FILENO, &c, 1));
+    return write(STDOUT_FILENO, &c, 1);
 }
 
 char get_char(void)
