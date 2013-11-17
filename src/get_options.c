@@ -16,7 +16,7 @@ static int print_usage(char * msg, char *str)
 
 static char *get_string(int argc, char **argv, int i)
 {
-    int cur_arg = i + 1;
+    int cur_arg = i;
     int count = 0;
 
     for (; cur_arg < argc; cur_arg++)
@@ -33,6 +33,7 @@ static char *get_string(int argc, char **argv, int i)
         value = strcat(value, " ");
         value = strcat(value, argv[cur_arg]);
     }
+    value[count] = '\0';
 
     return value;
 }
@@ -43,7 +44,6 @@ static int options2(int argc, char **argv, int i)
     {
         if (i + 1 < argc)
         {
-            /* Need to be updated to reflect the correct behaviour of 42sh*/
             g_global->readline = get_string(argc, argv, i + 1);
             parse();
             return -1;
@@ -76,7 +76,8 @@ static int options(int argc, char **argv, int i)
     if (strcmp(argv[i], "--version") == 0)
     {
         printf("Version 0.5\n");
-        exit(0); /* NEED TO FREE GLOBAL */
+        exit(0);
+        /* NEED TO FREE GLOBAL */
     }
     else if (strcmp(argv[i], "--ast-print") == 0)
     {
@@ -106,19 +107,6 @@ int get_file(char *filename)
         fprintf(stderr, "%s: File not found\n", filename);
         exit(127);
     }
-
-    /*size_t size = 1024;
-    char *buf = malloc(sizeof (char) * size);
-    char *value = malloc(sizeof (char) * size);
-    while (fgets(buf, size, file) != NULL)
-    {
-        if (strlen(value) + strlen(buf) > size)
-        {
-            value = realloc(buf, 1024);
-            size += 1024;
-        }
-        value = strcat(value, buf);
-    }*/
 
     char *value = malloc(sizeof (char));
     value = strcpy(value, "");
