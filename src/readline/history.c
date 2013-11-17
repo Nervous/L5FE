@@ -13,7 +13,7 @@ void init_history(void)
     strcat(buf, "/.42sh_history");
     //g_global->hist = malloc(sizeof (FILE));
     g_global->hist = fopen(buf, "w+");
-    g_global = g_global;
+    free(buf);
 }
 
 void write_history(char *line)
