@@ -5,9 +5,6 @@ static int parse_simplecommand(s_token **tok)
 {
     ast_add_step("Simple_command");
 
-    while (parse_prefix(tok) == 0)
-        ;
-
     if (parse_prefix(tok) == -1)
     {
         if (parse_element(tok) == -1)
@@ -17,10 +14,21 @@ static int parse_simplecommand(s_token **tok)
         }
         while (parse_element(tok) == 0)
             ;
-
         //        climb_ast(1);
         return 0;
     }
+
+    while (parse_prefix(tok) == 0)
+        ;
+
+    if (parse_element(tok) == -1)
+    {
+        remove_node(g_global->current_node);
+        return -1;
+    }
+
+    while (parse_element(tok) == 0)
+        ;
 
     climb_ast(1);
     return 0;

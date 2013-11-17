@@ -1,13 +1,12 @@
 #include "exec.h"
 
-int exec_else(s_list *else_list)
+int exec_else(s_list *current)
 {
-    int condition = 0;
-    s_list current = else_list->node->son_list;
+    int condition = 1;
     while (current != NULL && current->node->type != ELSE)
     {
         condition = exec_compound(current->brothers):
-        if (condition) //current elif -> compound -> then -> compound
+        if (condition == 0) //current elif -> compound -> then -> compound
             return exec_compound(current->brothers->brothers->brothers);
         /* current elif -> compound -> then -> compound -> else of elif */
         current = current->brothers->brothers->brothers->brothers;
@@ -17,14 +16,13 @@ int exec_else(s_list *else_list)
     return exec_compound(current->brothers);
 }
 
-int exec_if(s_list *rule_if)
+int exec_if(s_list *current)
 {
-    s_list current = rule_if->node->son_list;
     /* current on if */
     int condition = exec_compound(current->brothers);
     current = current->brothers->brothers;
     /*current on then*/
-    if (condition)
+    if (condition == 0)
         return exec_compound(current->brothers);
     /* if current (which is now eq to fi or else) == "Else_clause" */
     else if (strcmp((current = current->brothers->brothers)->node->str,
