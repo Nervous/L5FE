@@ -3,6 +3,7 @@
 # include <stdio.h>
 # include <termios.h>
 # include "exec/variable.h"
+# include "exec/function.h"
 
 void init_global(void);
 
@@ -88,6 +89,7 @@ typedef struct global
     FILE *hist;
     struct termios attribute;
     s_var *var;
+    s_function *func;
 } s_global;
 
 #endif /* !STRUCT_H */
