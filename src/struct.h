@@ -2,6 +2,7 @@
 # define STRUCT_H
 # include <stdio.h>
 # include <termios.h>
+# include "exec/variable.h"
 
 void init_global(void);
 
@@ -49,8 +50,6 @@ enum e_type
     RIGHT_BRACKET,
     LEFT_PAR,
     RIGHT_PAR,
-    LEFT_SQ_BRACKET,
-    RIGHT_SQ_BRACKET,
     B_SLASH,
     SLASH,
     IONUMBER,

@@ -60,11 +60,9 @@ static enum e_type set_type_multiple(char *str)
 
 static enum e_type set_type_simple2(char *str)
 {
-    if (strcmp(str, "[") == 0)
-        return LEFT_SQ_BRACKET;
-    if (strcmp(str, "]") == 0)
-        return RIGHT_SQ_BRACKET;
     if (strcmp(str, "<") == 0)
+        return TOKEN_REDIR;
+    if (strcmp(str, ">") == 0)
         return TOKEN_REDIR;
     if (strcmp(str, ";") == 0)
         return SEMICOLON;
@@ -132,6 +130,8 @@ static int is_separator2(char c)
         return 1;
     case '<':
         return 1;
+    case '>':
+        return 1;
     case '\\':
         return 1;
     default:
@@ -154,10 +154,6 @@ int is_separator(char c)
     case '(':
         return 1;
     case ')':
-        return 1;
-    case '[':
-        return 1;
-    case ']':
         return 1;
     case '{':
         return 1;
