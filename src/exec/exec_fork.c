@@ -38,8 +38,8 @@ char **build_argv(s_list *ast)
     char **ret = malloc(4 * sizeof (char *));
     ret[0] = "/bin/sh";
     ret[1] = "-c";
-    //ret[2] = malloc(sizeof (char));
-    //ret[2][0] = '\0';
+    ret[2] = malloc(sizeof (char));
+    ret[2][0] = '\0';
     ret[3] = NULL;
 
     while (ast != NULL)
