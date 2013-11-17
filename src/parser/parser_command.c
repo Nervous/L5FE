@@ -23,7 +23,7 @@ static int parse_simplecommand(s_token **tok)
 
     if (parse_element(tok) == -1)
     {
-        remove_node(g_global->current_node);
+        //remove_node(g_global->current_node);
         return -1;
     }
 

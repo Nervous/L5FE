@@ -1,7 +1,10 @@
 #include "get_options.h"
 #include "readline/readline.c"
+#include "exec/exec.h"
 
 extern s_global *g_global;
+
+static void load_config();
 
 /**
 ** @brief Display the Usage message on the standard error output
@@ -45,6 +48,8 @@ static int options2(int argc, char **argv, int i)
         if (i + 1 < argc)
         {
             g_global->readline = get_string(argc, argv, i + 1);
+            if (g_global->norc != 1)
+                load_config();
             parse();
             return -1;
         }
@@ -98,12 +103,14 @@ static int options(int argc, char **argv, int i)
 ** single single to parse and execute
 */
 
-int get_file(char *filename)
+static int get_file(char *filename, bool config)
 {
     FILE *file;
 
     if ((file = fopen(filename, "r")) == NULL)
     {
+        if (config)
+            return -4242;
         fprintf(stderr, "%s: File not found\n", filename);
         exit(127);
     }
@@ -122,7 +129,8 @@ int get_file(char *filename)
 
     g_global->readline = value;
     g_global->file = 0;
-
+    if (g_global->norc != 1)
+        load_config();
     return parse();
 }
 
@@ -131,10 +139,20 @@ int get_file(char *filename)
 ** argument is provided, 42sh will run in interactive mode
 */
 
+void load_config()
+{
+    get_file("etc/42shrc", true);
+    exec_input(get_root(g_global->current_node));
+    release_ast(get_root(g_global->current_node));
+    get_file("etc/42shrc", true);
+    exec_input(get_root(g_global->current_node));
+}
+
 int get_options(int argc, char **argv)
 {
     if (argc == 1)
     {
+        load_config();
         readline();
         return 42; //calling readline
     }
@@ -150,9 +168,10 @@ int get_options(int argc, char **argv)
                 return ret + (ret == -1);
         }
         else
-            return get_file(argv[i]); //executing first arg as command file
+            return get_file(argv[i], false); //executing first arg as command file
     }
-
+    if (g_global->norc != 1)
+        load_config();
     readline();
     return 42;
 }

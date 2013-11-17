@@ -3,24 +3,32 @@
 extern s_global *g_global;
 int parse_redirection(s_token **tok)
 {
-       if (my_isdigit((*tok)->str))
-       {
-            *tok = eat_token(*tok);
-            *tok = get_token(REDIRECTION);
-            climb_ast(1);
-       }
+    bool digit = false;
 
-       if ((*tok)->type != TOKEN_REDIR)
-           return -1;
+    if (my_isdigit((*tok)->str))
+    {
+        *tok = eat_token(*tok);
+        *tok = get_token(REDIRECTION);
+        digit = true;
+        climb_ast(1);
+    }
 
-       *tok = eat_token(*tok);
-       *tok = get_token(WORD);
-       if ((*tok)->type != WORD)
-           return -1;
-       *tok = eat_token(*tok);
-       *tok = get_token(EOL);
-       climb_ast(1);
-        return 0;
+    if ((*tok)->type != TOKEN_REDIR)
+    {
+        if (!digit)
+            return -1;
+        else
+            return parse_error("Expected a redirection here");
+    }
+
+    *tok = eat_token(*tok);
+    *tok = get_token(WORD);
+    if ((*tok)->type != WORD)
+        return -1;
+    *tok = eat_token(*tok);
+    *tok = get_token(EOL);
+    climb_ast(1);
+    return 0;
 }
 
 int parse_element(s_token **tok)
