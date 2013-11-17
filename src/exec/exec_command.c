@@ -3,7 +3,7 @@
 
 int exec_command(s_list *ast)
 {
-    int ert = 0;
+    int ret = 0;
 
     if (strcmp(ast->node->str, "Simple_command") == 0)
         ret = exec_simplecommand(ast->node->son_list);
@@ -13,7 +13,7 @@ int exec_command(s_list *ast)
 
         while (ast->brothers)
         {
-            ret = exec_redirection(ast->brothers);
+            ret = exec_redir(ast->brothers);
             ast = ast->brothers;
         }
     }
@@ -23,7 +23,7 @@ int exec_command(s_list *ast)
 
         while (ast->brothers)
         {
-            ret = exec_redirection(ast->brothers);
+            ret = exec_redir(ast->brothers);
             ast = ast->brothers;
         }
     }
