@@ -151,6 +151,6 @@ int parse_ruleif(s_token **tok)
         parse_error("PARSE ERROR : Expected a FI keyword");
     *tok = eat_token(*tok);
     *tok = get_token(EOL);
-    climb_ast(1);
+//    climb_ast(1);
     return 0;
 }
