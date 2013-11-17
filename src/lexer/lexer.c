@@ -216,8 +216,8 @@ s_token *get_token(enum e_type expected)
     }
 
     //DEBUG & TESTING
-    //printf("New token created:\nTYPE = %d\nSTR = %s\n\n",
-    //token->type, token->str);
+    printf("New token created:\nTYPE = %d\nSTR = %s\n\n",
+           token->type, token->str);
 
 
     return token;

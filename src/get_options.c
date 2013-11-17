@@ -133,6 +133,7 @@ int get_file(char *filename)
     }
 
     g_global->readline = value;
+    g_global->file = 0;
 
     return parse();
 }
