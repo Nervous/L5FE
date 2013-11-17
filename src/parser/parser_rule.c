@@ -13,9 +13,9 @@ static int do_group(s_token **tok)
     //climb_ast(1);
     if ((*tok)->type != DONE)
         parse_error("PARSE ERROR : Expected a DONE keyword");
-    *tok = eat_token(*tok);
+//    *tok = eat_token(*tok);
     *tok = get_token(EOL);
-    climb_ast(1);
+  //  climb_ast(1);
     return 0;
 }
 

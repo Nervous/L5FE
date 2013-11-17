@@ -8,7 +8,7 @@ add_library(readline ${readline_source_files})
 
 include_directories(/usr/include)
 
-link_directories(/usr/lib/x86_64-linux-gnu)
+link_directories(/usr/lib)
 
 target_link_libraries(
 

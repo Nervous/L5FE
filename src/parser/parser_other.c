@@ -7,6 +7,7 @@ int parse_redirection(s_token **tok)
        {
             *tok = eat_token(*tok);
             *tok = get_token(REDIRECTION);
+            climb_ast(1);
        }
 
        if ((*tok)->type != TOKEN_REDIR)
@@ -14,8 +15,7 @@ int parse_redirection(s_token **tok)
 
        *tok = eat_token(*tok);
        *tok = get_token(WORD);
-        if (g_global->current_node->father)
-            g_global->current_node = g_global->current_node->father;
+       climb_ast(1);
         return 0;
 }
 

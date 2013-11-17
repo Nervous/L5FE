@@ -56,6 +56,7 @@ int parse_shellcommand(s_token **tok)
     }
     else
     {
+        remove_node(g_global->current_node);
         climb_ast(1);
         return -1;
     }

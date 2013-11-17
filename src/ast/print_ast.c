@@ -34,7 +34,6 @@ static void print_node(s_list *ast, FILE *f)
         print_node(tmp->node->son_list, f);
         tmp->node->son_list = tmp->node->son_list->brothers;
     }
-//    free(ast);
 }
 
 void print_ast(s_list *ast, const char *fileName)
