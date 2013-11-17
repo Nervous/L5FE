@@ -15,6 +15,7 @@ int exec_redir(s_list *redirection);
 int exec_if(s_list *rule_if);
 int exec_compound(s_list *compound);
 int exec_simplecommand(s_list *simple_command);
+int exec_shellcommand(s_list *ast);
 int exec_dogroup(s_list *dogroup);
 int exec_ruleuntil(s_list *until);
 int do_fork(char **argv);
