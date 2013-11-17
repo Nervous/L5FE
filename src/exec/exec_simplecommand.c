@@ -7,7 +7,7 @@ int exec_simplecommand(s_list *simple_command)
     {
         if (simple_command->node->type == ASSIGNMENT_WORD)
         {
-//            return exec_var(simple_command->node->str);
+            return exec_var(simple_command->node->str);
         }
         else if (simple_command->node->type == WORD)
         {
