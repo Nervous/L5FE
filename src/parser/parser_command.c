@@ -21,11 +21,11 @@ static int parse_simplecommand(s_token **tok)
     while (parse_prefix(tok) == 0)
         ;
 
-    if (parse_element(tok) == -1)
+   /* if (parse_element(tok) == -1)
     {
         //remove_node(g_global->current_node);
         return -1;
-    }
+    }*/
 
     while (parse_element(tok) == 0)
         ;
