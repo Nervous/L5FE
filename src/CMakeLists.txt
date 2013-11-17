@@ -5,12 +5,13 @@ project(42sh)
 set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -std=c99 -pedantic")
 
 #creates a list named SRCS that contains main.c
-set(SRCS struct.h main.c get_options.c get_options.h variable.c)
+set(SRCS struct.h main.c get_options.c get_options.h)
 
 add_subdirectory(parser)
 add_subdirectory(ast)
 add_subdirectory(lexer)
 add_subdirectory(readline)
+add_subdirectory(exec)
 
 # defines the files to compile, just add the files you want to include
 #in the compilation
@@ -33,3 +34,4 @@ target_link_libraries(42sh ast)
 target_link_libraries(42sh lexer)
 target_link_libraries(42sh parser)
 target_link_libraries(42sh readline)
+target_link_libraries(42sh exec)

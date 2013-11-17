@@ -2,6 +2,7 @@
 # define STRUCT_H
 # include <stdio.h>
 # include <termios.h>
+# include "exec/variable.h"
 
 void init_global(void);
 
