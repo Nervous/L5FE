@@ -129,8 +129,6 @@ static int get_file(char *filename, bool config)
 
     g_global->readline = value;
     g_global->file = 0;
-    if (g_global->norc != 1)
-        load_config();
     return parse();
 }
 
@@ -145,6 +143,7 @@ void load_config()
     exec_input(get_root(g_global->current_node));
     //release_ast(get_root(g_global->current_node));
     g_global->current_node = NULL;
+    g_global->pos = 0;
 
     char *home = getenv("HOME");
     char *buf = malloc(sizeof (char) * (strlen(home) + 8));
@@ -152,6 +151,7 @@ void load_config()
     strcat(buf, "/.42shrc");
     get_file(buf, true);
     free(buf);
+    g_global->pos = 0;
 
     exec_input(get_root(g_global->current_node));
     //release_ast(get_root(g_global->current_node));
@@ -178,7 +178,11 @@ int get_options(int argc, char **argv)
                 return ret + (ret == -1);
         }
         else
+        {
+            if (g_global->norc != 1)
+                load_config();
             return get_file(argv[i], false); //executing first arg as command file
+        }
     }
     if (g_global->norc != 1)
         load_config();

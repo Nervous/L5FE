@@ -9,20 +9,20 @@ int do_fork(char **argv)
 {
     pid_t child;
     int status;
-    int ret = 0;
     extern char **environ;
 
     child = fork();
 
     if (child != 0)
     {
-        ret = waitpid(child, &status, 0);
+        waitpid(child, &status, 0);
         free(argv[2]);
         free(argv);
-        if (ret != 0)
-            return -1;
-        else
+
+        if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
             return 0;
+        else
+            return -1;
     }
     else
     {
@@ -38,8 +38,8 @@ char **build_argv(s_list *ast)
     char **ret = malloc(4 * sizeof (char *));
     ret[0] = "/bin/sh";
     ret[1] = "-c";
-    //ret[2] = malloc(sizeof (char));
-    //ret[2][0] = '\0';
+    ret[2] = malloc(sizeof (char));
+    ret[2][0] = '\0';
     ret[3] = NULL;
 
     while (ast != NULL)

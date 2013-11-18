@@ -12,4 +12,6 @@ void ast_add_node(s_token *token);
 s_list *get_root(s_list *current_node);
 void test_fill_ast(void);
 void print_ast(s_list *ast, const char *filename);
+s_token *copy_token(s_token *token);
+
 #endif /*!AST_H*/
