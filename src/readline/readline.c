@@ -50,28 +50,28 @@ void write_buf(char *buf, int cur_pos, int buf_size)
 
 static callback match_esc_key(char tmp)
 {
-        if (tmp == '[')
-        {
-            char tmp2 = get_char();
-            if (tmp2 == 'D')
-                return left_key;
-            if (tmp2 == 'C')
-                return right_key;
-            if (tmp2 == 'A')
-                return up_key;
-            if (tmp2 == 'B')
-                return down_key;
-            if (tmp2 == '3' && get_char() == '~')
-                return delete;
-        }
-        if (tmp == '\n')
-            return new_line;
-        return do_nothing;
+    if (tmp == '[')
+    {
+        char tmp2 = get_char();
+        if (tmp2 == 'D')
+            return left_key;
+        if (tmp2 == 'C')
+            return right_key;
+        if (tmp2 == 'A')
+            return up_key;
+        if (tmp2 == 'B')
+            return down_key;
+        if (tmp2 == '3' && get_char() == '~')
+            return delete;
+    }
+    if (tmp == '\n')
+        return new_line;
+    return do_nothing;
 }
 
 /**
-** @brief This function match key with special keys
-*/
+ ** @brief This function match key with special keys
+ */
 static callback match_key(char c, char **buf)
 {
     if (c == '\177' || c == '\b')
@@ -114,11 +114,16 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
 }
 
 /**
-** @brief This function is responsible of setting up the variables for
-** processing the input in PS1
-*/
+ ** @brief This function is responsible of setting up the variables for
+ ** processing the input in PS1
+ */
 static void read_input(void)
 {
+    if (g_global->readline != NULL)
+    {
+        free(g_global->readline);
+        g_global->readline = NULL;
+    }
     write(STDIN_FILENO, "42sh$ ", 6);
     char *buf = NULL;
     buf = calloc(100, sizeof (char));
@@ -131,9 +136,9 @@ static void read_input(void)
 }
 
 /**
-** @brief This function is responsible of setting up the variables for
-** processing the input in PS2
-*/
+ ** @brief This function is responsible of setting up the variables for
+ ** processing the input in PS2
+ */
 static void read_ps2(void)
 {
     write(STDIN_FILENO, "> ", 2);
@@ -157,6 +162,10 @@ void write_ps(void)
         write(STDIN_FILENO, "> ", 2);
 }
 
+/**
+ ** @brief This function is responsible of setting up the terminal and
+ ** the termcap data
+ */
 void readline(void)
 {
     init_term();
@@ -164,11 +173,6 @@ void readline(void)
     char term_buffer[2048];
     tgetent(term_buffer, type);
     do {
-        if (g_global->readline != NULL)
-        {
-            free(g_global->readline);
-            g_global->readline = NULL;
-        }
         read_input();
         if (!strcmp(g_global->readline, "exit"))
             break;
@@ -180,6 +184,7 @@ void readline(void)
         g_global->pos = 0;
         exec_input(get_root(g_global->current_node));
         add_to_hist(g_global->readline);
+        g_global->hist_ind = -1;
     }
     while (1);
     write_history();

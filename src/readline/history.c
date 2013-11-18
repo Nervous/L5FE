@@ -37,6 +37,8 @@ void write_history(void)
 
 void add_to_hist(char *buf)
 {
+    if (strcmp(buf, g_global->hist_arr[0]) == 0)
+        return;
     char *tmp = calloc(strlen(buf) + 1, sizeof (char));
     strcpy(tmp, buf);
     memmove(g_global->hist_arr + 1, g_global->hist_arr, sizeof (char *) * 199);
