@@ -46,13 +46,12 @@ void up_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
     int len = strlen(tmp);
     *max_size = len;
     *buf_size = len;
+    tputs(tgetstr("cr", NULL), 1, my_putchar);
+    tputs(tgetstr("ce", NULL), 1, my_putchar);
+    write_ps();
     *cur_pos = 0;
-    char *buffer_tmp;
-    buffer_tmp = tgoto("LE", *cur_pos, 0);
-    tputs(buffer_tmp, 1, my_putchar);
     *buf = calloc(len + 1, sizeof(char));
     *buf = strcpy(*buf, tmp);
-    write_buf(*buf, *cur_pos, *buf_size);
 }
 
 void down_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
@@ -64,10 +63,10 @@ void down_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
     int len = strlen(tmp);
     *max_size = len;
     *buf_size = len;
+    tputs(tgetstr("cr", NULL), 1, my_putchar);
+    tputs(tgetstr("ce", NULL), 1, my_putchar);
+    write_ps();
     *cur_pos = 0;
-    char *buffer_tmp;
-    buffer_tmp = tgoto("LE", *cur_pos, 0);
-    tputs(buffer_tmp, 1, my_putchar);
     *buf = calloc(len + 1, sizeof(char));
     write_buf(*buf, *cur_pos, *buf_size);
 }

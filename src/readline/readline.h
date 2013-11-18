@@ -3,6 +3,7 @@
 
 void readline(void);
 void write_buf(char *buf, int cur_pos, int buf_size);
+void write_ps(void);
 
 typedef enum key
 {

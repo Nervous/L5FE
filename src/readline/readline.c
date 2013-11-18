@@ -123,8 +123,6 @@ static void read_input(void)
     int max_size = 100;
     process_input(&buf, &cur_pos, &buf_size, &max_size);
     write(STDOUT_FILENO, "\n", 1);
-    if (g_global->readline != NULL)
-        free(g_global->readline);
     g_global->readline = buf;
 }
 
@@ -147,6 +145,14 @@ static void read_ps2(void)
     free(buf);
 }
 
+void write_ps(void)
+{
+    if (g_global->readline == NULL)
+        write(STDIN_FILENO, "42sh$ ", 6);
+    else
+        write(STDIN_FILENO, "> ", 2);
+}
+
 void readline(void)
 {
     init_term();
@@ -154,6 +160,11 @@ void readline(void)
     char term_buffer[2048];
     tgetent(term_buffer, type);
     do {
+        if (g_global->readline != NULL)
+        {
+            free(g_global->readline);
+            g_global->readline = NULL;
+        }
         read_input();
         if (!strcmp(g_global->readline, "exit"))
             break;
@@ -162,10 +173,10 @@ void readline(void)
             g_global->pos = 0;
             read_ps2();
         }
+        g_global->pos = 0;
         exec_input(get_root(g_global->current_node));
         write_history(g_global->readline);
     }
     while (1);
-    fflush(g_global->hist);
     tcsetattr(STDIN_FILENO, TCSANOW, &(g_global->attribute));
 }

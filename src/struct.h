@@ -86,10 +86,12 @@ typedef struct global
     int norc;
     int file;
     char *readline;
-    FILE *hist;
+    char *hist_file;
     struct termios attribute;
     s_var *var;
     //s_function *func;
+    char **hist_arr;
+    int hist_ind;
 } s_global;
 
 #endif /* !STRUCT_H */

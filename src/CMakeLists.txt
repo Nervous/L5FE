@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(42sh)
 
-set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -std=c99 -pedantic")
+set(CMAKE_C_FLAGS "-D_BSD_SOURCE -Wall -Wextra -Werror -std=c99 -pedantic")
 
 #creates a list named SRCS that contains main.c
 set(SRCS struct.h main.c get_options.c get_options.h)
