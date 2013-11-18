@@ -15,20 +15,32 @@ void init_history(void)
     g_global->hist_file = buf;
     FILE *file = fopen(buf, "r");
     g_global->hist_arr = calloc(200, sizeof(char *));
-    g_global->hist_ind = 0;
+    g_global->hist_ind = -1;
     size_t len = 0;
     for (int i = 0; i < 200; i++)
+    {
         getline(&g_global->hist_arr[i], &len, file);
+        g_global->hist_arr[i][strlen(g_global->hist_arr[i]) - 1] = '\0';
+    }
     fclose(file);
 }
 
-void write_history(char *line)
+void write_history(void)
 {
-    line = line;
-    /*
-    fputs(line, g_global->hist);
-    fputs("\n", g_global->hist);
-    */
+    FILE *file = fopen(g_global->hist_file, "w");
+    for (int i = 0; i < 200; i++)
+    {
+        fputs(g_global->hist_arr[i], file);
+        fputc('\n', file);
+    }
+}
+
+void add_to_hist(char *buf)
+{
+    char *tmp = calloc(strlen(buf) + 1, sizeof (char));
+    strcpy(tmp, buf);
+    memmove(g_global->hist_arr + 1, g_global->hist_arr, sizeof (char *) * 199);
+    g_global->hist_arr[0] = tmp;
 }
 
 char *get_history_ln(void)

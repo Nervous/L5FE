@@ -2,6 +2,7 @@ set(readline_source_files
     history.c
     functionkey.c
     readline.c
+    arrowkey.c
     )
 
 add_library(readline ${readline_source_files})

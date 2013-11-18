@@ -48,6 +48,27 @@ void write_buf(char *buf, int cur_pos, int buf_size)
     tputs(tgetstr("rc", NULL), 1, my_putchar);
 }
 
+static callback match_esc_key(char tmp)
+{
+        if (tmp == '[')
+        {
+            char tmp2 = get_char();
+            if (tmp2 == 'D')
+                return left_key;
+            if (tmp2 == 'C')
+                return right_key;
+            if (tmp2 == 'A')
+                return up_key;
+            if (tmp2 == 'B')
+                return down_key;
+            if (tmp2 == '3' && get_char() == '~')
+                return delete;
+        }
+        if (tmp == '\n')
+            return new_line;
+        return do_nothing;
+}
+
 /**
 ** @brief This function match key with special keys
 */
@@ -60,24 +81,7 @@ static callback match_key(char c, char **buf)
     if (c == '\033')
     {
         char tmp = get_char();
-        if (tmp == '[')
-        {
-            char tmp2 = get_char();
-            if (tmp2 == 'D')
-                return left_key;
-            if (tmp2 == 'C')
-                return right_key;
-            if (tmp2 == 'A')
-                return up_key;
-            if (tmp2 == 'B')
-                return down_key;
-            if (tmp2 == '\n')
-                return new_line;
-            if (tmp2 == '3' && get_char() == '~')
-                return delete;
-        }
-        if (tmp == '\n')
-            return new_line;
+        return match_esc_key(tmp);
         if (tmp < 32 || tmp == '\177')
             return match_key(tmp, buf);
     }
@@ -101,7 +105,7 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
             *buf_p = realloc(*buf_p, sizeof (char) * *max_s);
             buf = *buf_p;
         }
-        memcpy(*buf_p + *cur_pos + 1, *buf_p + *cur_pos, *buf_s - *cur_pos);
+        memmove(*buf_p + *cur_pos + 1, *buf_p + *cur_pos, *buf_s - *cur_pos);
         buf[*cur_pos] = tmp;
         write_buf(buf, *cur_pos, *buf_s);
         *cur_pos += 1;
@@ -138,7 +142,7 @@ static void read_ps2(void)
     int cur_pos = 0;
     int max_size = 100;
     process_input(&buf, &cur_pos, &buf_size, &max_size);
-    write(STDOUT_FILENO, "\n" ,1);
+    write(STDOUT_FILENO, "\n", 1);
     g_global->readline = realloc(g_global->readline,
             sizeof (char) * (strlen(g_global->readline) + buf_size + 1));
     strcat(g_global->readline, buf);
@@ -175,8 +179,9 @@ void readline(void)
         }
         g_global->pos = 0;
         exec_input(get_root(g_global->current_node));
-        write_history(g_global->readline);
+        add_to_hist(g_global->readline);
     }
     while (1);
+    write_history();
     tcsetattr(STDIN_FILENO, TCSANOW, &(g_global->attribute));
 }

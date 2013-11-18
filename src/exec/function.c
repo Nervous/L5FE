@@ -1,4 +1,4 @@
-#include "function.h"
+#include "../struct.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -27,6 +27,7 @@ s_function *search_function(char *name)
     {
         if (strcmp(tmp->name, name) == 0)
             return tmp;
+        tmp = tmp->next;
     }
     return NULL;
 }
@@ -34,7 +35,7 @@ s_function *search_function(char *name)
 /**
 ** @brief This function will copy the whole structure of an ast
 */
-s_list *cpy_list(s_list *src)
+s_list *cpy_list(s_list *src, s_list *father)
 {
     if (src == NULL)
         return NULL;
@@ -48,10 +49,10 @@ s_list *cpy_list(s_list *src)
     list->node->type = src->node->type;
     list->node->str = my_strcpy(src->node->str);
     list->node->pos = src->node->pos;
-    list->node->son_list = cpy_list(src->node->son_list);
+    list->node->son_list = cpy_list(src->node->son_list, list);
 
-    list->father = NULL;
-    list->brothers = cpy_list(src->brothers);
+    list->father = father;
+    list->brothers = cpy_list(src->brothers, list);
 }
 
 /**
@@ -59,15 +60,17 @@ s_list *cpy_list(s_list *src)
 */
 void add_function(char *name, s_list *ast)
 {
-    if (search_function(name) == NULL)
+    s_function *tmp = NULL;
+    if ((tmp = search_function(name)) == NULL)
     {
         s_function *new_func = malloc(sizeof (s_function));
         new_func->name = name;
-
+        new_func->node = cpy_list(ast, NULL);
     }
     else
     {
-
+        //todo FREE AST
+        tmp->node = cpy_list(ast, NULL);
     }
 }
 
