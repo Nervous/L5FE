@@ -20,6 +20,7 @@ void init_global(void)
     g_global->norc = 0;
     g_global->readline = NULL;
     g_global->hist = NULL;
+    g_global->hist_arr = NULL;
     g_global->var = NULL;
 }
 

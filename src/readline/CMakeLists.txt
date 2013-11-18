@@ -2,7 +2,7 @@ set(readline_source_files
     history.c
     functionkey.c
     readline.c
-)
+    )
 
 add_library(readline ${readline_source_files})
 
@@ -12,8 +12,8 @@ link_directories(/usr/lib)
 
 target_link_libraries(
 
-                    readline
+    readline
 
-                    termcap
+    termcap
 
-                    )
+    )

@@ -2,6 +2,7 @@
 # define READLINE_H
 
 void readline(void);
+void write_buf(char *buf, int cur_pos, int buf_size);
 
 typedef enum key
 {

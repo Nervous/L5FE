@@ -1,5 +1,6 @@
 #include "readline.h"
 #include "../struct.h"
+#include "history.h"
 #include <termios.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -8,6 +9,8 @@
 #include <string.h>
 
 int my_putchar(int ch);
+
+extern s_global *g_global;
 
 void right_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
 {
@@ -34,6 +37,40 @@ void left_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
     }
 }
 
+void up_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
+{
+    if (g_global->hist_ind > 0)
+        g_global->hist_ind -= 1;
+    free(*buf);
+    char *tmp = get_history_ln();
+    int len = strlen(tmp);
+    *max_size = len;
+    *buf_size = len;
+    *cur_pos = 0;
+    char *buffer_tmp;
+    buffer_tmp = tgoto("LE", *cur_pos, 0);
+    tputs(buffer_tmp, 1, my_putchar);
+    *buf = calloc(len + 1, sizeof(char));
+    *buf = strcpy(*buf, tmp);
+    write_buf(*buf, *cur_pos, *buf_size);
+}
+
+void down_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
+{
+    if (g_global->hist_ind > 0)
+        g_global->hist_ind += 1;
+    free(*buf);
+    char *tmp = get_history_ln();
+    int len = strlen(tmp);
+    *max_size = len;
+    *buf_size = len;
+    *cur_pos = 0;
+    char *buffer_tmp;
+    buffer_tmp = tgoto("LE", *cur_pos, 0);
+    tputs(buffer_tmp, 1, my_putchar);
+    *buf = calloc(len + 1, sizeof(char));
+    write_buf(*buf, *cur_pos, *buf_size);
+}
 
 void backspace (char **buf_p, int *cur_pos, int *buf_s, int *max_s)
 {

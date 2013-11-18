@@ -31,14 +31,14 @@ int my_putchar(int ch)
     return write(STDOUT_FILENO, &c, 1);
 }
 
-char get_char(void)
+static char get_char(void)
 {
     char c;
     read(STDIN_FILENO, &c, 1);
     return c;
 }
 
-static void write_buf(char *buf, int cur_pos, int buf_size)
+void write_buf(char *buf, int cur_pos, int buf_size)
 {
     buf_size = buf_size;
     write(STDOUT_FILENO, &buf[cur_pos], 1);
@@ -67,6 +67,10 @@ static callback match_key(char c, char **buf)
                 return left_key;
             if (tmp2 == 'C')
                 return right_key;
+            if (tmp2 == 'A')
+                return up_key;
+            if (tmp2 == 'B')
+                return down_key;
             if (tmp2 == '\n')
                 return new_line;
             if (tmp2 == '3' && get_char() == '~')
