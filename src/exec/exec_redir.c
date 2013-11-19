@@ -2,27 +2,25 @@
 
 int exec_redir(s_list *ast)
 {
-    ast=ast;
+/*    if (strcmp(ast->node, ">") == 0)
+        return exec_redir_output();
+    else if (strcmp(ast->node, ">|") == 0)
+        return exec_redir_output();
+    else if (strcmp(ast->node, "<") == 0)
+        return exec_redir_input();
+    else if (strcmp(ast->node, ">>") == 0)
+        return exec_redir_appendout();
+    else if (strcmp(ast->node, "<<") == 0)
+        return exec_redir_heredoc();
+    else if (strcmp(ast->node, "<<-") == 0)
+        return exec_redir_heredoc();
+    else if (strcmp(ast->node, "<&") == 0)
+        return exec_redir_dupin();
+    else if (strcmp(ast->node, ">&") == 0)
+        return exec_redir_dupout();
+    else if (strcmp(ast->node, "<>") == 0)
+    return exec_redir_rw();*/
 
-/*    switch (ast->node->str)
-    {
-    case ">":
-        return -1;//exec_redir_output();
-    case ">|":
-        return -1;//exec_redir_output();
-    case "<":
-        return -1;//exec_redir_input();
-    case ">>":
-        return -1;//exec_redir_appendout();
-    case "<<":
-        return -1;//exec_redir_heredoc();
-    case "<&":
-        return -1;//exec_redir_dupin();
-    case ">&":
-        return -1;//exec_redir_dupout();
-    case "<>":
-        return -1;//exec_redir_rw();
-        default:*/
-        return -1;
-        //}
+    ast = ast;
+    return -1;
 }
