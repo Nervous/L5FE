@@ -1,0 +1,3 @@
+echo toto > tests/redirection_pipes/titi
+cat tests/redirection_pipes/titi
+rm tests/redirection_pipes/titi
