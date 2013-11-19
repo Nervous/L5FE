@@ -29,6 +29,11 @@ s_var *search_var(s_var *list, char *key)
     return NULL;
 }
 
+/**
+** @brief This function add a new variable to the list of variable or change
+** the value of a variable if there is already a var with the key (key)
+** @return It return the new head of the list
+*/
 s_var *add_var(s_var *list, char *key, char *value)
 {
     s_var *tmp = NULL;
@@ -49,6 +54,9 @@ s_var *add_var(s_var *list, char *key, char *value)
     }
 }
 
+/**
+** @brief This function will free the list of variables
+*/
 void free_var(s_var *list)
 {
     s_var *tmp = list;
@@ -62,6 +70,9 @@ void free_var(s_var *list)
     }
 }
 
+/**
+** @brief This function will register parse a string and register a function
+*/
 int exec_var(char *str)
 {
     char *key = NULL;

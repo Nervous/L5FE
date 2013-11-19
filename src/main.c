@@ -27,7 +27,8 @@ void init_global(void)
 void free_global(void)
 {
     free(g_global->readline);
-
+    release_ast(get_root(g_global->current_node));
+    free(g_global->current_node);
     free(g_global);
 }
 #include <stdio.h>
