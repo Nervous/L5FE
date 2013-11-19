@@ -40,6 +40,10 @@ static int father_pipe(int pid, int fdlist[2], int *status, char **argv)
     return 0;
 }
 
+/**
+** @fn int exec_pipe(s_list *ast);
+** @brief Execute the pipe rule
+*/
 int exec_pipe(s_list *ast)
 {
     int fdlist[2];
@@ -63,9 +67,7 @@ int exec_pipe(s_list *ast)
             ret = execve(argv[0], argv, environ);
         }
         else
-        {
             ret = father_pipe(pid, fdlist, &status, argv);
-        }
     }
     return ret;
 }

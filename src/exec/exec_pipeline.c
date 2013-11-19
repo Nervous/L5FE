@@ -1,5 +1,9 @@
 #include "exec.h"
 
+/**
+** @fn int exec_pipeline(s_list *ast);
+** @brief Execute the pipeline rule
+*/
 int exec_pipeline(s_list *ast)
 {
     int ret = 0;
