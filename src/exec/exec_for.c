@@ -1,7 +1,9 @@
 #include "exec.h"
 
 extern s_global *g_global;
-
+/**
+** @brief Execute the for rule
+*/
 int exec_for(s_list *ast)
 {
     int ret = 0;
