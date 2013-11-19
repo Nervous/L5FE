@@ -2,7 +2,9 @@
 #include <string.h>
 
 extern s_global *g_global;
-
+/**
+** @brief Execute the input rule
+*/
 int exec_input(s_list *ast)
 {
     if (!ast || !(ast->son_list))

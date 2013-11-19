@@ -1,5 +1,8 @@
 #include "exec.h"
 
+/**
+** @brief Execute the compound_list rule
+*/
 int exec_compound_aux(s_list *p_and_or)
 {
     if (!p_and_or || p_and_or->son_list == NULL)
