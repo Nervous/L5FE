@@ -60,8 +60,6 @@ static int options2(int argc, char **argv, int i)
     {
         if (i + 1 < argc)
         {
-            /* Not implemented yet */
-            //parse();
             return 0;
         }
         else
