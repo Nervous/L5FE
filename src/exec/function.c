@@ -49,7 +49,7 @@ s_list *cpy_list(s_list *src, s_list *father)
     list->node->type = src->node->type;
     list->node->str = my_strcpy(src->node->str);
     list->node->pos = src->node->pos;
-    list->node->son_list = cpy_list(src->node->son_list, list);
+    list->son_list = cpy_list(src->son_list, list);
 
     list->father = father;
     list->brothers = cpy_list(src->brothers, list);
