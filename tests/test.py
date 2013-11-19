@@ -36,13 +36,14 @@ def test_command(command, tests, tests_cat, succ_tests, succ_tests_cat, output, 
         try:
                if timeout < 0 or timeout_test(cmd, timeout):
                     # if no ouput specified or if it matches
-                    if (output[0] == "" or \
-                            subprocess.check_output(cmd, stderr=subprocess.PIPE) == output[0]):
+                    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, \
+                                            stderr=subprocess.PIPE)
+                    stdout, stderr = p.communicate()
+                    if (output[0] == "" or stdout == output[0]):
                         # if the return value matches the expected one (0 by default)
                         if (subprocess.call(cmd,stdout=subprocess.PIPE, \
                               stderr=subprocess.PIPE) == return_value[0]):
-                            if (err_out[0] == "" or subprocess.call(cmd,stdout=subprocess.PIPE, \
-                                       stderr=subprocess.STDOUT) == err_output):
+                            if (err_out[0] == "" or stderr == err_out[0]):
                                 if not c_categories and not final:
                                     print(command[:-1] + ': \033[1;32mSUCCESS\033[1;m')
                                 succ_tests[0] += 1
