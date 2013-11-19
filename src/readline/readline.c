@@ -183,6 +183,8 @@ void readline(void)
         }
         g_global->pos = 0;
         exec_input(get_root(g_global->current_node));
+        release_ast(get_root(g_global->current_node));
+        g_global->current_node = NULL;
         add_to_hist(g_global->readline);
         g_global->hist_ind = -1;
     }
