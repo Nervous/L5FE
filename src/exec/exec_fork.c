@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-# include "../ast/ast.h"
+#include "../ast/ast.h"
 
 int do_fork(char **argv)
 {

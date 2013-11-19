@@ -2,13 +2,11 @@
 
 int exec_redir(s_list *ast)
 {
-    ast=ast;
-
-/*    switch (ast->node->str)
+    switch (ast->brothers->node->str)
     {
     case ">":
-        return -1;//exec_redir_output();
-    case ">|":
+        return exec_redir_output(ast);//exec_redir_output();
+   /* case ">|":
         return -1;//exec_redir_output();
     case "<":
         return -1;//exec_redir_input();
