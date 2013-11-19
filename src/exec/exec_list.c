@@ -12,7 +12,12 @@ int exec_list(s_list *ast)
         /* HANDLE '&' EXECUTION */
 
         if (ast->brothers->node->type == SEMICOLON)
-            ret = exec_andor(ast->brothers->brothers->son_list);
+        {
+            if (ast->brothers->brothers)
+                ret = exec_andor(ast->brothers->brothers->son_list);
+            else
+                return ret;
+        }
 
         ast = ast->brothers->brothers;
     }
