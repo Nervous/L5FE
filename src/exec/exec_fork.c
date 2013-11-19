@@ -82,8 +82,7 @@ char **build_argv(s_list *ast)
             str_size += 1;
         ret[2] = realloc(ret[2], str_size);
         ret[2] = strcat(ret[2], ast->node->str);
-        if (ast->brothers != NULL)
-            is_redirection(ast->brothers, &spaces);
+        is_redirection(ast, &spaces);
         if (ast->brothers != NULL && spaces == 0)
             ret[2] = strcat(ret[2], " ");
         else
