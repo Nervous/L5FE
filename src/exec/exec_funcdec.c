@@ -1,4 +1,5 @@
 #include "exec.h"
+#include "function.h"
 
 int exec_funcdec(s_list *funcdec)
 {

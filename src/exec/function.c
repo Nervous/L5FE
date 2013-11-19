@@ -66,6 +66,8 @@ void add_function(char *name, s_list *ast)
         s_function *new_func = malloc(sizeof (s_function));
         new_func->name = name;
         new_func->node = cpy_list(ast, NULL);
+        new_func->next = g_global->func;
+        g_global->func = new_func;
     }
     else
     {
@@ -74,3 +76,15 @@ void add_function(char *name, s_list *ast)
     }
 }
 
+void free_function(void)
+{
+    s_function *tmp = g_global->func;
+    s_function *last = tmp;
+
+    while (tmp != NULL)
+    {
+        last = tmp;
+        tmp = tmp->next;
+        free(last);
+    }
+}

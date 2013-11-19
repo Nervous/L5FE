@@ -1,0 +1,1 @@
+echo lol || echo lol2 && echo lol3
