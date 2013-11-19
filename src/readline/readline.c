@@ -24,13 +24,6 @@ static void init_term(void)
     init_history();
 }
 
-
-int my_putchar(int ch)
-{
-    char c = ch;
-    return write(STDOUT_FILENO, &c, 1);
-}
-
 static char get_char(void)
 {
     char c;
@@ -99,10 +92,10 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
             match_key(tmp, buf_p)(buf_p, cur_pos, buf_s, max_s);
             continue;
         }
-        if (*buf_s >= *max_s)
+        if (*buf_s >= *max_s - 1)
         {
             *max_s += 100;
-            *buf_p = realloc(*buf_p, sizeof (char) * *max_s);
+            *buf_p = realloc(*buf_p, (*max_s) * sizeof (char));
             buf = *buf_p;
         }
         memmove(*buf_p + *cur_pos + 1, *buf_p + *cur_pos, *buf_s - *cur_pos);
@@ -127,6 +120,7 @@ static void read_input(void)
     write(STDIN_FILENO, "42sh$ ", 6);
     char *buf = NULL;
     buf = calloc(100, sizeof (char));
+    buf = strcpy(buf, "");
     int buf_size = 0;
     int cur_pos = 0;
     int max_size = 100;
@@ -143,6 +137,7 @@ static void read_ps2(void)
 {
     write(STDIN_FILENO, "> ", 2);
     char *buf = calloc(100, sizeof (char));
+    buf = strcpy(buf, "");
     int buf_size = 0;
     int cur_pos = 0;
     int max_size = 100;
