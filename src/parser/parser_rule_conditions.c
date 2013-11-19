@@ -70,6 +70,10 @@ static void parse_caseclause(s_token **tok)
         parse_loop_EOL(tok);
 }
 
+/**
+** @brief Parse a rule_case grammar line
+*/
+
 int parse_rulecase(s_token **tok)
 {
     if ((*tok)->type != CASE)
@@ -125,6 +129,9 @@ static void parse_elseclause(s_token **tok)
     }
 }
 
+/**
+** @brief Parse an rule_if grammar line
+*/
 int parse_ruleif(s_token **tok)
 {
     if ((*tok)->type != IF)
