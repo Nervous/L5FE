@@ -28,7 +28,7 @@ static int parse_caseitem(s_token **tok)
 
     if ((*tok)->type != WORD && !started)
         return -1;
-    else if(started)
+    else if (started)
         parse_error("PARSE ERROR : Expected a WORD");
 
     *tok = eat_token(*tok);
@@ -64,7 +64,7 @@ static void parse_caseclause(s_token **tok)
 
     if (no_case == false)
         parse_loop_EOL(tok);
-    else if((*tok)->type == D_SEMICOLON)
+    else if ((*tok)->type == D_SEMICOLON)
         parse_error("PARSE ERROR : Expected a ')'");
     else
         parse_loop_EOL(tok);
