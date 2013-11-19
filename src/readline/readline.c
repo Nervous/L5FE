@@ -144,7 +144,8 @@ static void read_ps2(void)
     process_input(&buf, &cur_pos, &buf_size, &max_size);
     write(STDOUT_FILENO, "\n", 1);
     g_global->readline = realloc(g_global->readline,
-            sizeof (char) * (strlen(g_global->readline) + buf_size + 1));
+            sizeof (char) * (strlen(g_global->readline) + buf_size + 2));
+    strcat(g_global->readline, "\n");
     strcat(g_global->readline, buf);
     free(buf);
 }

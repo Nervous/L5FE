@@ -5,6 +5,8 @@
 #include "parser/parser.h"
 #include "get_options.h"
 #include "exec/exec.h"
+#include "readline/history.h"
+#include <stdlib.h>
 
 s_global *g_global = NULL;
 
@@ -22,6 +24,7 @@ void init_global(void)
     g_global->hist_file = NULL;
     g_global->hist_arr = NULL;
     g_global->var = NULL;
+    g_global->func = NULL;
 }
 
 void free_global(void)
@@ -29,11 +32,18 @@ void free_global(void)
     free(g_global->readline);
     release_ast(get_root(g_global->current_node));
     free(g_global->current_node);
+    if (g_global->hist_file)
+        free(g_global->hist_file);
+    free_var(g_global->var);
+    free_function();
+    if (g_global->hist_arr)
+        free_history();
     free(g_global);
 }
-#include <stdio.h>
+
 int main(int argc, char **argv)
 {
+    atexit(free_global);
     init_global();
 
     int ret = get_options(argc, argv);
@@ -42,7 +52,6 @@ int main(int argc, char **argv)
     if (g_global->ast)
         print_ast(get_root(g_global->current_node), "tree.dot");
     release_ast(get_root(g_global->current_node));
-    free_global();
 
     if (ret == -1)
         ret = 1;
