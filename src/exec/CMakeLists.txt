@@ -1,6 +1,7 @@
 set(exec_source_files
     exec.h
     variable.h
+    function.h
     exec_andor.c
     exec_command.c
     exec_compound.c
@@ -17,6 +18,7 @@ set(exec_source_files
     exec_for.c
     exec_case.c
     variable.c
+    function.c
     exec_funcdec.c
     exec_pipe.c
 )
