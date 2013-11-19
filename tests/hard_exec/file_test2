@@ -1,5 +1,4 @@
 if cat titi
-then
         for i in b c d
         do
                 for j in q w e
