@@ -14,8 +14,9 @@ Pattern :
 
 Exemple :
 
-CMD=echo test
+CMD=tests/while_until_commands/file_test2
 RV=0
-OP=test
 
+CMD=tests/while_until_commands/file_test2
+RV=0
 

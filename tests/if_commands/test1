@@ -7,15 +7,26 @@ I you want to, specify the expected output using OP=
 Pattern :
 
 'CMD=<command_i_want_to_test> [arg]*'
-['RV=<expected_return_value>']
+'RV=<expected_return_value>'
 ['OP=<expected_output>']
 ['EOP=<expected_error_output>']
 ''
 
-Exemple :
-
-CMD=echo test
+CMD=tests/if_commands/file_test1
 RV=0
-OP=test
 
+CMD=tests/if_commands/file_test2
+RV=0
+
+CMD=tests/if_commands/file_test3
+RV=0
+
+CMD=tests/if_commands/file_test4
+RV=0
+
+CMD=tests/if_commands/file_test5
+RV=0
+
+CMD=tests/if_commands/file_test6
+RV=1
 
