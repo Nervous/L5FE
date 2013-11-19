@@ -37,7 +37,28 @@ OP=FALSE
 
 CMD=tests/if_commands/file_test8
 RV=0
+EOP=cat: toto: No such file or directory
+OP=TRUE
 
 CMD=tests/if_commands/file_test9
 RV=0
+EOP=cat: toto: No such file or directory
+EOP=cat: pastrois: No such file or directory
+OP=un
+OP=TRUE
+
+CMD=tests/if_commands/file_test10
+RV=0
+OP=un
+OP=trois
+EOP=cat: toto: No such file or directory
+
+CMD=tests/if_commands/file_test11
+RV=0
+OP=un
+OP=dos
+OP=tres
+OP=caiuteuidowdela
+
+
 

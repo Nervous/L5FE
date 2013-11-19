@@ -23,13 +23,11 @@ static int parse_list(s_token **tok)
         if (parse_andor(tok, false) == -1)
         {
             no_andor = true;
-            //climb_ast(1);
             break;
         }
+        no_andor = no_andor;
     }
-    no_andor = no_andor; // CHECK HERE IN CASE OF PROBLEM
-    if (g_global->current_node->father)
-        g_global->current_node = g_global->current_node->father;
+    climb_ast(2);
     return 0;
 }
 

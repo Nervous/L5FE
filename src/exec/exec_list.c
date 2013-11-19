@@ -2,9 +2,10 @@
 
 int exec_list(s_list *ast)
 {
+    if (!ast)
+        return -1;
     int ret = 0;
     ret = exec_andor(ast->son_list);
-
     while (ast->brothers)
     {
         if (ast->brothers->node->type == BIT_AND)
@@ -18,7 +19,8 @@ int exec_list(s_list *ast)
             else
                 return ret;
         }
-
+        if (!ast->brothers || !ast->brothers->brothers)
+            break;
         ast = ast->brothers->brothers;
     }
 
