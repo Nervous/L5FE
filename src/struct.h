@@ -92,6 +92,7 @@ typedef struct global
     s_function *func;
     char **hist_arr;
     int hist_ind;
+    int parse_error;
 } s_global;
 
 #endif /* !STRUCT_H */
