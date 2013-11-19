@@ -1,0 +1,6 @@
+if cat toto
+then
+echo FALSE
+else
+echo TRUE
+fi
