@@ -49,7 +49,7 @@ void up_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
     write_ps();
     write(STDIN_FILENO, tmp, len);
     *cur_pos = *buf_size;
-    *buf = calloc(len + 1, sizeof(char));
+    *buf = calloc(len + 1, sizeof (char));
     *buf = strcpy(*buf, tmp);
 }
 
@@ -69,6 +69,6 @@ void down_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
     write_ps();
     write(STDIN_FILENO, tmp, len);
     *cur_pos = *buf_size;
-    *buf = calloc(len + 1, sizeof(char));
+    *buf = calloc(len + 1, sizeof (char));
     *buf = strcpy(*buf, tmp);
 }
