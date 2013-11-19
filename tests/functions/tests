@@ -28,7 +28,7 @@ OP=test
 OP=test2
 
 CMD=tests/functions/file_test4
-RV=0
+RV=1
 
 CMD=tests/functions/file_test5
 RV=1
