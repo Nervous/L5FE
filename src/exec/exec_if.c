@@ -35,8 +35,9 @@ int exec_if(s_list *current)
     current = current->brothers->brothers;
     if (condition == 0)
         return exec_compound(current->brothers->son_list);
-    else if (strcmp((current = current->brothers->brothers)->node->str,
-                     "Else_clause") == 0)
+    else if (current->brothers->brothers
+             && strcmp((current = current->brothers->brothers)->node->str,
+             "Else_clause") == 0)
         return exec_else(current->son_list);
     else
         return 0;
