@@ -128,7 +128,11 @@ static int get_file(char *filename, bool config)
     }
 
     g_global->readline = value;
-    g_global->file = 0;
+    g_global->file = 1;
+
+    fclose(file);
+    free(tmp);
+
     return parse();
 }
 
