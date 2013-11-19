@@ -1,7 +1,7 @@
 #include "ast.h"
 #include <string.h>
 #include <stdlib.h>
-
+#include <stdio.h>
 extern s_global *g_global;
 
 static void release_node(s_list *node)

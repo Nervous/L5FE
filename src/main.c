@@ -30,7 +30,7 @@ void free_global(void)
 
     free(g_global);
 }
-
+#include <stdio.h>
 int main(int argc, char **argv)
 {
     init_global();
@@ -40,7 +40,6 @@ int main(int argc, char **argv)
 
     if (g_global->ast)
         print_ast(get_root(g_global->current_node), "tree.dot");
-
     release_ast(get_root(g_global->current_node));
     free_global();
 
