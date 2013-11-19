@@ -24,6 +24,12 @@ void init_global(void)
     g_global->var = NULL;
 }
 
+void free_global(void)
+{
+    free(g_global->readline);
+
+    free(g_global);
+}
 
 int main(int argc, char **argv)
 {
@@ -36,5 +42,7 @@ int main(int argc, char **argv)
         print_ast(get_root(g_global->current_node), "tree.dot");
 
     release_ast(get_root(g_global->current_node));
+    free_global();
+
     return ret;
 }

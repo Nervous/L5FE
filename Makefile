@@ -14,6 +14,8 @@ $(BUILD):
 clean:
 	make clean -C $(BUILD)
 	$(RM) $(EXEC)
+	$(RM) tree.dot
+	$(RM) tree.png
 distclean:
 	$(RM) -r $(BUILD)
 	$(RM) $(EXEC)
