@@ -17,23 +17,23 @@ static void is_redirection(s_list *ast, int *spaces)
 {
     int redir = 0;
     if (ast->brothers && strcmp(ast->brothers->node->str, ">") == 0)
-        redir = 2;
+        redir = 1;
     else if (ast->brothers && strcmp(ast->brothers->node->str, "<") == 0)
-        redir = 2;
+        redir = 1;
     else if (ast->brothers && strcmp(ast->brothers->node->str, ">>") == 0)
-        redir = 3;
+        redir = 2;
     else if (ast->brothers && strcmp(ast->brothers->node->str, "<<") == 0)
-        redir = 3;
+        redir = 2;
     else if (ast->brothers && strcmp(ast->brothers->node->str, "<<-") == 0)
-        redir = 4;
+        redir = 3;
     else if (ast->brothers && strcmp(ast->brothers->node->str, ">&") == 0)
-        redir = 3;
+        redir = 2;
     else if (ast->brothers && strcmp(ast->brothers->node->str, "<&") == 0)
-        redir = 3;
+        redir = 2;
     else if (ast->brothers && strcmp(ast->brothers->node->str, ">|") == 0)
-        redir = 3;
+        redir = 2;
     else if (ast->brothers && strcmp(ast->brothers->node->str, "<>") == 0)
-        redir = 3;
+        redir = 2;
     do_checkredir(spaces, redir);
 }
 
@@ -86,7 +86,7 @@ char **build_argv(s_list *ast)
         if (ast->brothers != NULL && spaces == 0)
             ret[2] = strcat(ret[2], " ");
         else
-            --spaces;
+            spaces = spaces == 0 ? 0 : spaces - 1;
         ast = ast->brothers;
     }
 
