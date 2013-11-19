@@ -14,25 +14,16 @@ static void loop_coumpoundlist(s_token **tok, bool mandatory)
             else
                 parse_error("PARSE ERROR: Expected an '\\n' or '|' or ';' 2");
        }
-       int climb = 0;
         if ((*tok)->type == SEMICOLON)
         {
-            climb = 1;
-            climb_ast(2);
+            climb_ast(1);
         }
         *tok = eat_token(*tok);
         *tok = get_token(EOL);
-        if (!climb)
-        climb_ast(1);
+            climb_ast(1);
         parse_loop_EOL(tok);
         if (parse_andor(tok, false) == -1)
-        {
-        //    if (climb)
-          //      climb_ast(1);
             break;
-        }
-//        else
-  //          climb_ast(1);
    }
 }
 

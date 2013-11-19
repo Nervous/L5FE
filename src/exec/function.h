@@ -11,7 +11,7 @@ struct function
     s_function *next;
 };
 
-void add_function(char *name, s_list *ast);
+void add_function(char *name, struct list *ast);
 void free_function(void);
 s_function *search_function(char *name);
 

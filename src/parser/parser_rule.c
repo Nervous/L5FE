@@ -10,7 +10,6 @@ static int do_group(s_token **tok)
     climb_ast(1);
     if (parse_compoundlist(tok, true) == -1)
         parse_error("PARSE ERROR : Expected a coumpound list");
-    //climb_ast(1);
     if ((*tok)->type != DONE)
         parse_error("PARSE ERROR : Expected a DONE keyword");
     *tok = eat_token(*tok);

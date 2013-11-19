@@ -6,6 +6,7 @@ int parse_function(s_token **tok)
     ast_add_step("Funcdec");
     if ((*tok)->type != FUNC)
     {
+        climb_ast(1);
         return -1;
     }
     *tok = eat_token(*tok);
@@ -31,6 +32,5 @@ int parse_function(s_token **tok)
     parse_loop_EOL(tok);
     if (parse_shellcommand(tok) == -1)
         parse_error("PARSE ERROR : Expected a shell command !");
-    // REGISTER : g_global->current_node->node->son_list;
     return 0;
 }

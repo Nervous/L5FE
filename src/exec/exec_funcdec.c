@@ -1,7 +1,8 @@
 #include "exec.h"
 #include "function.h"
+void add_function(char *name, struct list *ast);
 
-int exec_funcdec(s_list *funcdec)
+int exec_funcdec(struct list *funcdec)
 {
     while (funcdec->brothers && strcmp(funcdec->brothers->node->str, "(") != 0)
         funcdec = funcdec->brothers;
