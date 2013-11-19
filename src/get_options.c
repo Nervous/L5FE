@@ -145,7 +145,7 @@ void load_config()
     g_global->pos = 0;
 
     char *home = getenv("HOME");
-    char *buf = malloc(sizeof (char) * (strlen(home) + 8));
+    char *buf = malloc(sizeof (char) * (strlen(home) + 9));
     strcpy(buf, home);
     strcat(buf, "/.42shrc");
     get_file(buf, true);
