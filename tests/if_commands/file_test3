@@ -1,0 +1,15 @@
+if cat toto
+then
+echo FALSE
+elif cat tata
+then
+echo FALSE
+elif cat tutu
+then
+echo FALSE
+elif echo TOTO
+then
+echo TRUE
+else
+echo TRUE
+fi
