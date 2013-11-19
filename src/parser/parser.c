@@ -25,9 +25,9 @@ static int parse_list(s_token **tok)
             no_andor = true;
             break;
         }
+        no_andor = no_andor;
     }
-    if (g_global->current_node->father)
-        g_global->current_node = g_global->current_node->father;
+    climb_ast(2);
     return 0;
 }
 
