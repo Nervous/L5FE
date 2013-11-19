@@ -28,5 +28,5 @@ CMD=tests/if_commands/file_test5
 RV=0
 
 CMD=tests/if_commands/file_test6
-RV=0
+RV=1
 
