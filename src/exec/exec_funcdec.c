@@ -11,5 +11,5 @@ int exec_funcdec(struct list *funcdec)
         funcdec = funcdec->brothers;
     add_function(name, funcdec);
 
-    return -1;
+    return 0;
 }

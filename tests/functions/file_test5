@@ -1,0 +1,6 @@
+function my_echo()
+{
+echo test
+
+
+my_echo
