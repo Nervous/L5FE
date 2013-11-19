@@ -179,6 +179,7 @@ void readline(void)
         while (parse() == -1)
         {
             g_global->pos = 0;
+            release_ast(get_root(g_global->current_node));
             read_ps2();
         }
         g_global->pos = 0;

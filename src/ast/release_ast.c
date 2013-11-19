@@ -33,6 +33,7 @@ void release_ast(s_list *ast)
     release_ast(ast->son_list);
     release_ast(ast->brothers);
     release_node2(ast);
+    g_global->current_node = NULL;
 }
 
 static void remove_node_aux(s_list *tmp, s_list *previous,

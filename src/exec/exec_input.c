@@ -1,6 +1,8 @@
 #include "exec.h"
 #include <string.h>
 
+extern s_global *g_global;
+
 int exec_input(s_list *ast)
 {
     if (!ast || !(ast->son_list))
@@ -16,5 +18,6 @@ int exec_input(s_list *ast)
             return 0;
         ast = ast->brothers;
     }
+    g_global->file = 0;
     return ret;
 }
