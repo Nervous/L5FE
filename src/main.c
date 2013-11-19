@@ -36,12 +36,15 @@ int main(int argc, char **argv)
     init_global();
 
     int ret = get_options(argc, argv);
-    exec_input(get_root(g_global->current_node));
+    ret = exec_input(get_root(g_global->current_node));
 
     if (g_global->ast)
         print_ast(get_root(g_global->current_node), "tree.dot");
     release_ast(get_root(g_global->current_node));
     free_global();
+
+    if (ret == -1)
+        ret = 1;
 
     return ret;
 }
