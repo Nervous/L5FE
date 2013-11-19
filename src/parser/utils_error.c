@@ -6,7 +6,7 @@ extern s_global *g_global;
 
 int parse_error(char *msg)
 {
-    g_global->parse_error = 1;
+    g_global->parse_error = -1;
     if (g_global->file == 1)
     {
         printf("%s\nExiting ...\n", msg);
