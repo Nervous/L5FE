@@ -50,7 +50,7 @@ def test_command(command, tests, tests_cat, succ_tests, succ_tests_cat, output, 
                             else:
                                 if not c_categories and not final:
                                     print(command[:-1] + \
-                                            ': F\033[1;31mFAILURE -> Unexpected error output\033[1;m')
+                                            ': \033[1;31mFAILURE -> Unexpected error output\033[1;m')
 
                         else:
                             if not c_categories and not final:
@@ -139,13 +139,13 @@ for category in categories:
                             succ_tests_cat, output, return_value, c_categories, err_output)
                     command = ""
                 elif line[:4] == "CMD=":
-                    command = line[4:]
+                    command += line[4:]
                 elif line[:3] == "RV=":
                     return_value[0] = int(line[3:])
                 elif line[:3] == "OP=":
-                    output[0] = line[3:]
+                    output[0] += line[3:]
                 elif line[:4] == "EOP=":
-                    err_output[0] = line[4:]
+                    err_output[0] += line[4:]
     if not final:
         if number:
             print('\033[1;34m' + category + ' -> Successful tests : '\

@@ -1,0 +1,60 @@
+How to use this file properly :
+
+Specify the command you want to test using CMD=
+I you want to, specify the expected return value using RV=
+I you want to, specify the expected output using OP=
+
+Pattern :
+
+'CMD=<command_i_want_to_test> [arg]*'
+['RV=<expected_return_value>']
+['OP=<expected_output>']
+['EOP=<expected_error_output>']
+''
+
+Exemple :
+
+CMD=tests/simple_exec/file_test1
+RV=0
+OP=lol
+
+CMD=tests/simple_exec/file_test2
+RV=0
+OP=lol
+
+CMD=tests/simple_exec/file_test3
+RV=0
+OP=lol
+
+CMD=tests/simple_exec/file_test4
+RV=0
+OP=lol
+
+CMD=tests/simple_exec/file_test5
+RV=0
+OP=lol
+OP=test
+
+CMD=tests/simple_exec/file_test6
+RV=0
+OP=lol
+OP=lol3
+
+CMD=tests/simple_exec/file_test7
+RV=0
+OP=lol1
+OP=lol2
+OP=lol3
+
+CMD=tests/simple_exec/file_test8
+RV=1
+
+CMD=tests/simple_exec/file_test9
+RV=0
+OP=toto
+
+CMD=tests/simple_exec/file_test10
+RV=0
+OP=test
+EOP=cat: toto: No such file or directory
+

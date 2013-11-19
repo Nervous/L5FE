@@ -1,0 +1,7 @@
+while cat toto
+do
+until cat toto
+do
+echo toto
+done
+done

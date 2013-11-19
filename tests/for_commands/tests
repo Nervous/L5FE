@@ -20,3 +20,20 @@ RV=0
 CMD=tests/for_commands/file_test2
 RV=1
 
+CMD=tests/for_commands/file_test3
+RV=1
+
+CMD=tests/for_commands/file_test4
+OP=citrouille
+OP=citrouille
+RV=0
+
+CMD=tests/for_commands/file_test5
+OP=citrouille
+OP=citrouille
+OP=citrouille
+RV=0
+
+CMD=tests/for_commands/file_test6
+RV=1
+
