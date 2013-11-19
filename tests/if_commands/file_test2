@@ -1,0 +1,6 @@
+if echo TRUE
+then
+echo TRUE
+else
+cat toto
+fi
