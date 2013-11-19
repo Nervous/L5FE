@@ -3,6 +3,8 @@
 int exec_pipeline(s_list *ast)
 {
     int ret = 0;
+    if (!ast || !ast->brothers)
+        return -1;
     if (ast->brothers->node->type != BIT_PIPE)
     {
         if (ast->node->type == NEG)
