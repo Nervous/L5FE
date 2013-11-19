@@ -10,7 +10,7 @@ int exec_else(s_list *current)
         condition = exec_compound(current->brothers->son_list);
         if (condition == 0) //current elif -> compound -> then -> compound
             return
-exec_compound(current->brothers->brothers->brothers->son_list);
+            exec_compound(current->brothers->brothers->brothers->son_list);
         /* current elif -> compound -> then -> compound -> else of elif */
         if (current->brothers->brothers->brothers->brothers)
             current =
@@ -19,7 +19,7 @@ exec_compound(current->brothers->brothers->brothers->son_list);
             return 0;
     }
     if (current == NULL)
-        return 0;a
+        return 0;
     return exec_compound(current->brothers->son_list);
 }
 
@@ -28,8 +28,6 @@ int exec_if(s_list *current)
     /* current on if */
     int condition = exec_compound(current->brothers->son_list);
     current = current->brothers->brothers;
-    if (strcmp(current->node->str, ";"))
-        current = current->brothers;
     /*current on then*/
     if (condition == 0)
         return exec_compound(current->brothers->son_list);
