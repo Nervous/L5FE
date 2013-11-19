@@ -1,6 +1,6 @@
 .\" Manpage 42sh
 .\" Contact vallee_a@epita.fr
-.TH man 1 "06 November 2013" "0.1" "42sh Man Page"
+.TH man 1 "19 November 2013" "0.5" "42sh Man Page"
 .SH NAME
 42sh
 .SH SYNOPSIS
@@ -8,7 +8,7 @@ Unix Shell in C
 .SH DESCRIPTION
 42sh is a shell developped in C language.
 .SH OPTIONS
-No option have been implemented yet.
+42sh [--ast-print] [-c command] [file]
 .SH COPYRIGHT
 Copyright © 2013 Vallee Antoine, Guet Emmanuel, Pruvot Amaury, Gerondeau Xavier, Moizan Guillaume. Permission to use, copy, modify, distribute, and sell this software and its documentation for any purpose is hereby granted without fee, provided that the above copyright notice appear in all copies and that both that copyright notice and this permission notice appear in supporting documentation. No representations are made about the suitability of this software for any purpose. It is provided "as is" without express or implied warranty.
 .SH AUTHORS

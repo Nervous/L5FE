@@ -1,5 +1,8 @@
 #include "exec.h"
 
+/**
+** @brief Execute the list rule
+*/
 int exec_list(s_list *ast)
 {
     if (!ast)
