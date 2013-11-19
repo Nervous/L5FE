@@ -1,0 +1,10 @@
+for i in a b c
+do
+if ls
+then
+for e in d f g
+do
+echo test
+done
+fi
+done

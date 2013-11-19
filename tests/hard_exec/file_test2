@@ -1,0 +1,22 @@
+if cat titi
+then
+        for i in b c d
+        do
+                for j in q w e
+                do
+                        cat Makefile | wc -l
+                done
+        done
+else
+        if echo true
+        then
+                echo toto && echo titi && echo "tata in the kitchen" && echo 'tutu'
+        fi
+        echo fifi > tests/hard_exec/test
+        for j in e r t
+        do
+                echo fifi >> tests/hard_exec/test
+        done
+fi
+
+cat tests/hard_exec/test | wc -l
