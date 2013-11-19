@@ -53,6 +53,8 @@ s_list *cpy_list(s_list *src, s_list *father)
 
     list->father = father;
     list->brothers = cpy_list(src->brothers, list);
+
+    return list;
 }
 
 /**
