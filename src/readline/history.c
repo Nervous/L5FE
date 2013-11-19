@@ -16,7 +16,7 @@ void init_history(void)
     FILE *file = fopen(buf, "r");
     if (file)
     {
-        g_global->hist_arr = calloc(200, sizeof(char *));
+        g_global->hist_arr = calloc(200, sizeof (char *));
         g_global->hist_ind = -1;
         size_t len = 0;
         for (int i = 0; i < 200; i++)
@@ -29,7 +29,7 @@ void init_history(void)
     else
     {
         for (int i = 0; i < 200; i++)
-            g_global->hist_arr[i] = calloc(1, sizeof(char));
+            g_global->hist_arr[i] = calloc(1, sizeof (char));
 
     }
 }
