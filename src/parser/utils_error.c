@@ -4,6 +4,10 @@
 
 extern s_global *g_global;
 
+/**
+** @brief Sets a global value to indicates that a parse error has occured
+*/
+
 int parse_error(char *msg)
 {
     g_global->parse_error = -1;

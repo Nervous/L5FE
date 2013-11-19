@@ -1,5 +1,10 @@
-#include "utils_string.h"
 #include <ctype.h>
+#include "utils_string.h"
+
+/**
+** @brief Checks if a string is actually a number
+*/
+
 bool my_isdigit(char *s)
 {
     if (s[0] == '\0')

@@ -1,6 +1,11 @@
 #include "parser.h"
 
 extern s_global *g_global;
+
+/**
+** @brief Parse a redirection
+*/
+
 int parse_redirection(s_token **tok)
 {
     bool digit = false;
@@ -33,6 +38,10 @@ int parse_redirection(s_token **tok)
     return 0;
 }
 
+/**
+** @brief Parse an element
+*/
+
 int parse_element(s_token **tok)
 {
     if ((*tok)->type == WORD)
@@ -45,6 +54,10 @@ int parse_element(s_token **tok)
     }
     return parse_redirection(tok);
 }
+
+/**
+** @brief Parse a prefix
+*/
 
 int parse_prefix(s_token **tok)
 {
