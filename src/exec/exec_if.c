@@ -19,7 +19,7 @@ exec_compound(current->brothers->brothers->brothers->son_list);
             return 0;
     }
     if (current == NULL)
-        return 0;
+        return 0;a
     return exec_compound(current->brothers->son_list);
 }
 
@@ -28,6 +28,8 @@ int exec_if(s_list *current)
     /* current on if */
     int condition = exec_compound(current->brothers->son_list);
     current = current->brothers->brothers;
+    if (strcmp(current->node->str, ";"))
+        current = current->brothers;
     /*current on then*/
     if (condition == 0)
         return exec_compound(current->brothers->son_list);
