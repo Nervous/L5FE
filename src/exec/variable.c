@@ -17,6 +17,10 @@ static char *my_strcpy(char *str)
     return new_str;
 }
 
+/**
+** @brief This function will search for a variable with the key (key)
+** @return It return the struct var if present in the list, or a NULL pointer
+*/
 s_var *search_var(s_var *list, char *key)
 {
     s_var *tmp = list;
