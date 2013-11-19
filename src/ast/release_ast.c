@@ -1,17 +1,16 @@
 #include "ast.h"
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
 extern s_global *g_global;
 
 static void release_node(s_list *node)
 {
     if (!node)
         return;
-    if (node->node->str)
-        free(node->node->str);
     if (node->son_list)
         release_node(node->son_list);
+    if (node->node->str)
+        free(node->node->str);
     free(node->node);
     free(node);
 }
@@ -60,6 +59,7 @@ static void remove_node_aux(s_list *tmp, s_list *previous,
         next = tmp->son_list->brothers;
   }
 }
+
 void remove_node(s_list *node)
 {
     if (!node)

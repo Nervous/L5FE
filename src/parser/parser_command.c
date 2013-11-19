@@ -46,7 +46,7 @@ static int parse_command(s_token **tok)
     {
         while (parse_redirection(tok) == 0)
             ;
-        climb_ast(1);
+//        climb_ast(1);
         return 0;
     }
     else if (parse_function(tok) != 0)

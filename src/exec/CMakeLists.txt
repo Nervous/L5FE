@@ -10,7 +10,6 @@ set(exec_source_files
     exec_input.c
     exec_list.c
     exec_pipeline.c
-    exec_redir.c
     exec_simplecommand.c
     exec_shellcommand.c
     exec_until.c
