@@ -3,6 +3,7 @@ set(readline_source_files
     functionkey.c
     readline.c
     arrowkey.c
+    putchar.c
     )
 
 add_library(readline ${readline_source_files})
