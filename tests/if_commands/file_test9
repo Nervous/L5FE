@@ -1,6 +1,6 @@
-if cat toto
+if cat toto || echo un || echo deux && cat pastrois
 then
-echo FALSE
+echo trois
 else
 echo TRUE
 fi
