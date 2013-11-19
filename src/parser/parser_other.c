@@ -20,9 +20,7 @@ int parse_redirection(s_token **tok)
     if ((*tok)->type != TOKEN_REDIR)
     {
         if (!digit)
-        {
             return -1;
-        }
         else
             return parse_error("Expected a redirection here");
     }
