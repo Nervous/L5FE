@@ -1,0 +1,12 @@
+function my_echo()
+{
+echo test
+my_echo2
+}
+
+my_echo2()
+{
+echo test2
+}
+
+my_echo
