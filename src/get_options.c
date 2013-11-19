@@ -136,11 +136,6 @@ static int get_file(char *filename, bool config)
     return parse();
 }
 
-/**
-** @brief Parses the argument passed to 42sh to find the options. If no
-** argument is provided, 42sh will run in interactive mode
-*/
-
 void load_config()
 {
     get_file("etc/42shrc", true);
@@ -161,6 +156,11 @@ void load_config()
     //release_ast(get_root(g_global->current_node));
     g_global->current_node = NULL;
 }
+
+/**
+** @brief Parses the argument passed to 42sh to find the options. If no
+** argument is provided, 42sh will run in interactive mode
+*/
 
 int get_options(int argc, char **argv)
 {
