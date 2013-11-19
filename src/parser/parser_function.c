@@ -14,6 +14,11 @@ int parse_function(s_token **tok)
         climb_ast(1);
         return -1;
     }
+    else
+    {
+        ast_add_step("function");
+        climb_ast(1);
+    }
     *tok = eat_token(*tok);
     *tok = get_token(WORD);
     climb_ast(1);
