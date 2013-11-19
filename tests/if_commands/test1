@@ -30,3 +30,14 @@ RV=0
 CMD=tests/if_commands/file_test6
 RV=1
 
+CMD=tests/if_commands/file_test7
+RV=0
+OP=TEST
+OP=FALSE
+
+CMD=tests/if_commands/file_test8
+RV=0
+
+CMD=tests/if_commands/file_test9
+RV=0
+

@@ -55,6 +55,6 @@ OP=toto
 
 CMD=tests/simple_exec/file_test10
 RV=0
-OP=test
 EOP=cat: toto: No such file or directory
+OP=test
 
