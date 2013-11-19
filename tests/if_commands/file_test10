@@ -1,0 +1,6 @@
+if cat toto || echo un || echo deux
+then
+echo trois
+else
+echo TRUE
+fi

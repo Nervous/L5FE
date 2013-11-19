@@ -107,21 +107,19 @@ static void parse_elseclause(s_token **tok)
         parse_compoundlist(tok, true);
         climb_ast(1);
     }
-    else if ((*tok)->type == ELIF)//TODO in AST
+    else if ((*tok)->type == ELIF)
     {
         ast_add_step("Else_clause");
         *tok = eat_token(*tok);
         *tok = get_token(EOL);
         climb_ast(1);
         parse_compoundlist(tok, true);
-        //climb_ast(1);
         if ((*tok)->type != THEN)
             parse_error("PARSE ERROR : Expected a THEN keyword");
         *tok = eat_token(*tok);
         *tok = get_token(EOL);
         climb_ast(1);
         parse_compoundlist(tok, true);
-//        climb_ast(1);
         parse_elseclause(tok);
         climb_ast(1);
     }
@@ -137,21 +135,16 @@ int parse_ruleif(s_token **tok)
     if (g_global->current_node->father)
         g_global->current_node = g_global->current_node->father;
     parse_compoundlist(tok, true);
-    //if (g_global->current_node->father)
-      //  g_global->current_node = g_global->current_node->father;
     if ((*tok)->type != THEN)
         parse_error("PARSE ERROR : Expected a THEN keyword");
     *tok = eat_token(*tok);
     *tok = get_token(EOL);
     climb_ast(1);
     parse_compoundlist(tok, true);
-//    climb_ast(1);
     parse_elseclause(tok);
-    //climb_ast(1);
     if ((*tok)->type != FI)
         parse_error("PARSE ERROR : Expected a FI keyword");
     *tok = eat_token(*tok);
     *tok = get_token(EOL);
-//    climb_ast(1);
     return 0;
 }

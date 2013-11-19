@@ -1,0 +1,6 @@
+if echo un && echo dos && echo tres
+then
+echo caiuteuidowdela
+else
+echo TRUE
+fi

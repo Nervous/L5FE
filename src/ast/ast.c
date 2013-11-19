@@ -4,6 +4,10 @@
 
 extern s_global *g_global;
 
+/**
+**@fn s_list *get_root(s_list *current_node);
+**@brief Returns the root of the AST
+*/
 s_list *get_root(s_list *current_node)
 {
     if (!current_node)
@@ -13,10 +17,8 @@ s_list *get_root(s_list *current_node)
         tmp = tmp->father;
     return tmp;
 }
-/**
-** Add a brother to the last son of
-** the current node
-*/
+
+/** Add a son to the current node and set the current node to it*/
 static void node_add_son(s_list *node)
 {
     if (!g_global->current_node->son_list)
@@ -38,6 +40,10 @@ static void node_add_son(s_list *node)
     g_global->current_node = node;
 }
 
+/**
+** @fn s_token *copy_token(s_token *token);
+** @brief Copy the token given in parameter in a new token
+*/
 s_token *copy_token(s_token *token)
 {
     if (!token)
@@ -51,24 +57,10 @@ s_token *copy_token(s_token *token)
     strcpy(new_node->str, token->str);
     return new_node;
 }
-s_list *list_copy(s_list *list)
-{
-    if (!list)
-        return NULL;
-    s_list *new_list = NULL;
-    if (!(new_list = malloc(sizeof (s_list))))
-        return NULL;
-    new_list->id = list->id;
-    new_list->linked = list->linked;
-    new_list->abstract = list->abstract;
-    new_list->node = copy_token(list->node);
-    new_list->father = list_copy(list->father);
-    return new_list;
-}
 
 /**
-** Add a node to the ast, whose father
-** will be the current_node global variable
+** @fn void ast_add_node(s_token *token);
+** @brief Add a son to the current node
 */
 void ast_add_node(s_token *token)
 {
@@ -87,6 +79,11 @@ void ast_add_node(s_token *token)
         node_add_son(new_node);
     g_global->current_node = new_node;
 }
+
+/**
+** @fn void ast_add_step(char *stepName)
+** @brief Add a new abstract son to the current node
+*/
 void ast_add_step(char *stepName)
 {
     s_list *new_node = NULL;

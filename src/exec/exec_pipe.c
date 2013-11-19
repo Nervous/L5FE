@@ -5,11 +5,44 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <string.h>
-# include "../ast/ast.h"
+#include "../ast/ast.h"
+
+static int son_pipe(s_list *ast, int fdlist[2], char **environ)
+{
+    char **argv = NULL;
+    close(fdlist[1]);
+    dup2(fdlist[0], STDIN_FILENO);
+    int ret = 0;
+    if (ast->brothers->brothers->brothers)
+        ret = exec_pipe(ast->brothers->brothers);
+    else
+    {
+        s_list *tmp = ast->brothers->brothers->son_list;
+        argv = build_argv(tmp->son_list);
+        ret = execve(argv[0], argv, environ);
+    }
+    return ret;
+}
+
+static int father_pipe(int pid, int fdlist[2], int *status, char **argv)
+{
+    close(fdlist[0]);
+    waitpid(pid, status, 0);
+    close(fdlist[1]);
+    if (argv)
+    {
+        free(argv[2]);
+        free(argv);
+    }
+
+    if (!WIFEXITED(*status))
+        return -1;
+    return 0;
+}
 
 int exec_pipe(s_list *ast)
 {
-    int fdlist[2]; //0 is read size, 1 is write
+    int fdlist[2];
     int ret = 0;
     int pid = 0;
     int status;
@@ -18,18 +51,7 @@ int exec_pipe(s_list *ast)
     pipe(fdlist);
     pid = fork();
     if (!pid)
-    {
-        close(fdlist[1]);
-        dup2(fdlist[0], STDIN_FILENO);
-        if (ast->brothers->brothers->brothers)
-            exec_pipe(ast->brothers->brothers);
-        else
-        {
-            s_list *tmp = ast->brothers->brothers->son_list;
-            argv = build_argv(tmp->son_list);
-            ret = execve(argv[0], argv, environ);
-        }
-    }
+        ret = son_pipe(ast, fdlist, environ);
     else
     {
         pid = fork();
@@ -42,17 +64,7 @@ int exec_pipe(s_list *ast)
         }
         else
         {
-            close(fdlist[0]);
-            waitpid(pid, &status, 0);
-            close(fdlist[1]);
-            if (argv)
-            {
-                free(argv[2]);
-                free(argv);
-            }
-
-            if (!WIFEXITED(status))
-                return -1;
+            ret = father_pipe(pid, fdlist, &status, argv);
         }
     }
     return ret;

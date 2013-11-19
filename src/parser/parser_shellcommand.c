@@ -29,12 +29,10 @@ static int check_shellcommand_par(s_token **tok)
         *tok = get_token(EOL);
         climb_ast(1);
         parse_compoundlist(tok, true);
-    //    climb_ast(1);
         if ((*tok)->type != RIGHT_PAR)
             parse_error("PARSE ERROR : Expected a right parenthesis");
         *tok = eat_token(*tok);
         *tok = get_token(EOL);
-    //    climb_ast(1);
         return 0;
     }
     return -1;
@@ -57,7 +55,6 @@ int parse_shellcommand(s_token **tok)
     else
     {
         remove_node(g_global->current_node);
-//        climb_ast(1);
         return -1;
     }
 }

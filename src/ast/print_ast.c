@@ -17,6 +17,7 @@ static void print_node_text(s_list *ast, FILE *f)
     fprintf(f, "%u [label = \"%s\"]", ast->id, ast->node->str);
     fprintf(f, "\n");
 }
+
 static void print_node(s_list *ast, FILE *f)
 {
     s_list *tmp = ast;
@@ -36,6 +37,10 @@ static void print_node(s_list *ast, FILE *f)
     }
 }
 
+/**
+** @fn void print_ast(s_list *ast, const char *fileName);
+** @brief Print the whole AST and store it in a .dot file
+*/
 void print_ast(s_list *ast, const char *fileName)
 {
     FILE *f;
@@ -51,6 +56,10 @@ void print_ast(s_list *ast, const char *fileName)
     fclose(f);
 }
 
+/**
+** @fn void climb_ast(int height);
+** @brief Set the current node to its father
+*/
 void climb_ast(int height)
 {
     for (int i = 0; i < height; i++)

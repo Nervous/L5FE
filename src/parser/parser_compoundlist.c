@@ -23,11 +23,7 @@ static void loop_coumpoundlist(s_token **tok, bool mandatory)
             climb_ast(1);
         parse_loop_EOL(tok);
         if (parse_andor(tok, false) == -1)
-        {
             break;
-        }
-//        else
-  //          climb_ast(1);
    }
 }
 
