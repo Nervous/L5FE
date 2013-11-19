@@ -12,8 +12,10 @@ static int parse_simplecommand(s_token **tok)
             remove_node(g_global->current_node);
             return -1;
         }
+
         while (parse_element(tok) == 0)
             ;
+
         return 0;
     }
 
@@ -64,6 +66,10 @@ static void parse_orcommand(s_token **tok)
             parse_error("PARSE ERROR : Was expecting a command");
     }
 }
+
+/**
+** @brief Parse a pipeline grammar line
+*/
 
 int parse_pipeline(s_token **tok, bool mandatory)
 {

@@ -1,6 +1,11 @@
 #include "parser.h"
 
 extern s_global *g_global;
+
+/**
+** @brief Parse an and_or grammar line
+*/
+
 int parse_function(s_token **tok)
 {
     ast_add_step("Funcdec");
