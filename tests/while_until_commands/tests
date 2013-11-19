@@ -20,3 +20,18 @@ RV=0
 CMD=tests/while_until_commands/file_test2
 RV=0
 
+CMD=tests/while_until_commands/file_test3
+RV=1
+
+CMD=tests/while_until_commands/file_test4
+RV=1
+
+CMD=tests/while_until_commands/file_test4
+RV=1
+
+CMD=tests/while_until_commands/file_test5
+RV=1
+
+CMD=tests/while_until_commands/file_test6
+RV=0
+
