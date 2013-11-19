@@ -60,5 +60,6 @@ OP=dos
 OP=tres
 OP=caiuteuidowdela
 
-
+CMD=tests/if_commands/file_test12
+RV=0
 
