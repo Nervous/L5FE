@@ -14,18 +14,11 @@ static int parse_simplecommand(s_token **tok)
         }
         while (parse_element(tok) == 0)
             ;
-        //        climb_ast(1);
         return 0;
     }
 
     while (parse_prefix(tok) == 0)
         ;
-
-   /* if (parse_element(tok) == -1)
-    {
-        //remove_node(g_global->current_node);
-        return -1;
-    }*/
 
     while (parse_element(tok) == 0)
         ;
@@ -46,7 +39,6 @@ static int parse_command(s_token **tok)
     {
         while (parse_redirection(tok) == 0)
             ;
-//        climb_ast(1);
         return 0;
     }
     else if (parse_function(tok) != 0)
