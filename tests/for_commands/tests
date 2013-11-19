@@ -25,5 +25,6 @@ RV=1
 
 CMD=tests/for_commands/file_test4
 OP=citrouille
+OP=citrouille
 RV=0
 

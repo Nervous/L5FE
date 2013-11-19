@@ -143,7 +143,7 @@ for category in categories:
                 elif line[:3] == "RV=":
                     return_value[0] = int(line[3:])
                 elif line[:3] == "OP=":
-                    output[0] = line[3:]
+                    output[0] += line[3:]
                 elif line[:4] == "EOP=":
                     err_output[0] = line[4:]
     if not final:
