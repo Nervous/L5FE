@@ -14,15 +14,33 @@ void init_history(void)
     strcat(buf, "/.42sh_history");
     g_global->hist_file = buf;
     FILE *file = fopen(buf, "r");
-    g_global->hist_arr = calloc(200, sizeof(char *));
-    g_global->hist_ind = -1;
-    size_t len = 0;
+    if (file)
+    {
+        g_global->hist_arr = calloc(200, sizeof(char *));
+        g_global->hist_ind = -1;
+        size_t len = 0;
+        for (int i = 0; i < 200; i++)
+        {
+            getline(&g_global->hist_arr[i], &len, file);
+            g_global->hist_arr[i][strlen(g_global->hist_arr[i]) - 1] = '\0';
+        }
+        fclose(file);
+    }
+    else
+    {
+        for (int i = 0; i < 200; i++)
+            g_global->hist_arr[i] = calloc(1, sizeof(char));
+
+    }
+}
+
+void free_history(void)
+{
     for (int i = 0; i < 200; i++)
     {
-        getline(&g_global->hist_arr[i], &len, file);
-        g_global->hist_arr[i][strlen(g_global->hist_arr[i]) - 1] = '\0';
+        free(g_global->hist_arr[i]);
     }
-    fclose(file);
+    free(g_global->hist_arr);
 }
 
 void write_history(void)
@@ -47,5 +65,7 @@ void add_to_hist(char *buf)
 
 char *get_history_ln(void)
 {
+    if (g_global->hist_ind == -1)
+        return "";
     return g_global->hist_arr[g_global->hist_ind];
 }

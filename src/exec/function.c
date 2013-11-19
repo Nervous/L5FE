@@ -1,4 +1,5 @@
 #include "../struct.h"
+#include "../ast/ast.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -17,9 +18,9 @@ static char *my_strcpy(char *str)
 }
 
 /**
-** @brief this function will try to retrieve the function with the name (name)
-** in the registered functions
-*/
+ ** @brief this function will try to retrieve the function with the name (name)
+ ** in the registered functions
+ */
 s_function *search_function(char *name)
 {
     s_function *tmp = g_global->func;
@@ -33,8 +34,8 @@ s_function *search_function(char *name)
 }
 
 /**
-** @brief This function will copy the whole structure of an ast
-*/
+ ** @brief This function will copy the whole structure of an ast
+ */
 s_list *cpy_list(s_list *src, s_list *father)
 {
     if (src == NULL)
@@ -58,15 +59,15 @@ s_list *cpy_list(s_list *src, s_list *father)
 }
 
 /**
-** @brief This function will add a new (function) struct to the memory
-*/
+ ** @brief This function will add a new (function) struct to the memory
+ */
 void add_function(char *name, s_list *ast)
 {
     s_function *tmp = NULL;
     if ((tmp = search_function(name)) == NULL)
     {
         s_function *new_func = malloc(sizeof (s_function));
-        new_func->name = name;
+        new_func->name = my_strcpy(name);
         new_func->node = cpy_list(ast, NULL);
         new_func->next = g_global->func;
         g_global->func = new_func;
@@ -87,6 +88,8 @@ void free_function(void)
     {
         last = tmp;
         tmp = tmp->next;
+        release_ast(get_root(last->node));
+        free(last->name);
         free(last);
     }
 }

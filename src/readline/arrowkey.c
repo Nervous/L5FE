@@ -55,7 +55,7 @@ void up_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
 
 void down_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
 {
-    if (g_global->hist_ind > 0)
+    if (g_global->hist_ind >= 0)
         g_global->hist_ind -= 1;
     else
         return;
