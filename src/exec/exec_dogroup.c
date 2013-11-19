@@ -1,7 +1,9 @@
 #include "exec.h"
 
+/**
+** @brief Execute the do_group rule
+*/
 int exec_dogroup(s_list *dogroup)
 {
-    /* return exec of son's first brother which is a compound list */
     return exec_compound(dogroup->brothers->son_list);
 }

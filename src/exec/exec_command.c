@@ -1,6 +1,9 @@
 #include <string.h>
 #include "exec.h"
 
+/**
+** @brief Execute the command rule
+*/
 int exec_command(s_list *ast)
 {
     int ret = 0;
