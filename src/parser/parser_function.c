@@ -6,6 +6,7 @@ int parse_function(s_token **tok)
     ast_add_step("Funcdec");
     if ((*tok)->type != FUNC)
     {
+        climb_ast(1);
         return -1;
     }
     *tok = eat_token(*tok);
