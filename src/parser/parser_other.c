@@ -4,7 +4,6 @@ extern s_global *g_global;
 int parse_redirection(s_token **tok)
 {
     bool digit = false;
-    ast_add_step("Redirection");
     if (my_isdigit((*tok)->str))
     {
         *tok = eat_token(*tok);
@@ -17,7 +16,6 @@ int parse_redirection(s_token **tok)
     {
         if (!digit)
         {
-            remove_node(g_global->current_node);
             return -1;
         }
         else
