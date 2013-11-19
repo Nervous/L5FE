@@ -38,7 +38,7 @@ def test_command(command, tests, tests_cat, succ_tests, succ_tests_cat, output, 
                     # if no ouput specified or if it matches
                     if (output[0] == "" or \
                             subprocess.check_output(cmd, stderr=subprocess.PIPE) == output[0]):
-                        # if the return value matches the expected one (0 by default) 
+                        # if the return value matches the expected one (0 by default)
                         if (subprocess.call(cmd,stdout=subprocess.PIPE, \
                               stderr=subprocess.PIPE) == return_value[0]):
                             if (err_out[0] == "" or subprocess.call(cmd,stdout=subprocess.PIPE, \
