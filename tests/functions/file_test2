@@ -1,0 +1,7 @@
+function my_echo()
+{
+echo test
+cat toto
+}
+
+my_echo

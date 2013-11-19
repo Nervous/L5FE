@@ -1,0 +1,8 @@
+function my_echo()
+{
+echo test > tmp
+}
+
+my_echo
+cat tmp | grep "test" | wc -c
+rm tmp

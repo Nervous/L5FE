@@ -5,8 +5,9 @@
 int exec_simplecommand(s_list *simple_command)
 {
     s_function *tmp = NULL;
+    int ret = 0;
     if ((tmp = search_function(simple_command->node->str)) != NULL)
-        exec_shellcommand(tmp->node->son_list);
+        ret = exec_shellcommand(tmp->node->son_list);
     else
     {
         while (simple_command)
@@ -23,5 +24,5 @@ int exec_simplecommand(s_list *simple_command)
             simple_command = simple_command->brothers;
         }
     }
-    return 1;
+    return ret;
 }

@@ -183,7 +183,7 @@ int get_options(int argc, char **argv)
         {
             if (g_global->norc != 1)
                 load_config();
-            return get_file(argv[i], false); //executing first arg as command file
+            return get_file(argv[i], false);
         }
     }
     if (g_global->norc != 1)
