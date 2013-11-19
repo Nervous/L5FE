@@ -1,0 +1,4 @@
+if cat toto
+then
+echo FALSE
+fi
