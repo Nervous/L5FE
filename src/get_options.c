@@ -140,12 +140,12 @@ void load_config()
 {
     get_file("etc/42shrc", true);
     exec_input(get_root(g_global->current_node));
-    //release_ast(get_root(g_global->current_node));
+    release_ast(get_root(g_global->current_node));
     g_global->current_node = NULL;
     g_global->pos = 0;
 
     char *home = getenv("HOME");
-    char *buf = malloc(sizeof (char) * (strlen(home) + 8));
+    char *buf = malloc(sizeof (char) * (strlen(home) + 9));
     strcpy(buf, home);
     strcat(buf, "/.42shrc");
     get_file(buf, true);
@@ -153,7 +153,7 @@ void load_config()
     g_global->pos = 0;
 
     exec_input(get_root(g_global->current_node));
-    //release_ast(get_root(g_global->current_node));
+    release_ast(get_root(g_global->current_node));
     g_global->current_node = NULL;
 }
 
