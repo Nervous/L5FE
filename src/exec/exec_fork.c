@@ -34,7 +34,7 @@ int do_fork(char **argv)
 
 char **build_argv(s_list *ast)
 {
-    int str_size = 0;
+    int str_size = 1;
     char **ret = malloc(4 * sizeof (char *));
     ret[0] = "/bin/sh";
     ret[1] = "-c";

@@ -7,6 +7,7 @@
 # include "../struct.h"
 # include "../ast/ast.h"
 
+int exec_pipe(s_list *ast);
 int exec_funcdec(s_list *funcdec);
 int exec_input(s_list *ast);
 int exec_list(s_list *ast);

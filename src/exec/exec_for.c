@@ -18,7 +18,7 @@ int exec_for(s_list *ast)
         while (ast->node->type == WORD)
         {
             add_var(g_global->var, tmp, ast->node->str);
-            ret = exec_dogroup(cpy->node->son_list);
+            ret = exec_dogroup(cpy->son_list);
             ast = ast->brothers;
         }
     }
@@ -27,7 +27,7 @@ int exec_for(s_list *ast)
         while (ast->node->type == WORD)
         {
             add_var(g_global->var, tmp, ast->node->str);
-            ret = exec_dogroup(cpy->node->son_list);
+            ret = exec_dogroup(cpy->son_list);
             ast = ast->brothers;
         }
     }

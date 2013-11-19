@@ -66,5 +66,9 @@ static int parse_input(void)
 
 int parse(void)
 {
-    return parse_input();
+    g_global->parse_error = 0;
+    int ret = parse_input();
+    if (ret != g_global->parse_error)
+        return g_global->parse_error;
+    return ret;
 }

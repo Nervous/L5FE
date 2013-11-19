@@ -19,6 +19,7 @@ set(exec_source_files
     exec_case.c
     variable.c
     exec_funcdec.c
+    exec_pipe.c
 )
 
 add_library(exec ${exec_source_files})

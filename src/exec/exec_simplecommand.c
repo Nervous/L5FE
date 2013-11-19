@@ -15,7 +15,7 @@ int exec_simplecommand(s_list *simple_command)
             return do_fork(argv);
         }
         else if (strcmp(simple_command->node->str, "Redirection") == 0)
-            return exec_redir(simple_command->node->son_list);
+            return exec_redir(simple_command->son_list);
         simple_command = simple_command->brothers;
     }
     return 1;

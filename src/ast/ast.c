@@ -19,11 +19,11 @@ s_list *get_root(s_list *current_node)
 */
 static void node_add_son(s_list *node)
 {
-    if (!g_global->current_node->node->son_list)
-        g_global->current_node->node->son_list = node;
+    if (!g_global->current_node->son_list)
+        g_global->current_node->son_list = node;
     else
     {
-        s_list *son_list = g_global->current_node->node->son_list;
+        s_list *son_list = g_global->current_node->son_list;
         while (son_list)
         {
             if (son_list->brothers)
@@ -49,7 +49,6 @@ s_token *copy_token(s_token *token)
         if (!(new_node->str = malloc(sizeof (char) * strlen(token->str) + 1)))
             return NULL;
     strcpy(new_node->str, token->str);
-    new_node->son_list = token->son_list;
     return new_node;
 }
 s_list *list_copy(s_list *list)
@@ -83,7 +82,7 @@ void ast_add_node(s_token *token)
     new_node->id = g_global->last_node_id;
     new_node->linked = 0;
     new_node->abstract = 0;
-    new_node->node->son_list = NULL;
+    new_node->son_list = NULL;
     if (g_global->current_node)
         node_add_son(new_node);
     g_global->current_node = new_node;
@@ -95,17 +94,16 @@ void ast_add_step(char *stepName)
         return;
     new_node->father = g_global->current_node;
     new_node->brothers = NULL;
-    s_token *new_token = NULL;
+    new_node->node = NULL;
     g_global->last_node_id += 1;
     new_node->id = g_global->last_node_id;
-    if (!(new_token = malloc(sizeof (s_token))))
+    if (!(new_node->node = malloc(sizeof (s_token))))
         return;
-    new_token->type = ABSTRACT;
-    if (!(new_token->str = malloc(sizeof (char) * strlen(stepName) + 1)))
+    new_node->node->type = ABSTRACT;
+    if (!(new_node->node->str = malloc(sizeof (char) * strlen(stepName) + 1)))
         return;
-    strcpy(new_token->str, stepName);
-    new_token->son_list = NULL;
-    new_node->node = new_token;
+    strcpy(new_node->node->str, stepName);
+    new_node->son_list = NULL;
     new_node->linked = 0;
     new_node->abstract = 1;
     if (g_global->current_node)

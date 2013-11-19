@@ -63,7 +63,7 @@ static void parse_orcommand(s_token **tok)
     {
         if ((*tok)->type != BIT_PIPE)
             return;
-
+        climb_ast(1);
         *tok = eat_token(*tok);
         *tok = get_token(PIPELINE);
         climb_ast(1);

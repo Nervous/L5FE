@@ -64,7 +64,6 @@ typedef struct token
     enum e_type type;
     char *str;
     int pos;
-    struct list *son_list;
 } s_token;
 
 typedef struct list
@@ -75,6 +74,7 @@ typedef struct list
     s_token *node;
     struct list *father;
     struct list *brothers;
+    struct list *son_list;
 } s_list;
 
 typedef struct global

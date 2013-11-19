@@ -6,10 +6,10 @@ int exec_command(s_list *ast)
     int ret = 0;
 
     if (strcmp(ast->node->str, "Simple_command") == 0)
-        ret = exec_simplecommand(ast->node->son_list);
+        ret = exec_simplecommand(ast->son_list);
     else if (strcmp(ast->node->str, "Shell_command") == 0)
     {
-        ret = exec_shellcommand(ast->node->son_list);
+        ret = exec_shellcommand(ast->son_list);
 
         while (ast->brothers)
         {
@@ -19,7 +19,7 @@ int exec_command(s_list *ast)
     }
     else if (strcmp(ast->node->str, "Funcdec") == 0)
     {
-        ret = exec_funcdec(ast->node->son_list);
+        ret = exec_funcdec(ast->son_list);
 
         while (ast->brothers)
         {

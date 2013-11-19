@@ -22,17 +22,17 @@ static void print_node(s_list *ast, FILE *f)
     s_list *tmp = ast;
     if (!tmp)
         return;
-    if (!tmp->node->son_list)
+    if (!tmp->son_list)
         print_node_text(ast, f);
-    while (tmp->node->son_list)
+    while (tmp->son_list)
     {
         if (tmp->father && tmp->linked == 0)
         {
             print_node_text(tmp, f);
             tmp->linked = 1;
         }
-        print_node(tmp->node->son_list, f);
-        tmp->node->son_list = tmp->node->son_list->brothers;
+        print_node(tmp->son_list, f);
+        tmp->son_list = tmp->son_list->brothers;
     }
 }
 

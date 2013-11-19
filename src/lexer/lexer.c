@@ -207,7 +207,6 @@ s_token *get_token(enum e_type expected)
     token->pos = g_global->pos;
     token->str = set_token_value(str, token->pos);
     token->type = set_token_type(token->str);
-    token->son_list = NULL;
     if (strlen(token->str) == 0)
         token->type = E_EOF;
 
