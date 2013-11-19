@@ -19,7 +19,8 @@ static int son_pipe(s_list *ast, int fdlist[2], char **environ)
     {
         s_list *tmp = ast->brothers->brothers->son_list;
         argv = build_argv(tmp->son_list);
-        ret = execve(argv[0], argv, environ);
+        if ((ret = execve(argv[0], argv, environ)) == -1)
+            exit(-1);
     }
     return ret;
 }
@@ -64,7 +65,8 @@ int exec_pipe(s_list *ast)
             close(fdlist[0]);
             dup2(fdlist[1], STDOUT_FILENO);
             argv = build_argv(ast->son_list->son_list);
-            ret = execve(argv[0], argv, environ);
+            if ((ret = execve(argv[0], argv, environ)) == -1)
+                exit(-1);
         }
         else
             ret = father_pipe(pid, fdlist, &status, argv);

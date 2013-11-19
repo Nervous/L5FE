@@ -1,4 +1,16 @@
 V0.5
 
-debug ; apres un if
+
+fix the pointer error in ast.c
+debug the if rule
+parser: Do some tests
+Tests: Finish the test sequence
+Hard Tests: Write some hard tests
 directory tree of submission
+finish the grammar rules
+Segfault tries to do
+Bonus: Resources
+Bonus: case
+Test zombies for pipes
+Fix leaks
+
