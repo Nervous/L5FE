@@ -44,7 +44,7 @@ static int parse_input(void)
     while (tok->type != E_EOF)
     {
         if (tok->type == EOL)
-            getandeat(tok);
+            getandeat(&tok);
         else if (tok->type == E_EOF)
             break;
         else
@@ -52,7 +52,7 @@ static int parse_input(void)
             if (parse_list(&tok) == -1)
                 return parse_error("PARSE ERROR : Expected a list");
             if (tok->type == EOL || tok->type == E_EOF)
-                getandeat(tok);
+                getandeat(&tok);
             else
                 return parse_error("PARSE ERROR : Expected '\\n' or EOF");
         }
