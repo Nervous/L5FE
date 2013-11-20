@@ -18,12 +18,12 @@ CMD=tests/hard_exec/file_test1
 RV=0
 
 CMD=tests/hard_exec/file_test2
-OP=cat: titi: No such file or directory
+EOP=cat: titi: No such file or directory
 OP=true
 OP=toto
 OP=titi
 OP=tata in the kitchen
 OP=tutu
-OP=4
+OP=       4
 RV=0
 

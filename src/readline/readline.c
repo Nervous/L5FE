@@ -160,7 +160,7 @@ void write_ps(void)
 
 /**
 ** @brief This function is responsible of setting up the terminal and
-** the termcap data
+** the termcap database
 */
 void readline(void)
 {
