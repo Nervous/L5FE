@@ -9,7 +9,7 @@
 
 extern s_global *g_global;
 
-void backspace (char **buf_p, int *cur_pos, int *buf_s, int *max_s)
+void backspace(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
 {
     max_s = max_s;
     char *buf = *buf_p;
@@ -27,7 +27,7 @@ void backspace (char **buf_p, int *cur_pos, int *buf_s, int *max_s)
     }
 }
 
-void delete (char **buf_p, int *cur_pos, int *buf_size, int *max_size)
+void delete(char **buf_p, int *cur_pos, int *buf_size, int *max_size)
 {
     max_size = max_size;
     char *buf = *buf_p;
@@ -42,7 +42,7 @@ void delete (char **buf_p, int *cur_pos, int *buf_size, int *max_size)
     }
 }
 
-void new_line (char **buf, int *cur_pos, int *buf_size, int *max_size)
+void new_line(char **buf, int *cur_pos, int *buf_size, int *max_size)
 {
     buf = buf;
     cur_pos = cur_pos;
@@ -50,7 +50,7 @@ void new_line (char **buf, int *cur_pos, int *buf_size, int *max_size)
     max_size = max_size;
 }
 
-void do_nothing (char **buf, int *cur_pos, int *buf_size, int *max_size)
+void do_nothing(char **buf, int *cur_pos, int *buf_size, int *max_size)
 {
     buf = buf;
     cur_pos = cur_pos;

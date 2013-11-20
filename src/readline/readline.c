@@ -41,7 +41,7 @@ void write_buf(char *buf, int cur_pos, int buf_size)
     tputs(tgetstr("rc", NULL), 1, my_putchar);
 }
 
-static callback match_esc_key(char tmp)
+static f_callback match_esc_key(char tmp)
 {
     if (tmp == '[')
     {
@@ -63,9 +63,9 @@ static callback match_esc_key(char tmp)
 }
 
 /**
- ** @brief This function match key with special keys
- */
-static callback match_key(char c, char **buf)
+** @brief This function match key with special keys
+*/
+static f_callback match_key(char c, char **buf)
 {
     if (c == '\177' || c == '\b')
         return backspace;
@@ -107,9 +107,9 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
 }
 
 /**
- ** @brief This function is responsible of setting up the variables for
- ** processing the input in PS1
- */
+** @brief This function is responsible of setting up the variables for
+** processing the input in PS1
+*/
 static void read_input(void)
 {
     if (g_global->readline != NULL)
@@ -130,9 +130,9 @@ static void read_input(void)
 }
 
 /**
- ** @brief This function is responsible of setting up the variables for
- ** processing the input in PS2
- */
+** @brief This function is responsible of setting up the variables for
+** processing the input in PS2
+*/
 static void read_ps2(void)
 {
     write(STDIN_FILENO, "> ", 2);
@@ -159,9 +159,9 @@ void write_ps(void)
 }
 
 /**
- ** @brief This function is responsible of setting up the terminal and
- ** the termcap data
- */
+** @brief This function is responsible of setting up the terminal and
+** the termcap data
+*/
 void readline(void)
 {
     init_term();

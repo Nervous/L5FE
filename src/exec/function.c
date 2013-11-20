@@ -18,9 +18,9 @@ static char *my_strcpy(char *str)
 }
 
 /**
- ** @brief this function will try to retrieve the function with the name (name)
- ** in the registered functions
- */
+** @brief this function will try to retrieve the function with the name (name)
+** in the registered functions
+*/
 s_function *search_function(char *name)
 {
     s_function *tmp = g_global->func;
@@ -34,8 +34,8 @@ s_function *search_function(char *name)
 }
 
 /**
- ** @brief This function will copy the whole structure of an ast
- */
+** @brief This function will copy the whole structure of an ast
+*/
 s_list *cpy_list(s_list *src, s_list *father)
 {
     if (src == NULL)
@@ -59,8 +59,8 @@ s_list *cpy_list(s_list *src, s_list *father)
 }
 
 /**
- ** @brief This function will add a new (function) struct to the memory
- */
+** @brief This function will add a new (function) struct to the memory
+*/
 void add_function(char *name, s_list *ast)
 {
     s_function *tmp = NULL;

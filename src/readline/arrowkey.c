@@ -10,7 +10,7 @@
 
 extern s_global *g_global;
 
-void right_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
+void right_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
 {
     buf = buf;
     max_size = max_size;
@@ -22,7 +22,7 @@ void right_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
     }
 }
 
-void left_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
+void left_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
 {
     buf = buf;
     buf_size = buf_size;
@@ -35,7 +35,7 @@ void left_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
     }
 }
 
-void up_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
+void up_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
 {
     if (g_global->hist_ind < 200)
         g_global->hist_ind += 1;
@@ -53,7 +53,7 @@ void up_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
     *buf = strcpy(*buf, tmp);
 }
 
-void down_key (char **buf, int *cur_pos, int *buf_size, int *max_size)
+void down_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
 {
     if (g_global->hist_ind >= 0)
         g_global->hist_ind -= 1;

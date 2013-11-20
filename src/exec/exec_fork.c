@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-# include "../ast/ast.h"
+#include "../ast/ast.h"
 
 static void do_checkredir(int *spaces, int redir)
 {

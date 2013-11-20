@@ -7,8 +7,8 @@ extern s_global *g_global;
 static void load_config();
 
 /**
-** @brief Display the Usage message on the standard error output
-*/
+ ** @brief Display the Usage message on the standard error output
+ */
 
 static int print_usage(char * msg, char *str)
 {
@@ -70,9 +70,9 @@ static int options2(int argc, char **argv, int i)
 }
 
 /**
-** @brief Compare the current option to every known option and perform the
-** appropriate action
-*/
+ ** @brief Compare the current option to every known option and perform the
+ ** appropriate action
+ */
 
 static int options(int argc, char **argv, int i)
 {
@@ -97,9 +97,9 @@ static int options(int argc, char **argv, int i)
 }
 
 /**
-** @brief Reads the file passed as an argument to 42sh and stores it into a
-** single single to parse and execute
-*/
+ ** @brief Reads the file passed as an argument to 42sh and stores it into a
+ ** single single to parse and execute
+ */
 
 static int get_file(char *filename, bool config)
 {
@@ -156,9 +156,9 @@ void load_config()
 }
 
 /**
-** @brief Parses the argument passed to 42sh to find the options. If no
-** argument is provided, 42sh will run in interactive mode
-*/
+ ** @brief Parses the argument passed to 42sh to find the options. If no
+ ** argument is provided, 42sh will run in interactive mode
+ */
 
 int get_options(int argc, char **argv)
 {
@@ -166,15 +166,13 @@ int get_options(int argc, char **argv)
     {
         load_config();
         readline();
-        return 42; //calling readline
+        return 0;
     }
 
     int ret;
 
     for (int i = 1; i < argc; i++)
-    {
-        char *opt = argv[i];
-        if (strncmp(opt, "-", 1) == 0 || strncmp(opt, "+", 1) == 0)
+        if (strncmp(argv[i], "-", 1) == 0 || strncmp(argv[i], "+", 1) == 0)
         {
             if ((ret = options(argc, argv, i)) != 0)
                 return ret + (ret == -1);
@@ -185,9 +183,9 @@ int get_options(int argc, char **argv)
                 load_config();
             return get_file(argv[i], false);
         }
-    }
+
     if (g_global->norc != 1)
         load_config();
     readline();
-    return 42;
+    return 0;
 }
