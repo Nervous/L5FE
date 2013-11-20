@@ -31,6 +31,12 @@ static int parse_list(s_token **tok)
     return 0;
 }
 
+static void getandeat(s_token **tok)
+{
+    *tok = eat_token(*tok);
+    *tok = get_token(EOL);
+}
+
 static int parse_input(void)
 {
     ast_add_step("Input");
@@ -38,10 +44,7 @@ static int parse_input(void)
     while (tok->type != E_EOF)
     {
         if (tok->type == EOL)
-        {
-            tok = eat_token(tok);
-            tok = get_token(INPUT);
-        }
+            getandeat(tok);
         else if (tok->type == E_EOF)
             break;
         else
@@ -49,10 +52,7 @@ static int parse_input(void)
             if (parse_list(&tok) == -1)
                 return parse_error("PARSE ERROR : Expected a list");
             if (tok->type == EOL || tok->type == E_EOF)
-            {
-                tok = eat_token(tok);
-                tok = get_token(INPUT);
-            }
+                getandeat(tok);
             else
                 return parse_error("PARSE ERROR : Expected '\\n' or EOF");
         }
