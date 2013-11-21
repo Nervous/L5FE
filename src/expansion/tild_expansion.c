@@ -19,7 +19,7 @@ static int tilde_plus(char **str)
 
 static int tilde_minus(char **str)
 {
-    char *exp = getenv("PWD");
+    char *exp = getenv("PWD"); // A CHANGER PAR APPEL VARIABLE GLOBAL
     int old_len = strlen(*str);
     int exp_len = strlen(exp); //+1 for '\0' which is not counted in strlen
     char *new_str = malloc((old_len + exp_len + 1) * sizeof(char));
