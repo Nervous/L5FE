@@ -1,12 +1,7 @@
-<<<<<<< HEAD
 #include "exec.h"
 #include "../builtins/builtins.h"
-=======
-#include "../builtins/builtins.h"
-#include "exec.h"
 #include <string.h>
 #include "exec.h"
-#include "../builtins/builtins.h"
 #include <stdio.h>
 extern s_global *g_global;
 
