@@ -1,5 +1,13 @@
 #include "builtins.h"
 #include <stdio.h>
+<<<<<<< HEAD
+
+int my_source(s_list *ast)
+{
+    printf("Coucou");
+    int ret = 0;
+    /** TODO: Do a getfile of the file in parameter */
+    ast = ast;
 #include <stdbool.h>
 #include "../get_options.h"
 #include "../exec/exec.h"

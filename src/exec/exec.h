@@ -6,6 +6,7 @@
 # include "variable.h"
 # include "../struct.h"
 # include "../ast/ast.h"
+# include "../builtins/builtins.h"
 
 int exec_pipe(s_list *ast);
 int exec_funcdec(s_list *funcdec);
