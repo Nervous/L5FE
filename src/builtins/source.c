@@ -1,12 +1,13 @@
 #include "builtins.h"
 #include <stdio.h>
 
+extern s_global *g_global;
 int my_source(s_list *ast)
 {
-    printf("Coucou");
     int ret = 0;
-    /** TODO: Do a getfile of the file in parameter */
-    ast = ast;
+    s_list *tmp_save = g_global->current_node;
+    get_file(ast->node->str, true);
+    exec_input(get_root(g_global->current_node));
     return ret;
 }
 
