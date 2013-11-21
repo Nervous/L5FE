@@ -12,6 +12,7 @@ add_subdirectory(exec)
 add_subdirectory(parser)
 add_subdirectory(ast)
 add_subdirectory(lexer)
+add_subdirectory(arith)
 add_subdirectory(readline)
 
 # defines the files to compile, just add the files you want to include
@@ -24,11 +25,8 @@ add_subdirectory(readline)
 #executable will be named 42sh in put in build/
 #and will be compiled with files listed in source_files
 add_executable(
-
     42sh
-
     ${SRCS}
-
 )
 
 target_link_libraries(42sh exec)
@@ -37,3 +35,4 @@ target_link_libraries(42sh ast)
 target_link_libraries(42sh lexer)
 target_link_libraries(42sh parser)
 target_link_libraries(42sh readline)
+target_link_libraries(42sh arith)
