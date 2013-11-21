@@ -1,5 +1,8 @@
+#include <string.h>
 #include "exec.h"
 #include "../builtins/builtins.h"
+
+extern s_global *g_global;
 
 int check_builtin(s_list *ast)
 {
@@ -12,7 +15,12 @@ int check_builtin(s_list *ast)
              || strcmp(ast->node->str, ".") == 0)
         ret = my_source(ast->brothers);
     else if (strcmp(ast->node->str, "exit") == 0)
-        exit_builtin(ret);
+    {
+        if (ast->brothers)
+            exit_builtin(atoi(ast->brothers->node->str));
+        else
+            exit_builtin(g_global->ret);
+    }
     else
         return -1;
     return ret;
