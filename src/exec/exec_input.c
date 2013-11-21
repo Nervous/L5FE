@@ -15,7 +15,10 @@ int exec_input(s_list *ast)
     while (ast)
     {
         if (strcmp(ast->node->str, "List") == 0)
+        {
             ret = exec_list(ast->son_list);
+            g_global->ret = ret;
+        }
         else
             return 0;
         ast = ast->brothers;
