@@ -1,7 +1,8 @@
-#include "../struct.h"
-#include "../ast/ast.h"
 #include <string.h>
 #include <stdlib.h>
+#include "../struct.h"
+#include "../ast/ast.h"
+#include "function.h"
 
 extern s_global *g_global;
 

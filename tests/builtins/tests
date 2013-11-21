@@ -1,0 +1,35 @@
+How to use this file properly :
+
+Specify the command you want to test using CMD=
+I you want to, specify the expected return value using RV=
+I you want to, specify the expected output using OP=
+
+Pattern :
+
+'CMD=<command_i_want_to_test> [arg]*'
+['RV=<expected_return_value>']
+['OP=<expected_output>']
+['EOP=<expected_error_output>']
+''
+
+Exemple :
+
+CMD=tests/builtins/exit1
+RV=0
+
+CMD=tests/builtins/exit2
+OP=toto
+RV=0
+
+CMD=tests/builtins/exit3
+EOP=cat: titi: No such file or directory
+RV=1
+
+CMD=tests/builtins/exit4
+OP=toto
+RV=42
+
+CMD=tests/builtins/exit5
+EOP=cat: titi: No such file or directory
+RV=42
+

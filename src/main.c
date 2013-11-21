@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include "parser/parser.h"
 #include "ast/ast.h"
 #include "lexer/lexer.h"
@@ -6,7 +8,8 @@
 #include "get_options.h"
 #include "exec/exec.h"
 #include "readline/history.h"
-#include <stdlib.h>
+
+#include "arith/arith.h"
 
 s_global *g_global = NULL;
 
@@ -20,6 +23,7 @@ void init_global(void)
     g_global->ast = 0;
     g_global->file = 0;
     g_global->norc = 0;
+    g_global->ret = 0;
     g_global->readline = NULL;
     g_global->hist_file = NULL;
     g_global->hist_arr = NULL;
@@ -41,8 +45,17 @@ void free_global(void)
     free(g_global);
 }
 
+void test_arith(char *str)
+{
+    printf("**** RESULT OF EVAL : \n\t%d\n*********************\n\n", evalexpr(str));
+    exit(42);
+}
+
 int main(int argc, char **argv)
 {
+    if (argc == 3 && argv[1][0] == 'q') // RM ME
+        test_arith(argv[2]); // PLEASE RM ME DONT FORGET OMG FMDASJDNJASND
+
     atexit(free_global);
     init_global();
 

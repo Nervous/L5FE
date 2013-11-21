@@ -1,6 +1,6 @@
-#include "exec.h"
-#include "function.h"
 #include <string.h>
+#include "function.h"
+#include "exec.h"
 
 int exec_simplecommand(s_list *simple_command)
 {
