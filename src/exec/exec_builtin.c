@@ -23,6 +23,14 @@ int check_builtin(s_list *ast)
         else
             exit_builtin(g_global->ret);
     }
+    else if (strcmp(ast->node->str, "break") == 0)
+    {
+        if (ast->brothers)
+            g_global->break_nb = atoi(ast->brothers->node->str);
+        else
+            g_global->break_nb = 1;
+        return 0;
+    }
     else
         return -1;
     return ret;
