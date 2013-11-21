@@ -47,9 +47,9 @@ static int options2(int argc, char **argv, int i)
     {
         if (i + 1 < argc)
         {
-            g_global->readline = get_string(argc, argv, i + 1);
             if (g_global->norc != 1)
                 load_config();
+            g_global->readline = get_string(argc, argv, i + 1);
             parse();
             return -1;
         }
