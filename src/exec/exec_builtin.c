@@ -1,5 +1,6 @@
 #include "exec.h"
 #include "../builtins/builtins.h"
+
 int check_builtin(s_list *ast)
 {
     int ret = 0;
@@ -10,6 +11,8 @@ int check_builtin(s_list *ast)
     else if (strcmp(ast->node->str, "source") == 0
              || strcmp(ast->node->str, ".") == 0)
         ret = my_source(ast->brothers);
+    else if (strcmp(ast->node->str, "exit") == 0)
+        exit_builtin(ret);
     else
         return -1;
     return ret;

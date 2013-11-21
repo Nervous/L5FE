@@ -7,5 +7,6 @@
 int my_echo(s_list *ast);
 int my_source(s_list *ast);
 void my_puts(const char *str);
+void exit_builtin(int n);
 
 #endif /*!BUILTINS_H*/

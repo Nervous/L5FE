@@ -21,6 +21,7 @@ set(exec_source_files
     function.c
     exec_funcdec.c
     exec_pipe.c
+    exec_builtin.c
 )
 
 add_library(exec ${exec_source_files})
