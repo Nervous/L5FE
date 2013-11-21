@@ -11,5 +11,6 @@
 # include "parser/parser.h"
 
 int get_options(int argc, char **argv);
+int get_file(char *filename, bool config);
 
 #endif /* !GET_OPTIONS_H */

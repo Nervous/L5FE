@@ -78,7 +78,7 @@ static int options(int argc, char **argv, int i)
 {
     if (strcmp(argv[i], "--version") == 0)
     {
-        printf("Version 0.5\n");
+        printf("Version 0.8\n");
         exit(0);
     }
     else if (strcmp(argv[i], "--ast-print") == 0)
@@ -100,7 +100,7 @@ static int options(int argc, char **argv, int i)
  ** single single to parse and execute
  */
 
-static int get_file(char *filename, bool config)
+int get_file(char *filename, bool config)
 {
     FILE *file;
 

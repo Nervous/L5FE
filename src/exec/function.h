@@ -14,5 +14,6 @@ struct function
 void add_function(char *name, struct list *ast);
 void free_function(void);
 s_function *search_function(char *name);
+struct list *cpy_list(struct list *src, struct list *father);
 
 #endif /* !FUNCTION_H */

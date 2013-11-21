@@ -26,7 +26,9 @@ int exec_simplecommand(s_list *simple_command);
 int exec_shellcommand(s_list *ast);
 int exec_dogroup(s_list *dogroup);
 int exec_ruleuntil(s_list *until);
+int check_builtin(s_list *ast);
 int do_fork(char **argv);
 char **build_argv(s_list *ast);
+int check_builtin(s_list *ast);
 
 #endif /* !EXEC_H */
