@@ -7,6 +7,7 @@ set(CMAKE_C_FLAGS "-D_BSD_SOURCE -Wall -Wextra -Werror -std=c99 -pedantic")
 #creates a list named SRCS that contains main.c
 set(SRCS struct.h main.c get_options.c get_options.h)
 
+add_subdirectory(builtins)
 add_subdirectory(exec)
 add_subdirectory(parser)
 add_subdirectory(ast)
@@ -31,6 +32,7 @@ add_executable(
 )
 
 target_link_libraries(42sh exec)
+target_link_libraries(42sh builtins)
 target_link_libraries(42sh ast)
 target_link_libraries(42sh lexer)
 target_link_libraries(42sh parser)
