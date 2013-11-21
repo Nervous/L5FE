@@ -69,9 +69,6 @@ int do_fork(char **argv)
 
 char **build_argv(s_list *ast)
 {
-    /** find a better home for him please...*/
-    if (check_builtin(ast) == 0)
-        return NULL;
     int str_size = 1;
     int spaces = 0;
     char **ret = malloc(4 * sizeof (char *));

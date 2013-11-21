@@ -8,6 +8,8 @@ int exec_simplecommand(s_list *simple_command)
     int ret = 0;
     if ((tmp = search_function(simple_command->node->str)) != NULL)
         ret = exec_shellcommand(tmp->node->son_list);
+    else if ((ret = check_builtin(simple_command)) == 0)
+        return ret;
     else
     {
         while (simple_command)

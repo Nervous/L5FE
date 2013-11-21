@@ -1,4 +1,5 @@
 #include "builtins.h"
+#include <unistd.h>
 #include <stdio.h>
 
 static int expanded_echo(s_list *ast)
@@ -6,7 +7,7 @@ static int expanded_echo(s_list *ast)
     /** TODO */
     if (!ast)
         return -1;
-    printf("%s\n", ast->node->str);
+//    printf("%s\n", ast->node->str);
     return 0;
 }
 
@@ -17,14 +18,17 @@ static int print_array(s_list *ast, int option_n)
     while (ast)
     {
         if (ast->brothers)
-            printf("%s ", ast->node->str);
+        {
+            my_puts(ast->node->str);
+            my_puts(" ");
+        }
         else
-            printf("%s", ast->node->str);
+            my_puts(ast->node->str);
         ast = ast->brothers;
     }
 
     if (!option_n) /** TODO: Doesn't work with our shell (save string? wtf)*/
-        printf("\n");
+        my_puts("\n");
     return 0;
 }
 
