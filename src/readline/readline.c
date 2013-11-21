@@ -21,6 +21,15 @@ static void init_term(void)
     g_global->attribute = attribute;
     attribute.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &attribute);
+    setupterm("xterm", 1, (int *)0);
+    char *tmp = tigetstr("ZI");
+    tputs(enter_bold_mode, 1, my_putchar);
+    tputs(enter_am_mode, 1, my_putchar);
+    int lol = tigetnum("lh");
+    lol = lol;
+    tmp = tigetstr("mb");
+    tmp = tigetstr("ZH");
+    tmp = tmp;
     init_history();
 }
 
