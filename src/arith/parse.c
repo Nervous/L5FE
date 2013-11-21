@@ -10,7 +10,6 @@ static int get_op(const char c, int *is_op)
         return MULT;
     else if (c == '/')
         return DIV;
-        return R_PAR;
     else if (c == ' ')
         return SPACE;
     else if (c >= '0' && c <= '9')
@@ -127,7 +126,7 @@ static int loop_parse(const char *c, int *is_ope, int *acu, s_queue *q)
     return 0;
 }
 
-int parse(const char *s, s_queue *q)
+int parse_eval(const char *s, s_queue *q)
 {
     int acu = 0;
     int is_ope = 1;

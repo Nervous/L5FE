@@ -5,7 +5,7 @@ int evalexpr(char *str)
     s_queue *inf = q_init();
     s_queue *pos = NULL;
     int value = 0;
-    int error = parse(str, inf);
+    int error = parse_eval(str, inf);
     if (error != 0)
     {
         free_queue(inf);
@@ -14,4 +14,5 @@ int evalexpr(char *str)
 
     pos = get_postfix(inf);
     error = eval(pos, &value);
+    return value;
 }

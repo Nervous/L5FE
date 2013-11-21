@@ -3,7 +3,7 @@
 
 # include "std.h"
 
-int parse(const char *s, s_queue *q);
+int parse_eval(const char *s, s_queue *q);
 s_queue *get_postfix(s_queue *inf);
 s_node *node_from_int(const int i);
 int eval(s_queue *pos, int *result);
