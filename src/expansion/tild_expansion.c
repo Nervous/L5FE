@@ -20,11 +20,11 @@ int tilde_handler(char **str)
     if (str != NULL && *str != NULL)
     {
         if (str[1] == '+')
-            return tilde(str);
+            return tilde_plus(str);
         else if (str[1] == '-')
-            return tilde(str);
+            return tilde_plus(str);
         else
-            return tilde(str);
+            return tilde_plus(str);
     }
     else
         return 1;
