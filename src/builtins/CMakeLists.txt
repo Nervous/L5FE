@@ -3,6 +3,7 @@ set(builtins_source_files
     tools.c
     source.c
     builtins.h
+    exit.c
 )
 
 add_library(builtins ${builtins_source_files})
