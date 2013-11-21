@@ -1,11 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int char_counter_slash(char *str)
-{
-    
-}
-
 static int tilde_plus(char **str)
 {
     char *exp = getenv("PWD");
@@ -22,7 +17,7 @@ static int tilde_plus(char **str)
     return 0;
 }
 
-static int tilde_plus(char **str)
+static int tilde_minus(char **str)
 {
     char *exp = getenv("PWD");
     int old_len = strlen(*str);
@@ -61,7 +56,7 @@ int tilde_handler(char **str)
         if (*str[1] == '+')
             return tilde_plus(str);
         else if (*str[1] == '-')
-            return tilde_plus(str);
+            return tilde_minus(str);
         else
             return tilde(str);
     }
