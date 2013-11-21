@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "../ast/ast.h"
+#include "exec.h"
 
 static void do_checkredir(int *spaces, int redir)
 {
@@ -39,6 +40,8 @@ static void is_redirection(s_list *ast, int *spaces)
 
 int do_fork(char **argv)
 {
+    if (!argv)
+        return 0;
     pid_t child;
     int status;
     extern char **environ;
