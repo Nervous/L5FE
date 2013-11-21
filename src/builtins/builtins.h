@@ -5,6 +5,7 @@
 # include "../ast/ast.h"
 
 int my_echo(s_list *ast);
+int my_source(s_list *ast);
 void my_puts(const char *str);
 
 #endif /*!BUILTINS_H*/

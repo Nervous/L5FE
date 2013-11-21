@@ -51,7 +51,7 @@ static int options2(int argc, char **argv, int i)
                 load_config();
             g_global->readline = get_string(argc, argv, i + 1);
             parse();
-            return 0;
+            return 1; /** TODO */
         }
         else
             return print_usage("%s option needs a parameter\n", argv[i]);
