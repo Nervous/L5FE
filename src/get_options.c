@@ -51,7 +51,7 @@ static int options2(int argc, char **argv, int i)
                 load_config();
             g_global->readline = get_string(argc, argv, i + 1);
             parse();
-            return -1;
+            return 0;
         }
         else
             return print_usage("%s option needs a parameter\n", argv[i]);
@@ -80,7 +80,6 @@ static int options(int argc, char **argv, int i)
     {
         printf("Version 0.5\n");
         exit(0);
-        /* NEED TO FREE GLOBAL */
     }
     else if (strcmp(argv[i], "--ast-print") == 0)
     {
@@ -108,7 +107,7 @@ static int get_file(char *filename, bool config)
     if ((file = fopen(filename, "r")) == NULL)
     {
         if (config)
-            return -4242;
+            return 0;
         fprintf(stderr, "%s: File not found\n", filename);
         exit(127);
     }
