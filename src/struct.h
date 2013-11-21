@@ -89,7 +89,7 @@ typedef struct global
     char *hist_file;
     struct termios attribute;
     s_var *var;
-    s_function *func;
+    struct function *func;
     char **hist_arr;
     int hist_ind;
     int parse_error;

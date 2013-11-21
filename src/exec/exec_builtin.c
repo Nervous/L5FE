@@ -1,5 +1,6 @@
-#include "exec.h"
 #include "../builtins/builtins.h"
+#include "exec.h"
+
 int check_builtin(s_list *ast)
 {
     int ret = 0;

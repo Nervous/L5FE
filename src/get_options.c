@@ -100,7 +100,7 @@ static int options(int argc, char **argv, int i)
  ** single single to parse and execute
  */
 
-static int get_file(char *filename, bool config)
+int get_file(char *filename, bool config)
 {
     FILE *file;
 
