@@ -58,8 +58,8 @@ char *create_comment(char *str, unsigned int i)
         while (i < len && str[i] != '\n')
             i++;
         char *value = malloc(sizeof (char) * i);
-        strncpy(value, str, i);
-        value[i] = '\0';
+        strncpy(value, str, i - 1);
+        value[i - 1] = '\0';
         g_global->pos += i;
 
         return value;
@@ -87,7 +87,7 @@ static char *create_quote_token(char *str)
     {
         char *value = malloc(sizeof (char) * 9);
         strncpy(value, "!@#*()%^", 8);
-        value[9] = '\0';
+        value[8] = '\0';
         g_global->pos += i;
         return value;
     }
@@ -96,7 +96,7 @@ static char *create_quote_token(char *str)
         i++;
         char *value = malloc(sizeof (char) * i);
         strncpy(value, str, i);
-        value[i] = '\0';
+        value[i - 1] = '\0';
         g_global->pos += i;
 
         return value;

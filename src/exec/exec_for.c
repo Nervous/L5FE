@@ -19,6 +19,11 @@ int exec_for(s_list *ast)
         ast = ast->brothers->brothers->brothers;
         while (ast->node->type == WORD)
         {
+            if (g_global->break_nb > 0)
+            {
+                g_global->break_nb -= 1;
+                return 0;
+            }
             add_var(g_global->var, tmp, ast->node->str);
             ret = exec_dogroup(cpy->son_list);
             ast = ast->brothers;

@@ -94,6 +94,7 @@ typedef struct global
     int hist_ind;
     int parse_error;
     int ret;
+    int break_nb;
 } s_global;
 
 #endif /* !STRUCT_H */
