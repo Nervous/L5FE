@@ -1,4 +1,42 @@
+#include <stdbool.h>
 #include "std.h"
+
+static bool fill_char(char *c, const char *old, int size)
+{
+    char save = *c;
+    if (old[0] == '&')
+        if (size >= 1 && old[1] == '&')
+            *c = 'W';
+    if (old[0] == '*')
+        if (size >= 1 && old[1] == '*')
+            *c = '?';
+    if (old[0] == '|')
+        if (size >= 1 && old[1] == '|')
+            *c = 'K';
+    return *c != save;
+}
+
+static char *pre_parse(const char *s)
+{
+    int j = 0;
+    int dec = 0;
+    for (j = 0; s[j]; ++j)
+        ;
+    char *str = malloc((j + 1) * sizeof (char));
+    for (int i = 0; i < j; ++i)
+    {
+        if (!fill_char(str + i, s + i, j - i))
+            str[i - dec] = s[i];
+        else
+        {
+            ++dec;
+            ++i;
+        }
+    }
+    str = realloc(str, j - dec);
+    str[j - dec] = '\0';
+    return str;
+}
 
 static int get_op2(const char c)
 {
@@ -153,12 +191,15 @@ int parse_eval(const char *s, s_queue *q)
     int acu = 0;
     int is_ope = 1;
     int ret = 0;
+    char *str = pre_parse(s);
 
-    for (int i = 0; s[i]; ++i)
+    for (int i = 0; str[i]; ++i)
     {
-        ret = loop_parse((s + i), &is_ope, &acu, q);
+        ret = loop_parse((str + i), &is_ope, &acu, q);
         if (ret != 0)
             return ret;
     }
+
+    free(str);
     return ret;
 }

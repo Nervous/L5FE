@@ -13,7 +13,7 @@ static int make_2(int what, int v1, int v2, int *err)
         return v2 / v1;
     }
     else if (what == POW)
-        return v1 + v2; /* POW V2 V1 */
+        return pow(v2, v1);
     else if (what == XOR)
         return v2 ^ v1;
     else if (what == BIT_AND)
