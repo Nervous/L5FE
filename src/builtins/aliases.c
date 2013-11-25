@@ -8,11 +8,13 @@ extern s_global *g_global;
 int my_alias(s_list *ast)
 {
     char *value = NULL;
-    value = malloc(sizeof (char) * strlen(ast->node->str) + 1);
     char *name = NULL;
-    name = malloc(sizeof (char) * strlen(ast->node->str) + 1);
     if (ast)
+    {
+        name = malloc(sizeof (char) * strlen(ast->node->str) + 1);
         name = strcpy(name, ast->node->str);
+        name[strlen(name)] = '\0';
+    }
     else
         return 0;
 
@@ -21,12 +23,19 @@ int my_alias(s_list *ast)
     s_list *tmp = ast->brothers;
     while (tmp)
     {
-        value = realloc(value, sizeof (char) * (strlen(value)
-                             + strlen(tmp->node->str) + 1));
         if (value)
+        {
+            value = realloc(value, sizeof (char) * (strlen(value)
+                                  + strlen(tmp->node->str) + 1));
             value = strcat(value, tmp->node->str);
+            value[strlen(value)] = '\0';
+        }
         else
+        {
+            value = malloc(sizeof (char) * strlen(tmp->node->str) + 1);
             value = strcpy(value, tmp->node->str);
+            value[strlen(value)] = '\0';
+        }
         tmp = tmp->brothers;
     }
     if (name && value)
