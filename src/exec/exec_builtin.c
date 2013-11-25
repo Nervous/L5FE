@@ -119,7 +119,7 @@ int exec_alias(s_list **ast, char *str)
     }
 
     new_ast->father = father;
-    remove_node(ast);
+    remove_node(*ast);
 
     return exec_simplecommand(new_ast);
 }

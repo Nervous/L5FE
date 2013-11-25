@@ -182,7 +182,7 @@ static enum e_type is_expected(enum e_type type)
 {
     if (type == EOL || type == E_EOF || type == BIT_PIPE || type == BIT_AND
         || type == SEMICOLON || type == TOKEN_REDIR || type == PIPE_DOUBLE
-        || type == AND_DOUBLE || type == RIGHT_BRACKET || type == RIGHT_PAR)
+        || type == AND_DOUBLE)
         return type;
     return WORD;
 }
