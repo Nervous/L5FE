@@ -47,7 +47,7 @@ void free_global(void)
 
 void test_arith(char *str)
 {
-    printf("**** RESULT OF EVAL : \n\t%d\n*********************\n\n", evalexpr(str));
+    printf("**** RESULT OF EVAL : \n\t%d\n*********************\n\n", evalexpr("~1"));
     exit(42);
 }
 
