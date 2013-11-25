@@ -8,7 +8,7 @@ static int get_op2(const char c)
         return BIT_OR;
     else if (c == 'W')
         return AND;
-    else if (c == 'K')c
+    else if (c == 'K')
         return OR;
     else if (c == '!')
         return NOT;
