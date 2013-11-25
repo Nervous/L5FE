@@ -1,3 +1,4 @@
+#include <math.h>
 #include "eval.h"
 
 static int make_2(int what, int v1, int v2, int *err)
@@ -11,20 +12,21 @@ static int make_2(int what, int v1, int v2, int *err)
         }
         return v2 / v1;
     }
-    else if (what == MOD)
-    {
-        if (v1 == 0)
-        {
-            *err = 3;
-            return 0;
-        }
-        return v2 % v1;
-    }
+    else if (what == POW)
+        return v1 + v2; /* POW V2 V1 */
+    else if (what == XOR)
+        return v2 ^ v1;
+    else if (what == BIT_AND)
+        return v2 & v1;
+    else if (what == BIT_OR)
+        return v2 | v1;
+    else if (what == AND)
+        return v2 && v1;
+    else if (what == OR)
+        return v2 || v1;
     else
-    {
         *err = 1;
-        return 0;
-    }
+    return 0;
 }
 static int make(int what, int v1, int v2, int *err)
 {
@@ -36,6 +38,8 @@ static int make(int what, int v1, int v2, int *err)
         return v1;
     else if (what == SUB_U)
         return -v1;
+    else if (what == NOT)
+        return !v1;
     else if (what == MULT)
         return v1 * v2;
     else

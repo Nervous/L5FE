@@ -13,9 +13,14 @@ enum operat
     SUB,
     MULT,
     DIV,
-    MOD,
-    L_PAR,
-    R_PAR,
+    POW, /* ** => ? */
+    XOR,
+    BIT_AND,
+    BIT_OR,
+    AND, /* && => § */
+    OR, /* || => £ */
+    NOT,
+    TILDE,
     SPACE,
     WHAT
 };

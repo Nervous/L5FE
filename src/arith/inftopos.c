@@ -2,21 +2,12 @@
 
 static int get_precedence(int o)
 {
-    assert(o != L_PAR && o != R_PAR && o != SPACE && o != WHAT);
     if (o == ADD || o == SUB)
         return 2;
-    else if (o == ADD_U || o == SUB_U)
+    else if (o == ADD_U || o == SUB_U || o == NOT || o == TILDE)
         return 4;
     else
         return 3;
-}
-
-static int is_par(int o)
-{
-    if (o == L_PAR || o == R_PAR)
-        return 1;
-    else
-        return 0;
 }
 
 static int keep_going(s_stack *s, int o1)
@@ -24,8 +15,7 @@ static int keep_going(s_stack *s, int o1)
     int o2;
     int p_o1 = 0;
 
-    if (stack_isempty(s) == 0 && stack_top(s)->is_op == 1 &&
-            is_par(stack_top(s)->op) == 0)
+    if (stack_isempty(s) == 0 && stack_top(s)->is_op == 1)
     {
         o2 = stack_top(s)->op;
         p_o1 = get_precedence(o1);
@@ -63,7 +53,7 @@ int loop_postfix(s_stack *s, s_queue *out, s_node *act)
         {
             out = queue_add(out, node_cpy(act));
         }
-        else if (is_par(act->op) == 0)
+        else
         {
             while (keep_going(s, act->op) == 1)
             {
@@ -71,20 +61,6 @@ int loop_postfix(s_stack *s, s_queue *out, s_node *act)
                 free(stack_pop(s));
             }
             s = stack_add(s, node_cpy(act));
-        }
-        else if (act->op == L_PAR)
-        {
-            s = stack_add(s, node_cpy(act));
-        }
-        else
-        {
-            while (stack_isempty(s) == 0 && stack_top(s)->op != L_PAR)
-            {
-                out = queue_add(out, node_cpy(stack_top(s)));
-                free(stack_pop(s));
-            }
-            if (stack_top(s)->op == L_PAR)
-                free(stack_pop(s));
         }
         act = act->next;
     }
