@@ -70,14 +70,17 @@ static s_list *create_alias_token(s_list *father, s_list *new_ast, char *value)
     while (new_ast && new_ast->brothers)
         new_ast = new_ast->brothers;
 
-    s_token *token = malloc(sizeof (s_token));
+    s_token *token = NULL;
+    token = malloc(sizeof (s_token));
     token->str = value;
     token->type = WORD;
 
-    s_list *new_node = malloc(sizeof (s_list));
+    s_list *new_node = NULL;
+    new_node = malloc(sizeof (s_list));
     new_node->node = token;
     new_node->father = father;
     new_node->son_list = NULL;
+    new_node->brothers = NULL;
 
     if (new_ast)
         new_ast->brothers = new_node;
@@ -87,9 +90,9 @@ static s_list *create_alias_token(s_list *father, s_list *new_ast, char *value)
     return ret;
 }
 
-int exec_alias(s_list *ast, char *str)
+int exec_alias(s_list **ast, char *str)
 {
-    s_list *father = ast->father;
+    s_list *father = (*ast)->father;
     s_list *new_ast = NULL;
     char *alias_value = malloc(sizeof (char ) * strlen(str) + 1);
     strcpy(alias_value, str);
@@ -116,6 +119,7 @@ int exec_alias(s_list *ast, char *str)
     }
 
     new_ast->father = father;
+    remove_node(ast);
 
     return exec_simplecommand(new_ast);
 }

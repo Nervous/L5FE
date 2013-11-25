@@ -12,7 +12,7 @@ int exec_simplecommand(s_list *simple_command)
     else if ((ret = check_builtin(simple_command)) != -1)
         return ret;
     else if ((str = alias_get_value(simple_command->node->str)) != NULL)
-        return exec_alias(simple_command, str);
+        return exec_alias(&simple_command, str);
     else
     {
         while (simple_command)

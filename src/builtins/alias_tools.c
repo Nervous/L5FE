@@ -8,6 +8,8 @@ extern s_global *g_global;
 
 char *alias_get_value(char *name)
 {
+    if (!g_global->alias_list)
+        return NULL;
     s_alias *tmp = g_global->alias_list;
     while (tmp != NULL)
     {
@@ -26,7 +28,8 @@ int alias_set_value(char *name, char *value)
         if (!strcmp(tmp->name, name))
         {
             free(tmp->value);
-            tmp->value = value;
+            tmp->value = malloc(sizeof (char) * strlen(value) + 1);
+            tmp->value = strcpy(tmp->value, value);
             return 0;
         }
         tmp = tmp->next;
