@@ -31,6 +31,7 @@ void init_global(void)
     g_global->hist_arr = NULL;
     g_global->var = NULL;
     g_global->func = NULL;
+    g_global->alias_list = NULL;
     g_global->current_dir = malloc(sizeof (char) * 128);
     g_global->previous_dir = malloc(sizeof (char) * 128);
     g_global->current_dir = getcwd(g_global->current_dir, 128);
