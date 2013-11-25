@@ -28,7 +28,7 @@ static void init_term(void)
 
 static char get_char(void)
 {
-    char c;
+    char c = '\0';
     read(STDIN_FILENO, &c, 1);
     return c;
 }
@@ -85,7 +85,7 @@ static f_callback match_key(char c, char **buf)
 
 static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
 {
-    char tmp;
+    char tmp = '\0';
     char *buf = *buf_p;
     while ((tmp = get_char()) != '\n' && tmp != '\r')
     {
@@ -99,6 +99,8 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
             *max_s += 100;
             *buf_p = realloc(*buf_p, (*max_s) * sizeof (char));
             buf = *buf_p;
+            for (int i = *max_s - 100; i < *max_s; i++)
+                buf[i] = '\0';
         }
         memmove(*buf_p + *cur_pos + 1, *buf_p + *cur_pos, *buf_s - *cur_pos);
         buf[*cur_pos] = tmp;
