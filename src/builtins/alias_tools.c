@@ -8,6 +8,8 @@ extern s_global *g_global;
 
 char *alias_get_value(char *name)
 {
+    if (!g_global->alias_list)
+        return NULL;
     s_alias *tmp = g_global->alias_list;
     while (tmp != NULL)
     {

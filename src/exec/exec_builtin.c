@@ -70,14 +70,17 @@ static s_list *create_alias_token(s_list *father, s_list *new_ast, char *value)
     while (new_ast && new_ast->brothers)
         new_ast = new_ast->brothers;
 
-    s_token *token = malloc(sizeof (s_token));
+    s_token *token = NULL;
+    token = malloc(sizeof (s_token));
     token->str = value;
     token->type = WORD;
 
-    s_list *new_node = malloc(sizeof (s_list));
+    s_list *new_node = NULL;
+    new_node = malloc(sizeof (s_list));
     new_node->node = token;
     new_node->father = father;
     new_node->son_list = NULL;
+    new_node->brothers = NULL;
 
     if (new_ast)
         new_ast->brothers = new_node;
