@@ -1,5 +1,5 @@
 #include <stdlib.h>
-
+#include "builtins/aliases.h"
 #include "parser/parser.h"
 #include "ast/ast.h"
 #include "lexer/lexer.h"
@@ -25,17 +25,24 @@ void init_global(void)
     g_global->norc = 0;
     g_global->ret = 0;
     g_global->break_nb = 0;
+    g_global->continue_nb = 0;
     g_global->readline = NULL;
     g_global->hist_file = NULL;
     g_global->hist_arr = NULL;
     g_global->var = NULL;
     g_global->func = NULL;
+    g_global->current_dir = malloc(sizeof (char) * 128);
+    g_global->previous_dir = malloc(sizeof (char) * 128);
+    g_global->current_dir = getcwd(g_global->current_dir, 128);
+    g_global->previous_dir = strcpy(g_global->previous_dir,
+                                    g_global->current_dir);
 }
 
 void free_global(void)
 {
     free(g_global->readline);
     release_ast(get_root(g_global->current_node));
+    free_alias_list();
     free(g_global->current_node);
     if (g_global->hist_file)
         free(g_global->hist_file);
@@ -43,6 +50,8 @@ void free_global(void)
     free_function();
     if (g_global->hist_arr)
         free_history();
+    free(g_global->current_dir);
+    free(g_global->previous_dir);
     free(g_global);
 }
 

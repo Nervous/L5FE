@@ -21,8 +21,8 @@ static void init_term(void)
     g_global->attribute = attribute;
     attribute.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &attribute);
-    setupterm("xterm", 1, (int *)0);
-    tputs(enter_am_mode, 1, my_putchar);
+    //setupterm("xterm", 1, (int *)0);
+    //tputs(enter_am_mode, 1, my_putchar);
     init_history();
 }
 
