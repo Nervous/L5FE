@@ -7,8 +7,8 @@ extern s_global *g_global;
 static void load_config();
 
 /**
- ** @brief Display the Usage message on the standard error output
- */
+** @brief Display the Usage message on the standard error output
+*/
 
 static int print_usage(char * msg, char *str)
 {
@@ -70,9 +70,9 @@ static int options2(int argc, char **argv, int i)
 }
 
 /**
- ** @brief Compare the current option to every known option and perform the
- ** appropriate action
- */
+** @brief Compare the current option to every known option and perform the
+** appropriate action
+*/
 
 static int options(int argc, char **argv, int i)
 {
@@ -96,9 +96,9 @@ static int options(int argc, char **argv, int i)
 }
 
 /**
- ** @brief Reads the file passed as an argument to 42sh and stores it into a
- ** single single to parse and execute
- */
+** @brief Reads the file passed as an argument to 42sh and stores it into a
+** single single to parse and execute
+*/
 
 int get_file(char *filename, bool config)
 {
@@ -154,16 +154,54 @@ void load_config()
     g_global->current_node = NULL;
 }
 
+static int try_standard_input(void)
+{
+    unsigned int i = 1;
+    char *buf = malloc(sizeof (char) * 10);
+    char *value = malloc(sizeof (char) * 10);
+
+    if (buf == NULL || value == NULL)
+        return 1;
+
+    value = strcpy(value, "");
+
+    int flags = fcntl(0, F_GETFL, 0);
+    fcntl(0, F_SETFL, flags | O_NONBLOCK);
+
+    while ((buf = fgets(buf, 10, stdin)) != NULL)
+    {
+        if (strlen(buf) + strlen(value) >= 10 * i)
+            if ((value = realloc(value, sizeof (char) * (++i * 10))) == NULL)
+                return 1;
+        value = strcat(value, buf);
+    }
+
+    free(buf);
+
+    if (strlen(value) == 0)
+    {
+        free(value);
+        return 1;
+    }
+
+    g_global->readline = value;
+    g_global->file = 1;
+
+    return parse();
+}
+
 /**
- ** @brief Parses the argument passed to 42sh to find the options. If no
- ** argument is provided, 42sh will run in interactive mode
- */
+** @brief Parses the argument passed to 42sh to find the options. If no
+** argument is provided, 42sh will run in interactive mode
+*/
 
 int get_options(int argc, char **argv)
 {
     if (argc == 1)
     {
         load_config();
+        if (try_standard_input() == 0)
+            return 0;
         readline();
         return 0;
     }

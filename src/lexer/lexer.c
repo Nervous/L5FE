@@ -57,9 +57,9 @@ char *create_comment(char *str, unsigned int i)
 
         while (i < len && str[i] != '\n')
             i++;
-        char *value = malloc(sizeof (char) * i);
-        strncpy(value, str, i - 1);
-        value[i - 1] = '\0';
+        char *value = malloc(sizeof (char) * i + 1);
+        strncpy(value, str, i);
+        value[i] = '\0';
         g_global->pos += i;
 
         return value;
@@ -94,9 +94,9 @@ static char *create_quote_token(char *str)
     else
     {
         i++;
-        char *value = malloc(sizeof (char) * i);
+        char *value = malloc(sizeof (char) * i + 1);
         strncpy(value, str, i);
-        value[i - 1] = '\0';
+        value[i] = '\0';
         g_global->pos += i;
 
         return value;
@@ -209,6 +209,8 @@ s_token *get_token(enum e_type expected)
     token->type = set_token_type(token->str);
     if (strlen(token->str) == 0)
         token->type = E_EOF;
+    else if (token->str[strlen(token->str) - 1] == '=')
+        token->str[strlen(token->str) - 1] = '\0';
 
     if (expected == WORD)
         token->type = is_expected(token->type);

@@ -63,3 +63,59 @@ int check_builtin(s_list *ast)
         return -1;
     return 0;
 }
+
+static s_list *create_alias_token(s_list *father, s_list *new_ast, char *value)
+{
+    s_list *ret = new_ast;
+    while (new_ast && new_ast->brothers)
+        new_ast = new_ast->brothers;
+
+    s_token *token = malloc(sizeof (s_token));
+    token->str = value;
+    token->type = WORD;
+
+    s_list *new_node = malloc(sizeof (s_list));
+    new_node->node = token;
+    new_node->father = father;
+    new_node->son_list = NULL;
+
+    if (new_ast)
+        new_ast->brothers = new_node;
+    else
+        ret = new_node;
+
+    return ret;
+}
+
+int exec_alias(s_list *ast, char *str)
+{
+    s_list *father = ast->father;
+    s_list *new_ast = NULL;
+    char *alias_value = malloc(sizeof (char ) * strlen(str) + 1);
+    strcpy(alias_value, str);
+
+    alias_value++;
+    int len = strlen(alias_value) - 1;
+    int i = 0;
+
+    while (i < len)
+    {
+        while (i < len && alias_value[i] && alias_value[i] != ' ')
+            i++;
+        alias_value[i++] = '\0';
+
+        char *value = malloc(sizeof (char) * strlen(alias_value) + 1);
+        strcpy(value, alias_value);
+        value[i - 1] = '\0';
+        for (int j = 0; j < i; j++)
+            alias_value++;
+        i = 0;
+        len = strlen(alias_value) - 1;
+
+        new_ast = create_alias_token(father, new_ast, value);
+    }
+
+    new_ast->father = father;
+
+    return exec_simplecommand(new_ast);
+}

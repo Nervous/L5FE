@@ -31,5 +31,6 @@ int check_builtin(s_list *ast);
 int do_fork(char **argv);
 char **build_argv(s_list *ast);
 int check_builtin(s_list *ast);
+int exec_alias(s_list *ast, char *alias_value);
 
 #endif /* !EXEC_H */
