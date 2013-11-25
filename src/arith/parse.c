@@ -1,5 +1,21 @@
 #include "std.h"
 
+static int get_op2(const char c)
+{
+    if (c == '&')
+        return BIT_AND;
+    else if (c == '|')
+        return BIT_OR;
+    else if (c == 'W')
+        return AND;
+    else if (c == 'K')c
+        return OR;
+    else if (c == '!')
+        return NOT;
+    else
+        return WHAT;
+}
+
 static int get_op(const char c, int *is_op)
 {
     if (c == '+')
@@ -10,6 +26,12 @@ static int get_op(const char c, int *is_op)
         return MULT;
     else if (c == '/')
         return DIV;
+    else if (c == '~')
+        return TILDE;
+    else if (c == '?')
+        return POW;
+    else if (c == '^')
+        return XOR;
     else if (c == ' ')
         return SPACE;
     else if (c >= '0' && c <= '9')
@@ -18,7 +40,7 @@ static int get_op(const char c, int *is_op)
         return c - 48;
     }
     else
-        return WHAT;
+        return get_op2(c);
 }
 
 s_node *new(const char c)
@@ -55,6 +77,10 @@ void change_unary(s_node *n)
         n->op = ADD_U;
     else if (n->op == SUB)
         n->op = SUB_U;
+    else if (n->op == TILDE)
+        n->op = TILDE;
+    else if (n->op == NOT)
+        n->op = NOT;
     else
         assert(0 == 1 && "CAN NOT BE UNARY !");
 }
@@ -70,13 +96,9 @@ static int loop_when_op(s_node *n, int *is_ope, s_queue *q)
         }
         else if (n->op == WHAT)
             return 1;
-        else if (*is_ope == 1 && (n->op != L_PAR))
+        else if (*is_ope == 1)
             change_unary(n);
-        else if (*is_ope == 0 && (n->op == L_PAR))
-            return 2;
-        else if (*is_ope == 1 && (n->op == R_PAR))
-            return 2;
-        else if (*is_ope == 0 && (n->op != R_PAR))
+        else if (*is_ope == 0)
             *is_ope = 1;
 
         if (n != NULL)
