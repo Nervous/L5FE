@@ -4,6 +4,7 @@
 # include <termios.h>
 # include "exec/variable.h"
 # include "exec/function.h"
+# include "builtins/aliases.h"
 
 void init_global(void);
 
@@ -94,6 +95,11 @@ typedef struct global
     int hist_ind;
     int parse_error;
     int ret;
+    int break_nb;
+    int continue_nb;
+    char *previous_dir;
+    char *current_dir;
+    struct alias *alias_list;
 } s_global;
 
 #endif /* !STRUCT_H */

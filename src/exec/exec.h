@@ -6,6 +6,7 @@
 # include "variable.h"
 # include "../struct.h"
 # include "../ast/ast.h"
+# include "../builtins/builtins.h"
 
 int exec_pipe(s_list *ast);
 int exec_funcdec(s_list *funcdec);
@@ -30,5 +31,6 @@ int check_builtin(s_list *ast);
 int do_fork(char **argv);
 char **build_argv(s_list *ast);
 int check_builtin(s_list *ast);
+int exec_alias(s_list *ast, char *alias_value);
 
 #endif /* !EXEC_H */

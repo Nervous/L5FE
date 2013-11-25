@@ -14,6 +14,7 @@ add_subdirectory(ast)
 add_subdirectory(lexer)
 add_subdirectory(arith)
 add_subdirectory(readline)
+add_subdirectory(expansion)
 
 # defines the files to compile, just add the files you want to include
 #in the compilation
@@ -36,3 +37,4 @@ target_link_libraries(42sh lexer)
 target_link_libraries(42sh parser)
 target_link_libraries(42sh readline)
 target_link_libraries(42sh arith)
+target_link_libraries(42sh expansion)

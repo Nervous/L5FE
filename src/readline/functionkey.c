@@ -15,7 +15,7 @@ void backspace(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
     char *buf = *buf_p;
     if (*cur_pos > 0)
     {
-        memcpy(buf + *cur_pos - 1, buf + *cur_pos, *buf_s - *cur_pos + 1);
+        memmove(buf + *cur_pos - 1, buf + *cur_pos, *buf_s - *cur_pos + 1);
         char *tmp = tgetstr("le", NULL);
         tputs(tmp, 1, my_putchar);
         *cur_pos -= 1;
@@ -33,7 +33,7 @@ void delete(char **buf_p, int *cur_pos, int *buf_size, int *max_size)
     char *buf = *buf_p;
     if (*cur_pos < *buf_size)
     {
-        memcpy(buf + *cur_pos, buf + *cur_pos + 1, *buf_size - *cur_pos + 1);
+        memmove(buf + *cur_pos, buf + *cur_pos + 1, *buf_size - *cur_pos + 1);
         *buf_size -= 1;
         tputs(tgetstr("sc", NULL), 1, my_putchar);
         write(STDOUT_FILENO, buf + *cur_pos, strlen(buf + *cur_pos));
