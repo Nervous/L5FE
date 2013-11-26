@@ -1,6 +1,7 @@
 #include "get_options.h"
 #include "readline/readline.c"
 #include "exec/exec.h"
+#include "builtins/builtins.h"
 
 extern s_global *g_global;
 
@@ -41,6 +42,57 @@ static char *get_string(int argc, char **argv, int i)
     return value;
 }
 
+static int options_enable(char **argv, int i, int argc)
+{
+    int ret = 0;
+    if (i + 2 < argc)
+    {
+        ++i;
+        ret = modify_opt(argv[i++], 1);
+        while (i + 1 < argc)
+        {
+            ret = modify_opt(argv[i++], 1);
+            if (ret)
+                return 1;
+        }
+        return ret;
+    }
+    else
+    {
+        for (int i = 0; i < 8; i++)
+            g_global->options[i]->activated = 1;
+    }
+    return 0;
+}
+
+static int options_o(char **argv, int i, int argc)
+{
+    int ret = 0;
+    if (strcmp(argv[i], "-O") == 0)
+    {
+        if (i + 2 < argc)
+        {
+            ++i;
+            ret = modify_opt(argv[i++], 0);
+            while (i + 1 < argc)
+            {
+                ret = modify_opt(argv[i++], 0);
+                if (ret)
+                    return 1;
+            }
+            return ret;
+        }
+        else
+        {
+            for (int i = 0; i < 8; i++)
+                g_global->options[i]->activated = 0;
+        }
+    }
+    else
+        ret = options_enable(argv, i, argc);
+    return ret;
+}
+
 static int options2(int argc, char **argv, int i)
 {
     if (strcmp(argv[i], "-c") == 0)
@@ -57,14 +109,7 @@ static int options2(int argc, char **argv, int i)
             return print_usage("%s option needs a parameter\n", argv[i]);
     }
     else if (strcmp(argv[i], "-O") == 0 || strcmp(argv[i], "+O") == 0)
-    {
-        if (i + 1 < argc)
-        {
-            return 0;
-        }
-        else
-            return print_usage("%s option needs a parameter\n", argv[i]);
-    }
+        return options_o(argv, i, argc);
 
     return print_usage("Option %s is not a valid option\n", argv[i]);
 }
@@ -200,9 +245,8 @@ int get_options(int argc, char **argv)
     if (argc == 1)
     {
         load_config();
-        if (try_standard_input() == 0)
-            return 0;
-        readline();
+        if (try_standard_input() != 0)
+            readline();
         return 0;
     }
 
@@ -223,6 +267,8 @@ int get_options(int argc, char **argv)
 
     if (g_global->norc != 1)
         load_config();
-    readline();
+    if (try_standard_input() != 0)
+        readline();
+
     return 0;
 }
