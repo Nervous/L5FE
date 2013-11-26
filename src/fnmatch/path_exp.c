@@ -49,9 +49,29 @@ static char *return_empty()
 
 static char *my_concat(char *str1, char *str2)
 {
-    str1 = str1;
-    str2 = str2;
-    return NULL;
+    if (str2[0] == '\0')
+    {
+        free(str2);
+        return str1;
+    }
+    int index = 0;
+    int len = strlen(str1) + strlen(str2) + 2; //for '\0'
+    char *result = malloc(len * sizeof (char));
+    for (unsigned int i = 0; i < strlen(str1); i++)
+    {
+        result[index] = str1[i];
+        index++;
+    }
+    result[index] = ' ';
+    index++;
+    for (unsigned int i = 0; i < strlen(str2) + 1; i++) //+1 to get '\0'
+    {
+        result[index] = str2[i];
+        index++;
+    }
+    free(str1);
+    free(str2);
+    return result;
 }
 static void free_my_var(char *tofree1, char* tofree2, char *tofree3, char**fr)
 {
@@ -86,7 +106,6 @@ static char *path_exp_rec(char *pwd, char *current_dir,
             c_dir = free_concat_slashs(current_dir, c_pattern, slashs, 0);
             tmp = path_exp_rec(pwd, c_dir, rem_pattern, slash_count);
             result = my_concat(result, tmp);
-            free(tmp);
         }
     free_my_var(c_pattern, rem_pattern, c_dir, dir_list2);
     return result;
