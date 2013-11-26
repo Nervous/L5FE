@@ -21,5 +21,6 @@ int my_export(s_list *ast);
 int my_shopt(s_list *ast);
 int my_history(s_list *ast);
 int modify_opt(char *name, int activate);
+char *my_itoa(int n);
 
 #endif /*!BUILTINS_H*/

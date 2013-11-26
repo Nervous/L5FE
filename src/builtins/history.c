@@ -6,10 +6,20 @@
 extern s_global *g_global;
 static int display_hist(void)
 {
+    char *number = NULL;
     for (int i = 0; g_global->hist_arr[i]; i++)
     {
         if (strlen(g_global->hist_arr[i]) > 0)
         {
+            if (i == 0)
+                my_puts("0");
+            else
+            {
+                number = my_itoa(i);
+                my_puts(number);
+                free(number);
+            }
+            my_puts("  ");
             my_puts(g_global->hist_arr[i]);
             my_puts("\n");
         }
