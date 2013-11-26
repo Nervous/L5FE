@@ -174,8 +174,6 @@ void readline(void)
     tgetent(term_buffer, type);
     do {
         read_input();
-        //if (!strcmp(g_global->readline, "exit"))
-        //break;
         while (parse() == -1)
         {
             g_global->pos = 0;

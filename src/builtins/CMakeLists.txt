@@ -11,6 +11,7 @@ set(builtins_source_files
     shopt.c
     export.c
     history.c
+    my_itoa.c
 )
 
 add_library(builtins ${builtins_source_files})
