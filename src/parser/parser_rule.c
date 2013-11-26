@@ -24,7 +24,7 @@ static void check_in_rulefor(s_token **tok)
         return;
     int semi = 0;
     *tok = eat_token(*tok);
-    *tok = get_token(WORD | SEMICOLON | EOL);
+    *tok = get_token(WORD);
     climb_ast(1);
     parse_loop_WORD(tok);
     if ((*tok)->type != SEMICOLON && (*tok)->type != EOL)

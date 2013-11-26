@@ -80,6 +80,8 @@ char **build_argv(s_list *ast)
 
     while (ast != NULL)
     {
+        if (strcmp(ast->node->str, "$") == 0)
+            expand_var(ast);
         str_size += strlen(ast->node->str);
         if (ast->brothers != NULL)
             str_size += 1;

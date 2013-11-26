@@ -90,7 +90,6 @@ void remove_node(s_list *node)
         remove_node_aux(tmp, previous, first_son, node);
         release_node(node);
         g_global->current_node = current_node_tmp;
-//        g_global->current_node->node = copy_token(current_node_tmp->node);
     }
     g_global = g_global;
 }

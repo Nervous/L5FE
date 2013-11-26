@@ -1,6 +1,7 @@
-#include "builtins.h"
 #include <unistd.h>
 #include <stdio.h>
+#include "builtins.h"
+#include "../exec/exec.h"
 
 static int expanded_echo(s_list *ast)
 {
@@ -17,6 +18,8 @@ static int print_array(s_list *ast, int option_n)
         return -1;
     while (ast)
     {
+        if (strcmp(ast->node->str, "$") == 0)
+            expand_var(ast);
         if (ast->brothers)
         {
             my_puts(ast->node->str);
