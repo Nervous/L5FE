@@ -9,7 +9,7 @@ set(fnmatch_source_files
     my_fnmatch.h
     push.c
     getdir.c
-#    path_exp.c
+    path_exp.c
 )
 
 add_library(fnmatch ${fnmatch_source_files})
