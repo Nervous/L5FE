@@ -30,7 +30,7 @@ static char *get_string(int argc, char **argv, int i)
         count++;
     }
 
-    char *value = malloc(sizeof (char) * count);
+    char *value = malloc(sizeof (char) * count + 1);
     value = strcpy(value, argv[i]);
     for (cur_arg = i + 1; cur_arg < argc; cur_arg++)
     {
