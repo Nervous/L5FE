@@ -1,5 +1,6 @@
 #include <string.h>
 #include "my_fnmatch.h"
+#include "../struct.h"
 
 extern s_global *g_global;
 
@@ -10,7 +11,7 @@ static void free_dir_list(char **dir_list)
     free(dir_list);
 }
 
-static char *free_concat_slashs(char *str1, char *str2, int slashs, int free)
+static char *free_concat_slashs(char *str1, char *str2, int slashs, int b_free)
 {
     int index = 0;
     int len = strlen(str1) + strlen(str2) + slashs + 1 //for '\0'
@@ -45,11 +46,7 @@ static char *return_empty()
     return res;
 }
 
-static char *path_exp_rec_aux(char *pwd, char *current_dir,
-    char *pattern, int slashs)
-{
-    if 
-}
+
 
 static char free_my_var(char *tofree1, char* tofree2, char *tofree3, char**fr)
 {
@@ -83,10 +80,11 @@ static char *path_exp_rec(char *pwd, char *current_dir,
         {
             c_dir = free_concat_slashs(current_dir, c_pattern);
             tmp = path_exp_rec(pwd, c_dir, rem_pattern, slash_count);
-            my_concat(result, tmp);
+            result = my_concat(result, tmp);
             free(tmp);
         }
     free_my_var(c_pattern, rem_pattern, c_dir, dir_list);
+    return result;
 }
 
 char *path_exp(char* str)
