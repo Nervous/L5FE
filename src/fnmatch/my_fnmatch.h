@@ -5,6 +5,6 @@
 
 int my_fnmatch(const char *pattern, const char *string);
 char *my_str_copy(char *str);
-char **get_dir_list(char *dir);
+char **get_dir_list2(char *dir);
 
 #endif /* !MY_FNMATCH */

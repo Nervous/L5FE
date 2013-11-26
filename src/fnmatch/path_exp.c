@@ -4,11 +4,11 @@
 
 extern s_global *g_global;
 
-static void free_dir_list(char **dir_list)
+static void free_dir_list2(char **dir_list2)
 {
-    for (int i = 0; dir_list[i] != NULL; i++)
-        free(dir_list[i]);
-    free(dir_list);
+    for (int i = 0; dir_list2[i] != NULL; i++)
+        free(dir_list2[i]);
+    free(dir_list2);
 }
 
 static char *free_concat_slashs(char *str1, char *str2, int slashs, int b_free)
@@ -62,7 +62,7 @@ static char *path_exp_rec(char *pwd, char *current_dir,
     char *c_dir = NULL;
     char *result;
     char *tmp = free_concat_slash(pwd, current_dir, 0, 0);
-    char **dir_list = get_dir_list(tmp);
+    char **dir_list2 = get_dir_list2(tmp);
     free(tmp);
     int sep_pos = 0;
     int slash_count = 0;
@@ -75,15 +75,15 @@ static char *path_exp_rec(char *pwd, char *current_dir,
     char *c_pattern = strdup(pattern);
     c_pattern[sep_count - slashs_count + 1] = '\0';
     char *rem_pattern = strdup(&(pattern[sep_pos + 1]));
-    for (int i = 0; dir_list[i] != NULL; i++)
-        if (my_fnmatch(c_pattern, dir_list[i]))
+    for (int i = 0; dir_list2[i] != NULL; i++)
+        if (my_fnmatch(c_pattern, dir_list2[i]))
         {
             c_dir = free_concat_slashs(current_dir, c_pattern);
             tmp = path_exp_rec(pwd, c_dir, rem_pattern, slash_count);
             result = my_concat(result, tmp);
             free(tmp);
         }
-    free_my_var(c_pattern, rem_pattern, c_dir, dir_list);
+    free_my_var(c_pattern, rem_pattern, c_dir, dir_list2);
     return result;
 }
 

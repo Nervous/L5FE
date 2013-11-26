@@ -4,9 +4,9 @@ void push(s_fifo *fifo, bool star)
 {
   assert(fifo != NULL);
 
-  s_list *new = NULL;
+  s_list22 *new = NULL;
 
-  new = malloc(sizeof (s_list));
+  new = malloc(sizeof (s_list22));
   if (new == NULL)
     return;
 

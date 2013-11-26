@@ -2,8 +2,8 @@
 
 s_fifo *init_fifo(void)
 {
-  s_list *head = NULL;
-  s_list *tail = NULL;
+  s_list22 *head = NULL;
+  s_list22 *tail = NULL;
   s_fifo *fifo = NULL;
 
   fifo = malloc(sizeof (s_fifo));
