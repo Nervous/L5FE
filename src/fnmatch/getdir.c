@@ -4,7 +4,7 @@
 #include <string.h>
 #include "my_fnmatch.h"
 
-static char *my_str_copy(char *str)
+char *my_str_copy(char *str)
 {
     char *result = malloc((strlen(str) + 1) * sizeof(char));
     result = strcpy(result, str);
@@ -23,12 +23,12 @@ char **get_dir_list(char *dir)
     {
         while ((tmp = readdir(dp)))
         {
-            dir_list[dir_count] = my_str_copy(tmp->d_name);
+            dir_list[dir_count] = strdup(tmp->d_name);
             dir_count++;
-            dir_list = realloc(dir_list, dir_count + 2);
+            dir_list = realloc(dir_list, dir_count + 1);
+            dir_list[dir_count] = NULL;
         }
-
         closedir(dp);
     }
-    return NULL;
+    return dir_list;
 }

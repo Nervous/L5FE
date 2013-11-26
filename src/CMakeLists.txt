@@ -15,7 +15,7 @@ add_subdirectory(lexer)
 add_subdirectory(arith)
 add_subdirectory(readline)
 add_subdirectory(expansion)
-add_subdirectory(fnmatch)
+#add_subdirectory(fnmatch)
 
 # defines the files to compile, just add the files you want to include
 #in the compilation
@@ -39,4 +39,4 @@ target_link_libraries(42sh parser)
 target_link_libraries(42sh readline)
 target_link_libraries(42sh arith)
 target_link_libraries(42sh expansion)
-target_link_libraries(42sh fnmatch)
+#target_link_libraries(42sh fnmatch)
