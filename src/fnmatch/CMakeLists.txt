@@ -6,8 +6,8 @@ set(fnmatch_source_files
     compare.c
     fifo.h
     main.c
-    #my_fnmatch.h
-    #push.c
+    my_fnmatch.h
+    push.c
 )
 
 add_library(fnmatch ${fnmatch_source_files})
