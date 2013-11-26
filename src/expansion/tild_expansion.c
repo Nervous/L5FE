@@ -14,9 +14,9 @@ static int tilde_plus(char **str)
     {
         new_str[i] = exp[i];
     }
-    for (int i = exp_len; i < old_len + exp_len; i++)
+    for (int i = exp_len + 2; i < old_len + exp_len; i++)
     {
-        new_str[i] = (*str)[i - exp_len];
+        new_str[i - 2] = (*str)[i - exp_len];
     }
     free(*str);
     *str = new_str;
@@ -33,9 +33,9 @@ static int tilde_minus(char **str)
     {
         new_str[i] = exp[i];
     }
-    for (int i = exp_len; i < old_len + exp_len; i++)
+    for (int i = exp_len + 2; i < old_len + exp_len; i++)
     {
-        new_str[i] = (*str)[i - exp_len];
+        new_str[i - 2] = (*str)[i - exp_len];
     }
     free(*str);
     *str = new_str;
@@ -52,9 +52,9 @@ static int tilde(char **str)
     {
         new_str[i] = exp[i];
     }
-    for (int i = exp_len; i < old_len + exp_len; i++)
+    for (int i = exp_len + 1; i < old_len + exp_len; i++)
     {
-        new_str[i] = (*str)[i - exp_len];
+        new_str[i - 1] = (*str)[i - exp_len];
     }
     free(*str);
     *str = new_str;
