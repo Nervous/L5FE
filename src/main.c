@@ -8,10 +8,38 @@
 #include "get_options.h"
 #include "exec/exec.h"
 #include "readline/history.h"
-
+#include "builtins/builtins.h"
 #include "arith/arith.h"
 
 s_global *g_global = NULL;
+
+static void init_options(void)
+{
+    g_global->options[0] = malloc(sizeof (s_options));
+    g_global->options[0]->name = "ast_print";
+    g_global->options[0]->activated = 0;
+    g_global->options[1] = malloc(sizeof (s_options));
+    g_global->options[1]->name = "dotglob";
+    g_global->options[1]->activated = 0;
+    g_global->options[2] = malloc(sizeof (s_options));
+    g_global->options[2]->name = "expand_aliases";
+    g_global->options[2]->activated = 0;
+    g_global->options[3] = malloc(sizeof (s_options));
+    g_global->options[3]->name = "extglob";
+    g_global->options[3]->activated = 0;
+    g_global->options[4] = malloc(sizeof (s_options));
+    g_global->options[4]->name = "nocaseglob";
+    g_global->options[4]->activated = 0;
+    g_global->options[5] = malloc(sizeof (s_options));
+    g_global->options[5]->name = "nullglob";
+    g_global->options[5]->activated = 0;
+    g_global->options[6] = malloc(sizeof (s_options));
+    g_global->options[6]->name = "sourcepath";
+    g_global->options[6]->activated = 0;
+    g_global->options[7] = malloc(sizeof (s_options));
+    g_global->options[7]->name = "xpg_echo";
+    g_global->options[7]->activated = 0;
+}
 
 void init_global(void)
 {
@@ -32,6 +60,7 @@ void init_global(void)
     g_global->var = NULL;
     g_global->func = NULL;
     g_global->alias_list = NULL;
+    init_options();
     g_global->current_dir = malloc(sizeof (char) * 128);
     g_global->previous_dir = malloc(sizeof (char) * 128);
     g_global->current_dir = getcwd(g_global->current_dir, 128);
@@ -53,6 +82,8 @@ void free_global(void)
         free_history();
     free(g_global->current_dir);
     free(g_global->previous_dir);
+    for (int i = 0; i < 8; i++)
+        free(g_global->options[i]);
     free(g_global);
 }
 

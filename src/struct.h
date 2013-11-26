@@ -100,6 +100,7 @@ typedef struct global
     char *previous_dir;
     char *current_dir;
     struct alias *alias_list;
+    struct options *options[8];
 } s_global;
 
 #endif /* !STRUCT_H */
