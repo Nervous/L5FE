@@ -51,6 +51,7 @@ void write_history(void)
         fputs(g_global->hist_arr[i], file);
         fputc('\n', file);
     }
+    fclose(file);
 }
 
 void add_to_hist(char *buf)

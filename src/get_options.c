@@ -203,8 +203,8 @@ void load_config()
 static int try_standard_input(void)
 {
     unsigned int i = 1;
-    char *buf = malloc(sizeof (char) * 10);
-    char *value = malloc(sizeof (char) * 10);
+    char *buf = malloc(sizeof (char) * 100);
+    char *value = malloc(sizeof (char) * 100);
 
     if (buf == NULL || value == NULL)
         return 1;
@@ -214,10 +214,10 @@ static int try_standard_input(void)
     int flags = fcntl(0, F_GETFL, 0);
     fcntl(0, F_SETFL, flags | O_NONBLOCK);
 
-    while ((buf = fgets(buf, 10, stdin)) != NULL)
+    while ((fgets(buf, 100, stdin)) != NULL)
     {
-        if (strlen(buf) + strlen(value) >= 10 * i)
-            if ((value = realloc(value, sizeof (char) * (++i * 10))) == NULL)
+        if (strlen(buf) + strlen(value) >= 100 * i)
+            if ((value = realloc(value, sizeof (char) * (++i * 100))) == NULL)
                 return 1;
         value = strcat(value, buf);
     }

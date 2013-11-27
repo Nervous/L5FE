@@ -58,7 +58,6 @@ static int print_array(s_list *ast, int option_n)
         if (strcmp(ast->node->str, "$") == 0)
             expand_var(ast);
         tilde_handler(&(ast->node->str));
-//        path_exp(&(ast->node->str));
         if (ast->brothers)
         {
             my_puts(ast->node->str);
@@ -68,7 +67,6 @@ static int print_array(s_list *ast, int option_n)
             my_puts(ast->node->str);
         ast = ast->brothers;
     }
-
     if (!option_n)
         my_puts("\n");
     return 0;
@@ -89,4 +87,3 @@ int my_echo(s_list *ast)
         ret = print_array(ast, 0);
     return ret;
 }
-

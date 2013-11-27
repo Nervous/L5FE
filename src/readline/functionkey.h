@@ -14,5 +14,6 @@ void do_nothing(char **buf, int *cur_pos, int *buf_size, int *max_size);
 void ctrl_a(char **buf_p, int *cur_pos, int *buf_s, int *max_s);
 void ctrl_e(char **buf_p, int *cur_pos, int *buf_s, int *max_s);
 void ctrl_l(char **buf_p, int *cur_pos, int *buf_s, int *max_s);
+void delete_end(char **buf_p, int *cur_pos, int *buf_size, int *max_size);
 
 #endif /* !FUNCTIONKEY_H */

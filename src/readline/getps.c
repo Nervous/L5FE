@@ -7,13 +7,13 @@
 #include <string.h>
 #define _XOPEN_SOURCE
 
-extern s_global *g_global;
+    extern s_global *g_global;
 
-static char *match_char3(int *i, char *val, char *buf)
-{
-    if (val[*i] == 'w' || val[*i] == 'W')
-        getcwd(buf, 256);
-    else if (val[*i] == '$')
+    static char *match_char3(int *i, char *val, char *buf)
+    {
+        if (val[*i] == 'w' || val[*i] == 'W')
+            getcwd(buf, 256);
+        else if (val[*i] == '$')
     {
         if (getuid() == 0)
             buf[0] = '#';
@@ -94,6 +94,7 @@ static void aux_func(int i)
 {
     g_global->ps_size = i;
     g_global->x_pos = i;
+    g_global = g_global;
 }
 
 void getps(char *ps)

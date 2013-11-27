@@ -106,19 +106,16 @@ int exec_alias(s_list **ast, char *str)
 {
     s_list *father = (*ast)->father;
     s_list *new_ast = NULL;
-    char *alias_value = malloc(sizeof (char ) * strlen(str) + 1);
+    char *alias_value = malloc(sizeof (char) * strlen(str) + 1);
     strcpy(alias_value, str);
-
     alias_value++;
     int len = strlen(alias_value) - 1;
     int i = 0;
-
     while (i < len)
     {
         while (i < len && alias_value[i] && alias_value[i] != ' ')
             i++;
         alias_value[i++] = '\0';
-
         char *value = malloc(sizeof (char) * strlen(alias_value) + 1);
         strcpy(value, alias_value);
         value[i - 1] = '\0';
@@ -126,12 +123,9 @@ int exec_alias(s_list **ast, char *str)
             alias_value++;
         i = 0;
         len = strlen(alias_value) - 1;
-
         new_ast = create_alias_token(father, new_ast, value);
     }
-
     new_ast->father = father;
     remove_node(*ast);
-
     return exec_simplecommand(new_ast);
 }
