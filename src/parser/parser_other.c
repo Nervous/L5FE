@@ -2,10 +2,6 @@
 
 extern s_global *g_global;
 
-/**
-** @brief Parse a redirection
-*/
-
 int parse_redirection(s_token **tok)
 {
     bool digit = false;
