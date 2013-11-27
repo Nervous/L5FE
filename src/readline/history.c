@@ -59,6 +59,7 @@ void add_to_hist(char *buf)
         return;
     char *tmp = calloc(strlen(buf) + 1, sizeof (char));
     strcpy(tmp, buf);
+    free(g_global->hist_arr[199]);
     memmove(g_global->hist_arr + 1, g_global->hist_arr, sizeof (char *) * 199);
     g_global->hist_arr[0] = tmp;
 }

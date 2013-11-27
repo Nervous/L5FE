@@ -4,6 +4,9 @@ set(readline_source_files
     readline.c
     arrowkey.c
     putchar.c
+    getps.c
+    utils.c
+    ctrlkey.c
     )
 
 add_library(readline ${readline_source_files})

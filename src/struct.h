@@ -93,6 +93,9 @@ typedef struct global
     struct function *func;
     char **hist_arr;
     int hist_ind;
+    int x_pos;
+    int y_pos;
+    int ps_size;
     int parse_error;
     int ret;
     int break_nb;

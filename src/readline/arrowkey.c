@@ -16,8 +16,19 @@ void right_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
     max_size = max_size;
     if (*cur_pos < *buf_size)
     {
-        char *tmp = tgetstr("nd", NULL);
-        tputs(tmp, 1, my_putchar);
+        if (g_global->x_pos >= tgetnum("co"))
+        {
+            g_global->x_pos = 0;
+            g_global->y_pos += 1;
+            for (int i = 0; i < tgetnum("co"); i++)
+                tputs(tgetstr("le", NULL), 1, my_putchar);
+            tputs(tgetstr("do", NULL), 1, my_putchar);
+        }
+        else
+        {
+            tputs(tgetstr("nd", NULL), 1, my_putchar);
+            g_global->x_pos += 1;
+        }
         *cur_pos += 1;
     }
 }
@@ -29,8 +40,20 @@ void left_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
     max_size = max_size;
     if (*cur_pos > 0)
     {
-        char *tmp = tgetstr("le", NULL);
-        tputs(tmp, 1, my_putchar);
+        if (g_global->x_pos == 0 && g_global->y_pos > 0)
+        {
+            g_global->x_pos = tgetnum("co");
+            g_global->y_pos -= 1;
+            for (int i = 0; i < tgetnum("co"); i++)
+                tputs(tgetstr("nd", NULL), 1, my_putchar);
+            tputs(tgetstr("up", NULL), 1, my_putchar);
+        }
+        else
+        {
+            g_global->x_pos -= 1;
+            char *tmp = tgetstr("le", NULL);
+            tputs(tmp, 1, my_putchar);
+        }
         *cur_pos -= 1;
     }
 }
@@ -46,6 +69,7 @@ void up_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
     *buf_size = len;
     tputs(tgetstr("cr", NULL), 1, my_putchar);
     tputs(tgetstr("ce", NULL), 1, my_putchar);
+    g_global->x_pos = len;
     write_ps();
     write(STDIN_FILENO, tmp, len);
     *cur_pos = *buf_size;
@@ -66,6 +90,7 @@ void down_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
     *buf_size = len;
     tputs(tgetstr("cr", NULL), 1, my_putchar);
     tputs(tgetstr("ce", NULL), 1, my_putchar);
+    g_global->x_pos = len;
     write_ps();
     write(STDIN_FILENO, tmp, len);
     *cur_pos = *buf_size;

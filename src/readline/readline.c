@@ -3,6 +3,7 @@
 #include "../parser/parser.h"
 #include "../exec/exec.h"
 #include "../ast/ast.h"
+#include "getps.h"
 #include "functionkey.h"
 #include "history.h"
 #include <termios.h>
@@ -21,8 +22,8 @@ static void init_term(void)
     g_global->attribute = attribute;
     attribute.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &attribute);
-    //setupterm("xterm", 1, (int *)0);
-    //tputs(enter_am_mode, 1, my_putchar);
+    setupterm("xterm", 1, (int *)0);
+    tputs(enter_am_mode, 1, my_putchar);
     init_history();
 }
 
@@ -39,7 +40,8 @@ void write_buf(char *buf, int cur_pos, int buf_size)
     write(STDOUT_FILENO, &buf[cur_pos], 1);
     tputs(tgetstr("sc", NULL), 1, my_putchar);
     write(STDOUT_FILENO, &buf[cur_pos + 1], strlen(&buf[cur_pos + 1]));
-    write(STDOUT_FILENO, " ", 1);
+    if (g_global->x_pos < tgetnum("co"))
+        write(STDOUT_FILENO, " ", 1);
     tputs(tgetstr("rc", NULL), 1, my_putchar);
 }
 
@@ -73,6 +75,10 @@ static f_callback match_key(char c, char **buf)
         return backspace;
     if (c == '\n'|| c == '\r')
         return new_line;
+    if (c == '\001')
+        return ctrl_a;
+    if (c == '\003')
+        return ctrl_e;
     if (c == '\033')
     {
         char tmp = get_char();
@@ -104,6 +110,7 @@ static void process_input(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
         }
         memmove(*buf_p + *cur_pos + 1, *buf_p + *cur_pos, *buf_s - *cur_pos);
         buf[*cur_pos] = tmp;
+        add_char();
         write_buf(buf, *cur_pos, *buf_s);
         *cur_pos += 1;
         *buf_s += 1;
@@ -121,7 +128,7 @@ static void read_input(void)
         free(g_global->readline);
         g_global->readline = NULL;
     }
-    write(STDIN_FILENO, "42sh$ ", 6);
+    getps("PS1");
     char *buf = NULL;
     buf = calloc(100, sizeof (char));
     buf = strcpy(buf, "");
@@ -157,7 +164,7 @@ static void read_ps2(void)
 void write_ps(void)
 {
     if (g_global->readline == NULL)
-        write(STDIN_FILENO, "42sh$ ", 6);
+        getps("PS1");
     else
         write(STDIN_FILENO, "> ", 2);
 }
@@ -174,11 +181,15 @@ void readline(void)
     tgetent(term_buffer, type);
     do {
         read_input();
+        g_global->x_pos = 0;
+        g_global->y_pos = 0;
         while (parse() == -1)
         {
             g_global->pos = 0;
             release_ast(get_root(g_global->current_node));
             read_ps2();
+            g_global->x_pos = 0;
+            g_global->y_pos = 0;
         }
         g_global->pos = 0;
         exec_input(get_root(g_global->current_node));
@@ -188,6 +199,4 @@ void readline(void)
         g_global->hist_ind = -1;
     }
     while (1);
-    write_history();
-    tcsetattr(STDIN_FILENO, TCSANOW, &(g_global->attribute));
 }
