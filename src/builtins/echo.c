@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "builtins.h"
 #include "../exec/exec.h"
+#include "../expansion/expansion.h"
+#include "../fnmatch/my_fnmatch.h"
 
 static int expanded_echo(s_list *ast)
 {
@@ -20,6 +22,8 @@ static int print_array(s_list *ast, int option_n)
     {
         if (strcmp(ast->node->str, "$") == 0)
             expand_var(ast);
+        tilde_handler(&(ast->node->str));
+        path_exp(&(ast->node->str));
         if (ast->brothers)
         {
             my_puts(ast->node->str);

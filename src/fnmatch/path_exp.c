@@ -21,7 +21,7 @@ static char *free_concat_slashs(char *str1, char *str2, int slashs, int b_free)
         result[index] = str1[i];
         index++;
     }
-    for (int i = 0; i <= slashs; i++)
+    for (int i = 0; i < slashs; i++)
     {
         result[index] = '/';
         index++;
@@ -39,12 +39,12 @@ static char *free_concat_slashs(char *str1, char *str2, int slashs, int b_free)
     return result;
 }
 
-static char *return_empty()
+/*static char *return_empty()
 {
     char *res = malloc(sizeof (char));
     res[0] = '\0';
     return res;
-}
+}*/
 
 
 static char *my_concat(char *str1, char *str2)
@@ -80,30 +80,34 @@ static void free_my_var(char *tofree1, char* tofree2, char *tofree3, char**fr)
     free(tofree3);
     free_dir_list2(fr);
 }
-
+/* FIX NUMBER OF LINES */
 static char *path_exp_rec(char *pwd, char *current_dir,
     char *pattern, int slashs)
 {
     char *c_dir = NULL;
-    char *result;
+    char *result = malloc(sizeof (char));
+    result[0] = '\0';
     char *tmp = free_concat_slashs(pwd, current_dir, 0, 0);
     char **dir_list2 = get_dir_list2(tmp);
     free(tmp);
     int sep_pos = 0;
     int slash_count = 0;
+    if (pattern[sep_pos] == '\0')
+        return strdup(current_dir);
     while (pattern[sep_pos] != '\0' && pattern[sep_pos] != '/')
         sep_pos++;
-    if (pattern[sep_pos] == '\0')
-        return return_empty();
-    while (pattern[sep_pos++] == '/')
+    while (pattern[sep_pos] == '/')
+    {
         slash_count++;
+        sep_pos++;
+    }
     char *c_pattern = strdup(pattern);
-    c_pattern[sep_pos - slash_count + 1] = '\0';
-    char *rem_pattern = strdup(&(pattern[sep_pos + 1]));
+    c_pattern[sep_pos - slash_count] = '\0';
+    char *rem_pattern = strdup(&(pattern[sep_pos]));
     for (int i = 0; dir_list2[i] != NULL; i++)
         if (my_fnmatch(c_pattern, dir_list2[i]))
         {
-            c_dir = free_concat_slashs(current_dir, c_pattern, slashs, 0);
+            c_dir = free_concat_slashs(current_dir, dir_list2[i], slashs, 0);
             tmp = path_exp_rec(pwd, c_dir, rem_pattern, slash_count);
             result = my_concat(result, tmp);
         }
@@ -111,17 +115,10 @@ static char *path_exp_rec(char *pwd, char *current_dir,
     return result;
 }
 
-char *path_exp(char* str)
+void path_exp(char **str)
 {
-    if (str != NULL)
+    if (str != NULL && *str != NULL)
     {
-        int sep_pos = 0;
-        int slash_count = 0;
-        while (str[sep_pos] != '\0' && str[sep_pos] != '/')
-            sep_pos++;
-        while (str[sep_pos] == '\0')
-            slash_count++;
-        return path_exp_rec(g_global->current_dir, "", str, 0);
+         *str = path_exp_rec(g_global->current_dir, "", *str, 0);
     }
-    return NULL;
 }
