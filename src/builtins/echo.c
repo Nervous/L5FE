@@ -3,12 +3,47 @@
 #include "builtins.h"
 #include "../exec/exec.h"
 
+static void fill_buf(s_list *ast, int j, char *buf, int *trail)
+{
+    for (int i = 0; ast->node->str[i]; i++)
+    {
+        if (ast->node->str[i] == '\\' && ast->node->str[i + 1])
+        {
+            i++;
+            if (ast->node->str[i] == 'b' && ast->node->str[i + 1])
+            {
+                i++;
+                if (j > 0)
+                    buf[j - 1] = ast->node->str[i];
+            }
+            else if (ast->node->str[i] == 'n' && ast->node->str[i + 1])
+                buf[j++] = '\n';
+            else if (ast->node->str[i] == 'c')
+            {
+                *trail = 1;
+                break;
+            }
+            else if (ast->node->str[i] == '\\')
+                buf[j++] = '\\';
+        }
+        else
+            buf[j++] = ast->node->str[i];
+    }
+    buf[j] = '\0';
+    my_puts(buf);
+}
+
 static int expanded_echo(s_list *ast)
 {
-    /** TODO */
     if (!ast)
         return -1;
-//    printf("%s\n", ast->node->str);
+    char *buf = malloc(sizeof (char) * strlen(ast->node->str) + 1);
+    int j = 0;
+    int trail = 0;
+    fill_buf(ast, j, buf, &trail);
+    free(buf);
+    if (trail == 0)
+        my_puts("\n");
     return 0;
 }
 
@@ -30,7 +65,7 @@ static int print_array(s_list *ast, int option_n)
         ast = ast->brothers;
     }
 
-    if (!option_n) /** TODO: Doesn't work with our shell (save string? wtf)*/
+    if (!option_n)
         my_puts("\n");
     return 0;
 }
