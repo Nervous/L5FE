@@ -38,7 +38,7 @@ static char *create_special_string(char *str, int nb)
 ** be parsed.
 */
 
-char *create_comment(char *str, unsigned int i)
+static char *create_comment(char *str, unsigned int i)
 {
     if (str[0] == '$' || str[0] == '\\')
     {
@@ -222,13 +222,6 @@ static enum e_type is_expected(enum e_type type)
         return type;
     return WORD;
 }
-
-/**
-** @brief Analyzes lexically the input str and returns the next token it has
-** recognized. If the parser explicitely called for a WORD token, a WORD token
-** should be recognized only if recognized token's type is not a special
-** delimiter determined by is_expected()
-*/
 
 s_token *get_token(enum e_type expected)
 {
