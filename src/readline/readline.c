@@ -71,23 +71,29 @@ static f_callback match_esc_key(char tmp)
 */
 static f_callback match_key(char c, char **buf)
 {
+    buf = buf;
     if (c == '\177' || c == '\b')
         return backspace;
-    if (c == '\n'|| c == '\r')
-        return new_line;
     if (c == '\001')
         return ctrl_a;
     if (c == '\005')
         return ctrl_e;
     if (c == '\f')
         return ctrl_l;
+    if (c == '\006')
+        return right_key;
+    if (c == '\002')
+        return left_key;
+    if (c == '\020')
+        return up_key;
+    if (c == '\016')
+        return down_key;
+    if (c == '\004')
+        return delete;
+    if (c == '\v')
+        return delete_end;
     if (c == '\033')
-    {
-        char tmp = get_char();
-        return match_esc_key(tmp);
-        if (tmp < 32 || tmp == '\177')
-            return match_key(tmp, buf);
-    }
+        return match_esc_key(get_char());
     return do_nothing;
 }
 
