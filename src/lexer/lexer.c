@@ -180,6 +180,30 @@ static char *set_token_value(char *str, unsigned int pos)
     return value;
 }
 
+static char *remove_backslash(char *str)
+{
+    if (str[0] == '"' || str[0] == '\'')
+        return str;
+
+    int count = 0;
+    for (unsigned int i = 0; i < strlen(str); i++)
+        if (str[i] == '\\')
+            count++;
+
+    if (count != 0)
+    {
+        char *s = calloc(strlen(str) + 1 - count, sizeof(char));
+        char *save = str;
+        while (str[0])
+            if ((str++)[0] != '\\')
+                s = strncat(s, str - 1, 1);
+        free(save);
+        return s;
+    }
+
+    return str;
+}
+
 /**
 ** @brief Checks if the current token is no a special delimiter when the parser
 ** calls for a WORD token
@@ -213,6 +237,8 @@ s_token *get_token(enum e_type expected)
 
     token->pos = g_global->pos;
     token->str = set_token_value(str, token->pos);
+    token->str = remove_backslash(token->str);
+
     token->type = set_token_type(token->str);
     if (strlen(token->str) == 0)
         token->type = E_EOF;
