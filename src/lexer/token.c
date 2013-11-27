@@ -132,8 +132,8 @@ static int is_separator2(char c)
         return 1;
     case '>':
         return 1;
-    case '\\':
-        return 1;
+        /*case '\\':
+          return 1;*/
     default:
         return isspace(c);
     }
