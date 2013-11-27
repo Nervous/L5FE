@@ -20,7 +20,7 @@ static int star_loop(s_list22 *list2, const char *str, int index)
     {
         if (str[index] == '\0')
             return 1;
-        return (star_loop(list2, str, index+1));
+        return star_loop(list2, str, index + 1);
     }
 }
 
