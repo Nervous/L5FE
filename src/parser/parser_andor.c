@@ -17,10 +17,6 @@ static void parse_otherconditions(s_token **tok, bool mandatory)
     }
 }
 
-/**
-** @brief Parse an and_or grammar line
-*/
-
 int parse_andor(s_token **tok, bool mandatory)
 {
     ast_add_step("AND_OR");

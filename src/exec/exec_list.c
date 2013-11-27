@@ -15,9 +15,6 @@ int exec_list(s_list *ast)
     {
         if (ast->brothers->node->type == BIT_AND)
             ret = exec_andor(ast->brothers->brothers->son_list);
-
-        /* HANDLE '&' EXECUTION */
-
         if (ast->brothers->node->type == SEMICOLON)
         {
             if (ast->brothers->brothers)
@@ -32,6 +29,5 @@ int exec_list(s_list *ast)
             break;
         ast = ast->brothers->brothers;
     }
-
     return ret;
 }
