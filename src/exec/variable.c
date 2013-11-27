@@ -52,7 +52,6 @@ s_var *add_var(s_var *list, char *key, char *value)
     else
     {
         free(tmp->value);
-        free(key);
         tmp->value = value;
         return list;
     }

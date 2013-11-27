@@ -27,8 +27,7 @@ int exec_for(s_list *ast)
                 g_global->break_nb -= 1;
                 return 0;
             }
-            add_var(g_global->var, tmp, ast->node->str);
-            /* Variable expand is crushed because we exectue the cpy */
+            g_global->var = add_var(g_global->var, tmp, ast->node->str);
             ret = exec_dogroup(cpy->son_list);
             ast = ast->brothers;
         }

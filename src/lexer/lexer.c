@@ -161,9 +161,16 @@ static char *set_token_value(char *str, unsigned int pos)
     while (i < len && is_separator(str[i - pos]) == 0)
         i++;
 
-    if ((i - pos) == 0
-        && ((is_separator(str[0]) == 1
-             && isspace(str[0]) == 0) || str[0] == '\n'))
+    if ((i - pos- 1) != 4294967295 && (str[i - pos - 1] == '=')
+        && (str[i - pos] == '"'))
+    {
+        i++;
+        while (i < len && (str[i++ - pos] != '"' || str[i - pos - 2] == '\\'))
+            ;
+    }
+
+    if ((i - pos) == 0 && ((is_separator(str[0]) == 1
+                            && isspace(str[0]) == 0) || str[0] == '\n'))
         return special_separator(str);
 
     g_global->pos = i;
