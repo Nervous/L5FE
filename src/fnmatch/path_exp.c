@@ -72,6 +72,18 @@ static void free_my_var(char *tofree1, char* tofree2, char *tofree3, char**fr)
     free(tofree3);
     free_dir_list2(fr);
 }
+
+static int slash_counter(int *sep_pos, char *pattern)
+{
+    int slash_count = 0;
+    while (pattern[*sep_pos] == '/')
+    {
+        slash_count++;
+        (*sep_pos)++;
+    }
+    return slash_count;
+}
+
 /* FIX NUMBER OF LINES */
 static char *path_exp_rec(char *pwd, char *current_dir,
     char *pattern, int slashs)
@@ -88,11 +100,7 @@ static char *path_exp_rec(char *pwd, char *current_dir,
         return strdup(current_dir);
     while (pattern[sep_pos] != '\0' && pattern[sep_pos] != '/')
         sep_pos++;
-    while (pattern[sep_pos] == '/')
-    {
-        slash_count++;
-        sep_pos++;
-    }
+    slash_count = slash_counter(&sep_pos, pattern);
     char *c_pattern = strdup(pattern);
     c_pattern[sep_pos - slash_count] = '\0';
     char *rem_pattern = strdup(&(pattern[sep_pos]));

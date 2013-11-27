@@ -5,20 +5,19 @@
 
 extern s_global *g_global;
 
-static void expand_arith(s_list *ast)
+static void loop_expandarith(int *count, int *other_count, s_list *tmp,
+                             s_list *arith_next)
 {
-    s_list *arith_next = ast->brothers->brothers->brothers;
-    s_list *tmp = arith_next->brothers;
-    int count = 0;
-
-    while (count != 2 && tmp)
+    while (*count != 2 && tmp)
     {
         if (strcmp(tmp->node->str, ")") == 0)
         {
-            ++count;
+            ++(*count);
             tmp = tmp->brothers;
             continue;
         }
+        else
+            ++(*other_count);
 
         arith_next->node->str = realloc(arith_next->node->str,
                                         strlen(arith_next->node->str) +
@@ -26,6 +25,16 @@ static void expand_arith(s_list *ast)
         arith_next->node->str = strcat(arith_next->node->str, tmp->node->str);
         tmp = tmp->brothers;
     }
+
+}
+
+static void expand_arith(s_list *ast)
+{
+    s_list *arith_next = ast->brothers->brothers->brothers;
+    int count = 0;
+    int other_count = 0;
+
+    loop_expandarith(&count, &other_count, arith_next->brothers, arith_next);
 
     if (count != 2)
     {
@@ -35,7 +44,7 @@ static void expand_arith(s_list *ast)
 
     int res = evalexpr(ast->brothers->brothers->brothers->node->str);
 
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < 5 + other_count; ++i)
         remove_node(ast->brothers);
     s_token *tok = malloc(sizeof (s_token));
     if (res == 0)

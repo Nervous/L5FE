@@ -25,10 +25,6 @@ static void release_node2(s_list *node)
     free(node);
 }
 
-/**
-** @fn void release_ast(s_list *ast)
-** @brief Free all the nodes of the AST
-*/
 void release_ast(s_list *ast)
 {
     if (!ast)
@@ -64,10 +60,6 @@ static void remove_node_aux(s_list *tmp, s_list *previous,
   }
 }
 
-/**
-** @fn void remove_node(s_list *node)
-** @brief Remove a node in the AST
-*/
 void remove_node(s_list *node)
 {
     if (!node)

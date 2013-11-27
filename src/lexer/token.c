@@ -26,7 +26,7 @@ static enum e_type set_type_multiple2(char *str)
         return TOKEN_REDIR;
     if (strstr(str, "=") != NULL)
         return ASSIGNMENT_WORD;
-    return (strcmp(str, ";;") == 0) ? D_SEMICOLON : WORD;
+    return strcmp(str, ";;") == 0 ? D_SEMICOLON : WORD;
 }
 
 static enum e_type set_type_multiple(char *str)

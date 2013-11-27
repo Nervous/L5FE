@@ -24,7 +24,7 @@ char *my_reverse_str(const char *src, int op)
         for (int i = 0; i < size; i++)
         {
             j++;
-                res[i] = src[size - j];
+            res[i] = src[size - j];
         }
     }
     else

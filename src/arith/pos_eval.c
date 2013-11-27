@@ -42,6 +42,8 @@ static int make(int what, int v1, int v2, int *err)
         return !v1;
     else if (what == MULT)
         return v1 * v2;
+    else if (what == TILDE)
+        return ~v1;
     else
         return make_2(what, v1, v2, err);
 }
@@ -80,7 +82,8 @@ static int loop_eval(s_node *act, s_stack *s, s_node *v1, int *res)
         if (stack_size(s) < 1)
             return 4;
         v1 = stack_pop(s);
-        if (act->op != ADD_U && act->op != SUB_U)
+        if (act->op != ADD_U && act->op != SUB_U && act->op != NOT &&
+            act->op != TILDE)
         {
             if (stack_size(s) < 1)
                 return 2;
