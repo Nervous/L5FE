@@ -6,7 +6,7 @@
 
 char *my_str_copy(char *str)
 {
-    char *result = malloc((strlen(str) + 1) * sizeof(char));
+    char *result = malloc((strlen(str) + 1) * sizeof (char));
     result = strcpy(result, str);
     return result;
 }

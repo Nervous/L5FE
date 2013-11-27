@@ -2,15 +2,15 @@
 
 void destroy(s_fifo *fifo)
 {
-  s_list22 *save;
-  s_list22 *parse = fifo->head;
+    s_list22 *save;
+    s_list22 *parse = fifo->head;
 
-  while (parse != NULL)
+    while (parse != NULL)
     {
-      save = parse;
-      parse = parse->next;
-      free(save);
+        save = parse;
+        parse = parse->next;
+        free(save);
     }
 
-  free(fifo);
+    free(fifo);
 }
