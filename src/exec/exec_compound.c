@@ -1,4 +1,5 @@
 #include "exec.h"
+#include <string.h>
 
 /**
 ** @brief Execute the compound_list rule
@@ -8,6 +9,8 @@ int exec_compound_aux(s_list *p_and_or)
 {
     if (g_global->break_nb <= 0)
     {
+        if (p_and_or && strcmp(p_and_or->node->str, ";") == 0)
+            p_and_or = p_and_or->brothers;
         if (!p_and_or || p_and_or->son_list == NULL)
             return 0;
         else
@@ -15,10 +18,7 @@ int exec_compound_aux(s_list *p_and_or)
                               || exec_compound_aux(p_and_or->brothers);
     }
     else
-    {
-        //g_global->break_nb -= 1;
         return 0;
-    }
 }
 
 int exec_compound(s_list *compound)
