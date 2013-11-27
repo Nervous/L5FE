@@ -6,7 +6,7 @@
 
 extern s_global *g_global;
 
-int my_alias2(s_list *ast, char *value, char *name)
+static int my_alias2(s_list *ast, char *value, char *name)
 {
     s_list *tmp = ast->brothers;
     while (tmp)
