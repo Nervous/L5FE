@@ -38,10 +38,6 @@ static void check_end_coumpoundlist(s_token **tok)
     parse_loop_EOL(tok);
 }
 
-/**
-** @brief Parse a compoundlist
-*/
-
 int parse_compoundlist(s_token **tok, bool mandatory)
 {
     ast_add_step("Compound_list");

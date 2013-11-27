@@ -62,7 +62,9 @@ void up_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
 {
     if (g_global->hist_ind < 200)
         g_global->hist_ind += 1;
-    free(*buf);
+    char *buf_tmp = *buf;
+    for (int i = 0; buf_tmp[i]; i++)
+        buf_tmp[i] = '\0';
     char *tmp = get_history_ln();
     int len = strlen(tmp);
     *max_size = len + 100;
@@ -73,8 +75,8 @@ void up_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
     g_global->x_pos = len + g_global->ps_size;
     write(STDIN_FILENO, tmp, len);
     *cur_pos = *buf_size;
-    *buf = calloc(len + 100, sizeof (char));
-    *buf = strcpy(*buf, tmp);
+    buf_tmp = strcpy(buf_tmp, tmp);
+    buf = &buf_tmp;
 }
 
 void down_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
@@ -83,7 +85,9 @@ void down_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
         g_global->hist_ind -= 1;
     else
         return;
-    free(*buf);
+    char *buf_tmp = *buf;
+    for (int i = 0; buf_tmp[i]; i++)
+        buf_tmp[i] = '\0';
     char *tmp = get_history_ln();
     int len = strlen(tmp);
     *max_size = len;
@@ -94,6 +98,5 @@ void down_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
     write_ps();
     write(STDIN_FILENO, tmp, len);
     *cur_pos = *buf_size;
-    *buf = calloc(len + 1, sizeof (char));
     *buf = strcpy(*buf, tmp);
 }
