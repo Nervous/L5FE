@@ -39,14 +39,6 @@ static char *free_concat_slashs(char *str1, char *str2, int slashs, int b_free)
     return result;
 }
 
-/*static char *return_empty()
-{
-    char *res = malloc(sizeof (char));
-    res[0] = '\0';
-    return res;
-}*/
-
-
 static char *my_concat(char *str1, char *str2)
 {
     if (str2[0] == '\0')
