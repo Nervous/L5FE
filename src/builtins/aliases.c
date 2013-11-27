@@ -28,7 +28,7 @@ static int my_alias2(s_list *ast, char *value, char *name)
     }
     if (name && value)
         add_alias(name, value);
-    return 0;
+   return 0;
 }
 
 int my_alias(s_list *ast)

@@ -4,10 +4,6 @@
 
 extern s_global *g_global;
 
-/**
-**@fn s_list *get_root(s_list *current_node);
-**@brief Returns the root of the AST
-*/
 s_list *get_root(s_list *current_node)
 {
     if (!current_node)
@@ -40,10 +36,6 @@ static void node_add_son(s_list *node)
     g_global->current_node = node;
 }
 
-/**
-** @fn s_token *copy_token(s_token *token);
-** @brief Copy the token given in parameter in a new token
-*/
 s_token *copy_token(s_token *token)
 {
     if (!token)
@@ -58,10 +50,6 @@ s_token *copy_token(s_token *token)
     return new_node;
 }
 
-/**
-** @fn void ast_add_node(s_token *token);
-** @brief Add a son to the current node
-*/
 void ast_add_node(s_token *token)
 {
     s_list *new_node = NULL;
@@ -80,10 +68,6 @@ void ast_add_node(s_token *token)
     g_global->current_node = new_node;
 }
 
-/**
-** @fn void ast_add_step(char *stepName)
-** @brief Add a new abstract son to the current node
-*/
 void ast_add_step(char *stepName)
 {
     s_list *new_node = NULL;
