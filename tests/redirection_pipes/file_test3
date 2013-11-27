@@ -1,1 +1,0 @@
-cat tests/redirection_pipes/file_test1 | cat | cat | cat
