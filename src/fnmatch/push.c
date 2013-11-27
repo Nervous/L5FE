@@ -2,27 +2,27 @@
 
 void push(s_fifo *fifo, bool star)
 {
-  assert(fifo != NULL);
+    assert(fifo != NULL);
 
-  s_list22 *new = NULL;
+    s_list22 *new = NULL;
 
-  new = malloc(sizeof (s_list22));
-  if (new == NULL)
-    return;
+    new = malloc(sizeof (s_list22));
+    if (new == NULL)
+        return;
 
-  for (int i = 0; i < 128; i++)
-    new->array[i] = 0;
-  new->star = star;
-  new->next = NULL;
+    for (int i = 0; i < 128; i++)
+        new->array[i] = 0;
+    new->star = star;
+    new->next = NULL;
 
-  if (fifo->head == NULL)
+    if (fifo->head == NULL)
     {
-      fifo->tail = new;
-      fifo->head = new;
+        fifo->tail = new;
+        fifo->head = new;
     }
-  else if (fifo->tail != NULL)
+    else if (fifo->tail != NULL)
     {
-      fifo->tail->next = new;
-      fifo->tail = new;
+        fifo->tail->next = new;
+        fifo->tail = new;
     }
 }

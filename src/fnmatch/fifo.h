@@ -9,15 +9,15 @@
 typedef struct list2 s_list22;
 struct list2
 {
-  char array[128];
-  bool star;
-s_list22 *next;
+    char array[128];
+    bool star;
+    s_list22 *next;
 };
 
 typedef struct fifo
 {
-  s_list22 *head;
-  s_list22 *tail;
+    s_list22 *head;
+    s_list22 *tail;
 } s_fifo;
 
 s_fifo *init_fifo(void);
