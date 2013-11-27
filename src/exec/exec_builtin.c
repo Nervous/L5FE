@@ -61,8 +61,8 @@ int check_builtin(s_list *ast)
     else if (strcmp(ast->node->str, "source") == 0
              || strcmp(ast->node->str, ".") == 0)
     {
-        return 0;
         my_source(ast->brothers);
+        return 0;
     }
     else if (strcmp(ast->node->str, "exit") == 0)
     {

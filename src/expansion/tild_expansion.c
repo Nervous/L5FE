@@ -9,7 +9,7 @@ static int tilde_plus(char **str)
     char *exp = g_global->current_dir;
     int old_len = strlen(*str);
     int exp_len = strlen(exp); //+1 for '\0' which is not counted in strlen
-    char *new_str = calloc(old_len + exp_len + 1, sizeof(char));
+    char *new_str = calloc(old_len + exp_len + 1, sizeof (char));
     for (int i = 0; i < exp_len; i++)
     {
         new_str[i] = exp[i];
@@ -28,7 +28,7 @@ static int tilde_minus(char **str)
     char *exp = g_global->previous_dir; // A CHANGER PAR APPEL VARIABLE GLOBAL
     int old_len = strlen(*str);
     int exp_len = strlen(exp); //+1 for '\0' which is not counted in strlen
-    char *new_str = calloc(old_len + exp_len + 1, sizeof(char));
+    char *new_str = calloc(old_len + exp_len + 1, sizeof (char));
     for (int i = 0; i < exp_len; i++)
     {
         new_str[i] = exp[i];
@@ -47,7 +47,7 @@ static int tilde(char **str)
     char *exp = getenv("HOME");
     int old_len = strlen(*str);
     int exp_len = strlen(exp); //+1 for '\0' which is not counted in strlen
-    char *new_str = calloc(old_len + exp_len + 1, sizeof(char));
+    char *new_str = calloc(old_len + exp_len + 1, sizeof (char));
     for (int i = 0; i < exp_len; i++)
     {
         new_str[i] = exp[i];

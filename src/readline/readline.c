@@ -191,7 +191,7 @@ void readline(void)
         read_input();
         g_global->x_pos = 0;
         g_global->y_pos = 0;
-        while (parse() == -1)
+        while (parse() != 0)
         {
             g_global->pos = 0;
             release_ast(get_root(g_global->current_node));

@@ -10,6 +10,7 @@ int my_source(s_list *ast)
     int ret = 0;
     char *readline_saved = g_global->readline;
     release_ast(g_global->current_node);
+    g_global->pos = 0;
     get_file(ast->node->str, true);
     ret = exec_input(get_root(g_global->current_node));
     release_ast(g_global->current_node);

@@ -28,11 +28,7 @@ OP=test
 OP=test2
 
 CMD=tests/functions/file_test4
-RV=1
+RV=2
 
 CMD=tests/functions/file_test5
-RV=1
-
-CMD=tests/functions/file_test6
-RV=0
-
+RV=2
