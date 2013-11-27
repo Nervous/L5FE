@@ -19,7 +19,7 @@ RV=0
 OP=test
 
 CMD=tests/functions/file_test2
-RV=1
+RV=2
 OP=test
 
 CMD=tests/functions/file_test3
@@ -28,10 +28,10 @@ OP=test
 OP=test2
 
 CMD=tests/functions/file_test4
-RV=1
+RV=2
 
 CMD=tests/functions/file_test5
-RV=1
+RV=2
 
 CMD=tests/functions/file_test6
 RV=0
