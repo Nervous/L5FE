@@ -11,7 +11,8 @@ extern s_global *g_global;
 
 void exit_builtin(int n)
 {
-    write_history();
+    if (!g_global->file)
+        write_history();
     tcsetattr(STDIN_FILENO, TCSANOW, &(g_global->attribute));
     if (n == -1)
     {
