@@ -63,7 +63,6 @@ int loop_postfix(s_stack *s, s_queue *out, s_node *act)
         }
         act = act->next;
     }
-
     return 1;
 }
 
