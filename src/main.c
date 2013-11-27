@@ -87,17 +87,8 @@ void free_global(void)
     free(g_global);
 }
 
-void test_arith(char *str)
-{
-    printf("**** RESULT OF EVAL : \n\t%d\n*********************\n\n", evalexpr(str));
-    exit(42);
-}
-
 int main(int argc, char **argv)
 {
-    if (argc == 3 && argv[1][0] == 'q') // RM ME
-        test_arith(argv[2]); // PLEASE RM ME DONT FORGET OMG FMDASJDNJASND
-
     atexit(free_global);
     init_global();
 
