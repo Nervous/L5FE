@@ -1,4 +1,4 @@
-if cat titi
+if true
 then
         for i in b c d
         do
@@ -12,10 +12,10 @@ else
         then
                 echo toto && echo titi && echo "tata in the kitchen" && echo 'tutu'
         fi
-        echo fifi > tests/hard_exec/test
+        echo fifi
         for j in e r t
         do
-                echo fifi >> tests/hard_exec/test
+                echo fifi
         done
 fi
 

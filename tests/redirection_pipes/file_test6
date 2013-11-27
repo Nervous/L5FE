@@ -1,5 +1,0 @@
-echo toto > tests/redirection_pipes/titi
-cat tests/redirection_pipes/titi
-echo " tata" >> tests/redirection_pipes/titi
-cat tests/redirection_pipes/titi
-rm tests/redirection_pipes/titi

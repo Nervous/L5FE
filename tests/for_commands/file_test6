@@ -1,4 +1,4 @@
 for i in c
 do
-cat rat
+echo lol
 done
