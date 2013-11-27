@@ -47,7 +47,11 @@ void delete_end(char **buf_p, int *cur_pos, int *buf_size, int *max_size)
     cur_pos = cur_pos;
     buf_size = buf_size;
     max_size = max_size;
-    tputs(tgetstr("nw", NULL), 1, my_putchar);
+    tputs(tgetstr("ce", NULL), 1, my_putchar);
+    char *tmp = *buf_p;
+    for (int i = *cur_pos; tmp[i]; i++)
+        tmp[i] = '\0';
+    *buf_size = *cur_pos;
 }
 
 void new_line(char **buf, int *cur_pos, int *buf_size, int *max_size)

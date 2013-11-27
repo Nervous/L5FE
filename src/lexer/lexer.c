@@ -161,7 +161,7 @@ static char *set_token_value(char *str, unsigned int pos)
     while (i < len && is_separator(str[i - pos]) == 0)
         i++;
 
-    if ((i - pos- 1) != 4294967295 && (str[i - pos - 1] == '=')
+    if ((i - pos - 1) != 4294967295 && (str[i - pos - 1] == '=')
         && (str[i - pos] == '"'))
     {
         i++;
@@ -192,11 +192,16 @@ static char *remove_backslash(char *str)
 
     if (count != 0)
     {
-        char *s = calloc(strlen(str) + 1 - count, sizeof(char));
+        char *s = calloc(strlen(str) + 1, sizeof(char));
         char *save = str;
         while (str[0])
+        {
+            if (str[0] == '"')
+                while ((++str)[0] != '"')
+                    s = strncat(s, str - 1, 1);
             if ((str++)[0] != '\\')
                 s = strncat(s, str - 1, 1);
+        }
         free(save);
         return s;
     }

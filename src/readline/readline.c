@@ -177,10 +177,6 @@ void write_ps(void)
         write(STDIN_FILENO, "> ", 2);
 }
 
-/**
-** @brief This function is responsible of setting up the terminal and
-** the termcap database
-*/
 void readline(void)
 {
     init_term();
