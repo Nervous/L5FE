@@ -192,11 +192,16 @@ static char *remove_backslash(char *str)
 
     if (count != 0)
     {
-        char *s = calloc(strlen(str) + 1 - count, sizeof(char));
+        char *s = calloc(strlen(str) + 1, sizeof(char));
         char *save = str;
         while (str[0])
+        {
+            if (str[0] == '"')
+                while ((++str)[0] != '"')
+                    s = strncat(s, str - 1, 1);
             if ((str++)[0] != '\\')
                 s = strncat(s, str - 1, 1);
+        }
         free(save);
         return s;
     }
