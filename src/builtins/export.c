@@ -2,6 +2,7 @@
 #include <unistd.h>
 
 extern char **environ;
+
 static int display_env(void)
 {
     for (int i = 0; environ[i]; i++)

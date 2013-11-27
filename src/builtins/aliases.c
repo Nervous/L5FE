@@ -5,21 +5,9 @@
 #include <string.h>
 
 extern s_global *g_global;
-int my_alias(s_list *ast)
-{
-    char *value = NULL;
-    char *name = NULL;
-    if (ast)
-    {
-        name = malloc(sizeof (char) * strlen(ast->node->str) + 1);
-        name = strcpy(name, ast->node->str);
-        name[strlen(name)] = '\0';
-    }
-    else
-        return 0;
 
-    if (!ast->brothers)
-        return 0;
+int my_alias2(s_list *ast, char *value, char *name)
+{
     s_list *tmp = ast->brothers;
     while (tmp)
     {
@@ -41,6 +29,24 @@ int my_alias(s_list *ast)
     if (name && value)
         add_alias(name, value);
     return 0;
+}
+
+int my_alias(s_list *ast)
+{
+    char *value = NULL;
+    char *name = NULL;
+    if (ast)
+    {
+        name = malloc(sizeof (char) * strlen(ast->node->str) + 1);
+        name = strcpy(name, ast->node->str);
+        name[strlen(name)] = '\0';
+    }
+    else
+        return 0;
+
+    if (!ast->brothers)
+        return 0;
+    return my_alias2(ast, value, name);
 }
 
 int my_unalias(s_list *ast)
