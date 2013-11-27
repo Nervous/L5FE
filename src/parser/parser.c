@@ -62,11 +62,6 @@ static int parse_input(void)
     return 0;
 }
 
-/**
-** @brief Starts the parsing of an input
-** @return Returns -1 if parses fail, 0 otherwise
-*/
-
 int parse(void)
 {
     g_global->parse_error = 0;
