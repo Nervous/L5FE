@@ -77,8 +77,10 @@ static f_callback match_key(char c, char **buf)
         return new_line;
     if (c == '\001')
         return ctrl_a;
-    if (c == '\003')
+    if (c == '\005')
         return ctrl_e;
+    if (c == '\f')
+        return ctrl_l;
     if (c == '\033')
     {
         char tmp = get_char();

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <term.h>
 #include <string.h>
+#include "functionkey.h"
 
 extern s_global *g_global;
 
@@ -16,9 +17,7 @@ void backspace(char **buf_p, int *cur_pos, int *buf_s, int *max_s)
     if (*cur_pos > 0)
     {
         memmove(buf + *cur_pos - 1, buf + *cur_pos, *buf_s - *cur_pos + 1);
-        char *tmp = tgetstr("le", NULL);
-        tputs(tmp, 1, my_putchar);
-        *cur_pos -= 1;
+        left_key(buf_p, cur_pos, buf_s, max_s);
         *buf_s -= 1;
         tputs(tgetstr("sc", NULL), 1, my_putchar);
         write(STDOUT_FILENO, buf + *cur_pos, strlen(buf + *cur_pos));

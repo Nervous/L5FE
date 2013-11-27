@@ -65,15 +65,15 @@ void up_key(char **buf, int *cur_pos, int *buf_size, int *max_size)
     free(*buf);
     char *tmp = get_history_ln();
     int len = strlen(tmp);
-    *max_size = len;
+    *max_size = len + 100;
     *buf_size = len;
     tputs(tgetstr("cr", NULL), 1, my_putchar);
     tputs(tgetstr("ce", NULL), 1, my_putchar);
-    g_global->x_pos = len;
     write_ps();
+    g_global->x_pos = len + g_global->ps_size;
     write(STDIN_FILENO, tmp, len);
     *cur_pos = *buf_size;
-    *buf = calloc(len + 1, sizeof (char));
+    *buf = calloc(len + 100, sizeof (char));
     *buf = strcpy(*buf, tmp);
 }
 
