@@ -1,15 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "utils_error.h"
-
-extern s_global *g_global;
-
-/**
-** @brief Sets a global value to indicates that a parse error has occured
-*/
+#include <termios.h>
+#include <unistd.h>
+#include <curses.h>
+#include <term.h>
 
 int parse_error(char *msg)
 {
+    extern s_global *g_global;
     g_global->parse_error = 2;
     if (g_global->file == 1)
     {

@@ -3,6 +3,7 @@
 #include "../ast/ast.h"
 #include <stdlib.h>
 #include "../expansion/expansion.h"
+#include "../fnmatch/my_fnmatch.h"
 
 extern s_global *g_global;
 int my_cd(s_list *ast)
@@ -25,6 +26,7 @@ int my_cd(s_list *ast)
         return 0;
     }
     tilde_handler(&(ast->node->str));
+ //   path_exp(&(ast->node->str));
     if (chdir(ast->node->str) != 0)
     {
         my_puts(ast->node->str);
