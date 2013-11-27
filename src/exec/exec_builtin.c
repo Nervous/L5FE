@@ -106,7 +106,7 @@ int exec_alias(s_list **ast, char *str)
 {
     s_list *father = (*ast)->father;
     s_list *new_ast = NULL;
-    char *alias_value = malloc(sizeof (char ) * strlen(str) + 1);
+    char *alias_value = malloc(sizeof (char) * strlen(str) + 1);
     strcpy(alias_value, str);
 
     alias_value++;
