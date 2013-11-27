@@ -1,6 +1,55 @@
+#include "../arith/arith.h"
+#include "../parser/utils_error.h"
+#include "../builtins/builtins.h"
 #include "exec.h"
 
 extern s_global *g_global;
+
+static void expand_arith(s_list *ast)
+{
+    s_list *arith_next = ast->brothers->brothers->brothers;
+    s_list *tmp = arith_next->brothers;
+    int count = 0;
+
+    while (count != 2 && tmp)
+    {
+        if (strcmp(tmp->node->str, ")") == 0)
+        {
+            ++count;
+            tmp = tmp->brothers;
+            continue;
+        }
+
+        arith_next->node->str = realloc(arith_next->node->str,
+                                        strlen(arith_next->node->str) +
+                                        strlen(tmp->node->str) + 1);
+        arith_next->node->str = strcat(arith_next->node->str, tmp->node->str);
+        tmp = tmp->brothers;
+    }
+
+    if (count != 2)
+    {
+        g_global->file = 1;
+        parse_error("Invalid arithmetic expansion");
+    }
+
+    int res = evalexpr(ast->brothers->brothers->brothers->node->str);
+
+    for (int i = 0; i < 5; ++i)
+        remove_node(ast->brothers);
+    s_token *tok = malloc(sizeof (s_token));
+    if (res == 0)
+    {
+        tok->str = malloc(2 * sizeof (char));
+        tok->str[0] = '0';
+        tok->str[1] = '\0';
+    }
+    else
+        tok->str = my_itoa(res);
+    free(ast->node->str);
+    free(ast->node);
+    ast->node = tok;
+}
 
 static void expand_param_bra(s_list *ast)
 {
@@ -78,7 +127,7 @@ void expand_var(s_list *ast)
         if (ast->brothers->brothers
             && strcmp(ast->brothers->brothers->node->str, "(") == 0)
             /* a 2nd '(' follows the '$' hence it's an arithmetic expansion */
-            return; /* expend_arith(ast); */
+            expand_arith(ast);
         else
             /* it's a command expansion */
             return; /* expand_command(ast); */

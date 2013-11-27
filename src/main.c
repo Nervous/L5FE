@@ -66,6 +66,8 @@ void init_global(void)
     g_global->current_dir = getcwd(g_global->current_dir, 128);
     g_global->previous_dir = strcpy(g_global->previous_dir,
                                     g_global->current_dir);
+    g_global->x_pos = 0;
+    g_global->y_pos = 0;
 }
 
 void free_global(void)
@@ -87,17 +89,8 @@ void free_global(void)
     free(g_global);
 }
 
-void test_arith(char *str)
-{
-    printf("**** RESULT OF EVAL : \n\t%d\n*********************\n\n", evalexpr(str));
-    exit(42);
-}
-
 int main(int argc, char **argv)
 {
-    if (argc == 3 && argv[1][0] == 'q') // RM ME
-        test_arith(argv[2]); // PLEASE RM ME DONT FORGET OMG FMDASJDNJASND
-
     atexit(free_global);
     init_global();
 

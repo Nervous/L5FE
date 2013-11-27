@@ -77,8 +77,10 @@ static f_callback match_key(char c, char **buf)
         return new_line;
     if (c == '\001')
         return ctrl_a;
-    if (c == '\003')
+    if (c == '\005')
         return ctrl_e;
+    if (c == '\f')
+        return ctrl_l;
     if (c == '\033')
     {
         char tmp = get_char();
@@ -183,7 +185,7 @@ void readline(void)
         read_input();
         g_global->x_pos = 0;
         g_global->y_pos = 0;
-        while (parse() == -1)
+        while (parse() != 0)
         {
             g_global->pos = 0;
             release_ast(get_root(g_global->current_node));
