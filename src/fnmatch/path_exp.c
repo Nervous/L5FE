@@ -87,7 +87,7 @@ static char *path_exp_rec(char *pwd, char *current_dir,
     char *c_dir = NULL;
     char *result = malloc(sizeof (char));
     result[0] = '\0';
-    char *tmp = free_concat_slashs(pwd, current_dir, 0, 0);
+    char *tmp = free_concat_slashs(pwd, current_dir, 1, 0);
     char **dir_list2 = get_dir_list2(tmp);
     free(tmp);
     int sep_pos = 0;
