@@ -68,9 +68,6 @@ static void parse_orcommand(s_token **tok)
     }
 }
 
-/**
-** @brief Parse a pipeline grammar line
-*/
 
 int parse_pipeline(s_token **tok, bool mandatory)
 {

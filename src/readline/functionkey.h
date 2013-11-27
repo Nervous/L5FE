@@ -3,6 +3,9 @@
 
 typedef void (*f_callback) (char **b, int *c_p, int *buf_s, int *max_s);
 
+/**
+** @brief These functions define the actions made by key sequences.
+*/
 void right_key(char **buf, int *cur_pos, int *buf_size, int *max_size);
 void left_key(char **buf, int *cur_pos, int *buf_size, int *max_size);
 void down_key(char **buf, int *cur_pos, int *buf_size, int *max_size);

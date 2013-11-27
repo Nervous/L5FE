@@ -14,7 +14,7 @@ static void free_dir_list2(char **dir_list2)
 static char *free_concat_slashs(char *str1, char *str2, int slashs, int b_free)
 {
     int index = 0;
-    int len = strlen(str1) + strlen(str2) + slashs + 1; //for '\0'
+    int len = strlen(str1) + strlen(str2) + slashs + 1;
     char *result = malloc(len * sizeof (char));
     for (unsigned int i = 0; i < strlen(str1); i++)
     {
@@ -26,7 +26,7 @@ static char *free_concat_slashs(char *str1, char *str2, int slashs, int b_free)
         result[index] = '/';
         index++;
     }
-    for (unsigned int i = 0; i < strlen(str2) + 1; i++) //+1 to get '\0'
+    for (unsigned int i = 0; i < strlen(str2) + 1; i++)
     {
         result[index] = str2[i];
         index++;
@@ -47,7 +47,7 @@ static char *my_concat(char *str1, char *str2)
         return str1;
     }
     int index = 0;
-    int len = strlen(str1) + strlen(str2) + 2; //for '\0'
+    int len = strlen(str1) + strlen(str2) + 2;
     char *result = malloc(len * sizeof (char));
     for (unsigned int i = 0; i < strlen(str1); i++)
     {
@@ -56,7 +56,7 @@ static char *my_concat(char *str1, char *str2)
     }
     result[index] = ' ';
     index++;
-    for (unsigned int i = 0; i < strlen(str2) + 1; i++) //+1 to get '\0'
+    for (unsigned int i = 0; i < strlen(str2) + 1; i++)
     {
         result[index] = str2[i];
         index++;
@@ -84,7 +84,6 @@ static int slash_counter(int *sep_pos, char *pattern)
     return slash_count;
 }
 
-/* FIX NUMBER OF LINES */
 static char *path_exp_rec(char *pwd, char *current_dir,
     char *pattern, int slashs)
 {

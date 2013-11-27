@@ -8,10 +8,6 @@ static void getandeat(s_token **tok)
     *tok = get_token(EOL);
 }
 
-/**
-** @brief Parse an and_or grammar line
-*/
-
 int parse_function(s_token **tok)
 {
     ast_add_step("Funcdec");

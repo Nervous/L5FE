@@ -15,7 +15,7 @@ char *my_reverse_str(const char *src, int op)
 {
     int j = 0;
     char *res = NULL;;
-    if (!(res = malloc(strlen(src) * sizeof (char))))
+    if (!(res = malloc((strlen(src) + 1) * sizeof (char))))
         return NULL;
     int size = strlen(src);
 
@@ -45,7 +45,7 @@ char *my_reverse_str(const char *src, int op)
 char *my_itoa(int n)
 {
     char *s;
-    if (!(s = malloc (int_length(n) * sizeof (char))))
+    if (!(s = malloc ((int_length(n) + 1) * sizeof (char))))
         return NULL;
     int i = 0;
     int j = 1;

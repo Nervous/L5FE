@@ -46,7 +46,6 @@ static s_node *node_cpy(const s_node *n)
 
 int loop_postfix(s_stack *s, s_queue *out, s_node *act)
 {
-    out = out;
     while (act != NULL)
     {
         if (act->is_op == 0)

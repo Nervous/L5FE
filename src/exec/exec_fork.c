@@ -14,9 +14,7 @@ int do_fork(char **argv)
     pid_t child;
     int status;
     extern char **environ;
-
     child = fork();
-
     if (child != 0)
     {
         waitpid(child, &status, 0);
@@ -45,7 +43,6 @@ char **build_argv(s_list *ast)
     ret[2] = malloc(sizeof (char));
     ret[2][0] = '\0';
     ret[3] = NULL;
-
     while (ast != NULL)
     {
         if (strcmp(ast->node->str, "$") == 0)
@@ -59,6 +56,5 @@ char **build_argv(s_list *ast)
             ret[2] = strcat(ret[2], " ");
         ast = ast->brothers;
     }
-
     return ret;
 }

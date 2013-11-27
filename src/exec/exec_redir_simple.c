@@ -6,22 +6,21 @@
 #include <string.h>
 #include "../ast/ast.h"
 
+extern char **environ;
+
 int exec_redir_output(s_list *ast)
 {
     int pid = 0;
     int status;
-    extern char **environ;
     int fd = 0;
     int fd2 = 0;
     pid = fork();
-
     if (pid != 0)
     {
         waitpid(child, &status, 0);
         close(fd2);
         free(argv[2]);
         free(argv);
-
         if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
             return 0;
         else

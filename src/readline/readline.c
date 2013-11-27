@@ -138,11 +138,11 @@ static void read_input(void)
     }
     getps("PS1");
     char *buf = NULL;
-    buf = calloc(100, sizeof (char));
+    buf = calloc(1000, sizeof (char));
     buf = strcpy(buf, "");
     int buf_size = 0;
     int cur_pos = 0;
-    int max_size = 100;
+    int max_size = 1000;
     process_input(&buf, &cur_pos, &buf_size, &max_size);
     write(STDOUT_FILENO, "\n", 1);
     g_global->readline = buf;
@@ -177,10 +177,6 @@ void write_ps(void)
         write(STDIN_FILENO, "> ", 2);
 }
 
-/**
-** @brief This function is responsible of setting up the terminal and
-** the termcap database
-*/
 void readline(void)
 {
     init_term();

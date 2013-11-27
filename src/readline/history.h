@@ -1,6 +1,9 @@
 #ifndef HISTORY_H
 # define HISTORY_H
 
+/**
+** @brief These functions are responsible of the history module
+*/
 void init_history(void);
 void write_history(void);
 char *get_history_ln(void);

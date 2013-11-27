@@ -1,28 +1,27 @@
 #include <stdbool.h>
+#include <string.h>
 #include "std.h"
 
 static bool fill_char(char *c, const char *old, int size)
 {
     char save = *c;
     if (old[0] == '&')
-        if (size >= 1 && old[1] == '&')
+        if (size > 1 && old[1] == '&')
             *c = 'W';
     if (old[0] == '*')
-        if (size >= 1 && old[1] == '*')
+        if (size > 1 && old[1] == '*')
             *c = '?';
     if (old[0] == '|')
-        if (size >= 1 && old[1] == '|')
+        if (size > 1 && old[1] == '|')
             *c = 'K';
     return *c != save;
 }
 
 static char *pre_parse(const char *s)
 {
-    int j = 0;
+    int j = strlen(s);
     int dec = 0;
-    for (j = 0; s[j]; ++j)
-        ;
-    char *str = malloc((j + 1) * sizeof (char));
+    char *str = calloc((j + 1), sizeof (char));
     for (int i = 0; i < j; ++i)
     {
         if (!fill_char(str + i, s + i, j - i))
@@ -33,7 +32,7 @@ static char *pre_parse(const char *s)
             ++i;
         }
     }
-    str = realloc(str, j - dec);
+    str = realloc(str, j - dec + 1);
     str[j - dec] = '\0';
     return str;
 }
