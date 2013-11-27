@@ -8,9 +8,19 @@
 # include "../ast/ast.h"
 # include "../builtins/builtins.h"
 
+/**
+** @fn int exec_pipe(s_list *ast);
+** @brief Execute the pipe rule
+*/
 int exec_pipe(s_list *ast);
 int exec_funcdec(s_list *funcdec);
+/**
+** @brief Execute the input rule
+*/
 int exec_input(s_list *ast);
+/**
+** @brief Execute the list rule
+*/
 int exec_list(s_list *ast);
 int exec_command(s_list *ast);
 int exec_pipeline(s_list *ast);
@@ -30,7 +40,13 @@ int exec_ruleuntil(s_list *until);
 int check_builtin(s_list *ast);
 int do_fork(char **argv);
 char **build_argv(s_list *ast);
+/**
+** @brief Check if the node is a builtin or not
+*/
 int check_builtin(s_list *ast);
+/**
+** @brief Execute an alias
+*/
 int exec_alias(s_list **ast, char *alias_value);
 void expand_var(s_list *ast);
 

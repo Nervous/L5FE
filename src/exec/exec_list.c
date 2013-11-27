@@ -1,10 +1,6 @@
 #include "exec.h"
 
 extern s_global *g_global;
-
-/**
-** @brief Execute the list rule
-*/
 int exec_list(s_list *ast)
 {
     if (!ast)
@@ -15,8 +11,6 @@ int exec_list(s_list *ast)
     {
         if (ast->brothers->node->type == BIT_AND)
             ret = exec_andor(ast->brothers->brothers->son_list);
-
-        /* HANDLE '&' EXECUTION */
 
         if (ast->brothers->node->type == SEMICOLON)
         {
