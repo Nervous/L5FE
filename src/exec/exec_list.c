@@ -26,6 +26,5 @@ int exec_list(s_list *ast)
             break;
         ast = ast->brothers->brothers;
     }
-
     return ret;
 }
