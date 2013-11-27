@@ -23,7 +23,7 @@ static int print_array(s_list *ast, int option_n)
         if (strcmp(ast->node->str, "$") == 0)
             expand_var(ast);
         tilde_handler(&(ast->node->str));
-        path_exp(&(ast->node->str));
+//        path_exp(&(ast->node->str));
         if (ast->brothers)
         {
             my_puts(ast->node->str);

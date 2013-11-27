@@ -26,7 +26,7 @@ int my_cd(s_list *ast)
         return 0;
     }
     tilde_handler(&(ast->node->str));
-    path_exp(&(ast->node->str));
+ //   path_exp(&(ast->node->str));
     if (chdir(ast->node->str) != 0)
     {
         my_puts(ast->node->str);
