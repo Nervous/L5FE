@@ -66,6 +66,8 @@ void init_global(void)
     g_global->current_dir = getcwd(g_global->current_dir, 128);
     g_global->previous_dir = strcpy(g_global->previous_dir,
                                     g_global->current_dir);
+    g_global->x_pos = 0;
+    g_global->y_pos = 0;
 }
 
 void free_global(void)
