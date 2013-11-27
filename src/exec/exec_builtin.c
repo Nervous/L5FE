@@ -5,6 +5,50 @@
 #include <stdio.h>
 extern s_global *g_global;
 
+static int check_builtin3(s_list *ast)
+{
+    if (strcmp(ast->node->str, "alias") == 0)
+        my_alias(ast->brothers);
+    else if (strcmp(ast->node->str, "unalias") == 0)
+        my_unalias(ast->brothers);
+    else if (strcmp(ast->node->str, "export") == 0)
+        my_export(ast->brothers);
+    else if (strcmp(ast->node->str, "shopt") == 0)
+        my_shopt(ast->brothers);
+    else if (strcmp(ast->node->str, "history") == 0)
+        my_history(ast->brothers);
+    else
+        return -1;
+    return 0;
+}
+
+static int check_builtin2(s_list *ast)
+{
+    if (strcmp(ast->node->str, "break") == 0)
+    {
+        if (ast->brothers)
+            g_global->break_nb = atoi(ast->brothers->node->str);
+        else
+            g_global->break_nb = 1;
+        return 0;
+    }
+    else if (strcmp(ast->node->str, "continue") == 0)
+    {
+        if (ast->brothers)
+            g_global->continue_nb = 1;
+        else
+            g_global->continue_nb = 1;
+        return 0;
+    }
+    else if (strcmp(ast->node->str, "cd") == 0)
+    {
+        my_cd(ast->brothers);
+        return 0;
+    }
+    else
+        return check_builtin3(ast);
+}
+
 int check_builtin(s_list *ast)
 {
     if (!ast)
@@ -28,40 +72,8 @@ int check_builtin(s_list *ast)
             exit_builtin(g_global->ret);
         return 0;
     }
-    else if (strcmp(ast->node->str, "break") == 0)
-    {
-        if (ast->brothers)
-            g_global->break_nb = atoi(ast->brothers->node->str);
-        else
-            g_global->break_nb = 1;
-        return 0;
-    }
-    else if (strcmp(ast->node->str, "continue") == 0)
-    {
-        if (ast->brothers)
-            g_global->continue_nb = 1; /** TODO: Multiple continues */
-        else
-            g_global->continue_nb = 1;
-        return 0;
-    }
-    else if (strcmp(ast->node->str, "cd") == 0)
-    {
-        my_cd(ast->brothers);
-        return 0;
-    }
-    else if (strcmp(ast->node->str, "alias") == 0)
-        my_alias(ast->brothers);
-    else if (strcmp(ast->node->str, "unalias") == 0)
-        my_unalias(ast->brothers);
-    else if (strcmp(ast->node->str, "export") == 0)
-        my_export(ast->brothers);
-    else if (strcmp(ast->node->str, "shopt") == 0)
-        my_shopt(ast->brothers);
-    else if (strcmp(ast->node->str, "history") == 0)
-        my_history(ast->brothers);
     else
-        return -1;
-    return 0;
+        return check_builtin2(ast);
 }
 
 static s_list *create_alias_token(s_list *father, s_list *new_ast, char *value)

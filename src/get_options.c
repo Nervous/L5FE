@@ -102,8 +102,9 @@ static int options2(int argc, char **argv, int i)
             if (g_global->norc != 1)
                 load_config();
             g_global->readline = get_string(argc, argv, i + 1);
+            g_global->file = 1;
             parse();
-            return 1; /** TODO */
+            return 1;
         }
         else
             return print_usage("%s option needs a parameter\n", argv[i]);

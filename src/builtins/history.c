@@ -15,7 +15,7 @@ static int display_hist(void)
                 my_puts("0");
             else
             {
-                //number = my_itoa(i);
+                number = my_itoa(i);
                 my_puts(number);
                 free(number);
             }
