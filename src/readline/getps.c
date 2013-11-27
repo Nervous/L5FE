@@ -9,11 +9,11 @@
 
     extern s_global *g_global;
 
-    static char *match_char3(int *i, char *val, char *buf)
-    {
-        if (val[*i] == 'w' || val[*i] == 'W')
-            getcwd(buf, 256);
-        else if (val[*i] == '$')
+static char *match_char3(int *i, char *val, char *buf)
+{
+    if (val[*i] == 'w' || val[*i] == 'W')
+        getcwd(buf, 256);
+    else if (val[*i] == '$')
     {
         if (getuid() == 0)
             buf[0] = '#';
