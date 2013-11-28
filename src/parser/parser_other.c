@@ -51,10 +51,8 @@ int parse_prefix(s_token **tok)
     {
         *tok = eat_token(*tok);
         *tok = get_token(EOL);
-        if (g_global->current_node->father)
-            g_global->current_node = g_global->current_node->father;
+//        climb_ast(1);
         return 0;
     }
-
     return parse_redirection(tok);
 }
