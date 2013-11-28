@@ -215,11 +215,28 @@ static char *remove_backslash(char *str)
 ** calls for a WORD token
 */
 
-static enum e_type is_expected(enum e_type type)
+static enum e_type is_expected(s_token *token)
 {
-    if (type == EOL || type == E_EOF || type == BIT_PIPE || type == BIT_AND
-        || type == SEMICOLON || type == TOKEN_REDIR || type == PIPE_DOUBLE
-        || type == AND_DOUBLE)
+    enum e_type type = token->type;
+    if (token->pos > 2)
+    {
+        if (g_global->readline[token->pos] == '('
+            && g_global->readline[token->pos - 1] == '('
+            && g_global->readline[token->pos - 2] == '$')
+            g_global->arith = 1;
+    }
+    if (token->pos > 1
+        && g_global->arith && g_global->readline[token->pos - 1] == ')'
+        && g_global->readline[token->pos] == ')')
+    {
+        g_global->arith = 0;
+        return WORD;
+    }
+    if (g_global->arith != 1
+        && (type == EOL || type == E_EOF || type == BIT_PIPE || type == BIT_AND
+            || type == SEMICOLON || type == TOKEN_REDIR || type == PIPE_DOUBLE
+            || type == AND_DOUBLE || type == RIGHT_PAR
+            || type == RIGHT_BRACKET))
         return type;
     return WORD;
 }
@@ -245,7 +262,7 @@ s_token *get_token(enum e_type expected)
         token->str[strlen(token->str) - 1] = '\0';
 
     if (expected == WORD)
-        token->type = is_expected(token->type);
+        token->type = is_expected(token);
     else if (token->str[0] == '#')
     {
         free(token->str);

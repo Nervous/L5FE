@@ -31,6 +31,18 @@ static int my_alias2(s_list *ast, char *value, char *name)
    return 0;
 }
 
+static int print_alias(char *name)
+{
+    char *value = alias_get_value(name);
+    if (!value)
+        return 1;
+    my_puts(name);
+    my_puts("=");
+    my_puts(value);
+    my_puts("\n");
+    return 0;
+}
+
 int my_alias(s_list *ast)
 {
     char *value = NULL;
@@ -45,7 +57,7 @@ int my_alias(s_list *ast)
         return 0;
 
     if (!ast->brothers)
-        return 0;
+        return print_alias(name);
     return my_alias2(ast, value, name);
 }
 

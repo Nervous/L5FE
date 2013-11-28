@@ -40,13 +40,8 @@ static void init_options(void)
     g_global->options[7]->name = "xpg_echo";
     g_global->options[7]->activated = 0;
 }
-
-void init_global(void)
+void init_global2(void)
 {
-    if (!(g_global = malloc(sizeof (s_global))))
-        return;
-    g_global->current_node = NULL;
-    g_global->last_node_id = 0;
     g_global->pos = 0;
     g_global->ast = 0;
     g_global->file = 0;
@@ -54,6 +49,16 @@ void init_global(void)
     g_global->ret = 0;
     g_global->break_nb = 0;
     g_global->continue_nb = 0;
+    g_global->arith = 0;
+}
+
+void init_global(void)
+{
+    if (!(g_global = malloc(sizeof (s_global))))
+        return;
+    init_global2();
+    g_global->current_node = NULL;
+    g_global->last_node_id = 0;
     g_global->readline = NULL;
     g_global->hist_file = NULL;
     g_global->hist_arr = NULL;
