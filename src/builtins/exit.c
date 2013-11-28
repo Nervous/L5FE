@@ -16,9 +16,10 @@ void exit_builtin(int n)
         write_history();
         tcsetattr(STDIN_FILENO, TCSANOW, &(g_global->attribute));
     }
+    if (n == -1)
+        exit(1);
+    else if (0 <= n && n <= 255)
+        exit(n);
     else
-        if (0 <= n && n <= 255)
-            exit(n);
-        else
-            exit(255);
+        exit(255);
 }

@@ -3,7 +3,9 @@
 
 int my_fnmatch(const char *pattern, const char *string)
 {
-    if (pattern == NULL)
+    if (pattern == NULL || string == NULL)
+        return 1;
+    if (pattern[0] != '.' && string[0] == '.')
         return 1;
     int r_val = 0;
     s_queue *queue = NULL;

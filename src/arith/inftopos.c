@@ -7,7 +7,7 @@ static int get_precedence(int o)
     else if (o == ADD_U || o == SUB_U || o == NOT || o == TILDE)
         return 4;
     else
-        return 2;
+        return 3;
 }
 
 static int keep_going(s_stack *s, int o1)

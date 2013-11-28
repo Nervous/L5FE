@@ -7,6 +7,8 @@
 extern s_global *g_global;
 int my_source(s_list *ast)
 {
+    if (!ast)
+        return 2;
     int ret = 0;
     char *readline_saved = g_global->readline;
     release_ast(g_global->current_node);
