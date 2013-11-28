@@ -4,17 +4,14 @@ extern s_global *g_global;
 static int parse_list(s_token **tok)
 {
     ast_add_step("List");
-
     bool no_andor = false;
-
     if (parse_andor(tok, true) == -1)
         return parse_error("PARSE ERROR : Expected an ANDOR structure");
-
     while (true)
     {
         if (!((*tok)->type == SEMICOLON || (*tok)->type == BIT_AND))
             break;
- //       climb_ast(1);
+        climb_ast(1);
         *tok = eat_token(*tok);
         *tok = get_token(EOL);
         climb_ast(1);
