@@ -83,6 +83,7 @@ typedef struct global
     s_list *current_node;
     int last_node_id;
     unsigned int pos;
+    int arith;
     int ast;
     int norc;
     int file;
