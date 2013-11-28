@@ -6,6 +6,7 @@ set(fnmatch_source_files
     my_fnmatch.h
     parser.c
     queue.c
+    path_exp.c
 )
 
 add_library(fnmatch ${fnmatch_source_files})
