@@ -79,9 +79,7 @@ static int cut_var(s_list *ast)
         else
             buf[j++] = ast->node->str[i];
     }
-    s_var *var = NULL;
-    if (!(var = malloc(sizeof (s_var))))
-        return 1;
+    s_var *var = malloc(sizeof (s_var));
     buf[j] = '\0';
     var = search_var(g_global->var, buf);
     if (!var)
