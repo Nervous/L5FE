@@ -16,9 +16,10 @@ static void loop_expandarith(int *count, int *other_count, s_list *tmp,
             tmp = tmp->brothers;
             continue;
         }
-        else
-            ++(*other_count);
+        else if (strcmp(tmp->node->str, "$") == 0)
+            expand_var(tmp);
 
+        ++(*other_count);
         arith_next->node->str = realloc(arith_next->node->str,
                                         strlen(arith_next->node->str) +
                                         strlen(tmp->node->str) + 1);
@@ -30,11 +31,13 @@ static void loop_expandarith(int *count, int *other_count, s_list *tmp,
 
 static void expand_arith(s_list *ast)
 {
-    s_list *arith_next = ast->brothers->brothers->brothers;
     int count = 0;
     int other_count = 0;
-
-    loop_expandarith(&count, &other_count, arith_next->brothers, arith_next);
+    for (int i = 0; i < 2; ++i)
+        remove_node(ast->brothers);
+    ast->node->str[0] = '\0';
+    ast->node->str = realloc(ast->node->str, 2);
+    loop_expandarith(&count, &other_count, ast->brothers, ast);
 
     if (count != 2)
     {
@@ -42,9 +45,9 @@ static void expand_arith(s_list *ast)
         parse_error("Invalid arithmetic expansion");
     }
 
-    int res = evalexpr(ast->brothers->brothers->brothers->node->str);
+    int res = evalexpr(ast->node->str);
 
-    for (int i = 0; i < 5 + other_count; ++i)
+    for (int i = 0; i < 3 + other_count; ++i)
         remove_node(ast->brothers);
     s_token *tok = malloc(sizeof (s_token));
     if (res == 0)
