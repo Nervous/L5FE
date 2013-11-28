@@ -58,14 +58,23 @@ void unalias(char *name)
     {
         if (!strcmp(tmp->name, name))
         {
+            if (g_global->alias_list == tmp)
+                g_global->alias_list = tmp->next;
             if (previous)
                 previous->next = tmp->next;
             free(tmp->value);
             free(tmp->name);
             free(tmp);
+            if (previous)
+                tmp = previous->next;
+            else
+                tmp = NULL;
         }
-        previous = tmp;
-        tmp = tmp->next;
+        else
+        {
+            previous = tmp;
+            tmp = tmp->next;
+        }
     }
 }
 
