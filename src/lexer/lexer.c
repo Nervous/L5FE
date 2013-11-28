@@ -199,7 +199,8 @@ static char *remove_backslash(char *str)
             if (str[0] == '"')
                 while ((++str)[0] != '"')
                     s = strncat(s, str - 1, 1);
-            if ((str++)[0] != '\\')
+            if ((str++)[0] != '\\'
+                || ((str - 1)[0] == '\\' && str[0] == '\\' && str++))
                 s = strncat(s, str - 1, 1);
         }
         free(save);
