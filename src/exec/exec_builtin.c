@@ -8,15 +8,15 @@ extern s_global *g_global;
 static int check_builtin3(s_list *ast)
 {
     if (strcmp(ast->node->str, "alias") == 0)
-        my_alias(ast->brothers);
+        return my_alias(ast->brothers);
     else if (strcmp(ast->node->str, "unalias") == 0)
-        my_unalias(ast->brothers);
+        return my_unalias(ast->brothers);
     else if (strcmp(ast->node->str, "export") == 0)
-        my_export(ast->brothers);
+        return my_export(ast->brothers);
     else if (strcmp(ast->node->str, "shopt") == 0)
-        my_shopt(ast->brothers);
+        return my_shopt(ast->brothers);
     else if (strcmp(ast->node->str, "history") == 0)
-        my_history(ast->brothers);
+        return my_history(ast->brothers);
     else
         return -1;
     return 0;
@@ -54,16 +54,10 @@ int check_builtin(s_list *ast)
     if (!ast)
         return -1;
     if (strcmp(ast->node->str, "echo") == 0)
-    {
-        my_echo(ast->brothers);
-        return 0;
-    }
+        return my_echo(ast->brothers);
     else if (strcmp(ast->node->str, "source") == 0
              || strcmp(ast->node->str, ".") == 0)
-    {
-        my_source(ast->brothers);
-        return 0;
-    }
+        return my_source(ast->brothers);
     else if (strcmp(ast->node->str, "exit") == 0)
     {
         if (ast->brothers)

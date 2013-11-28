@@ -97,7 +97,7 @@ static char *path_exp_rec(char *pwd, char *current_dir,
     int sep_pos = 0;
     int slash_count = 0;
     if (pattern[sep_pos] == '\0')
-        return strdup(current_dir);
+        return free_concat_slashs(current_dir, "", slashs, 0);
     while (pattern[sep_pos] != '\0' && pattern[sep_pos] != '/')
         sep_pos++;
     slash_count = slash_counter(&sep_pos, pattern);
@@ -119,6 +119,11 @@ void path_exp(char **str)
 {
     if (str != NULL && *str != NULL)
     {
-         *str = path_exp_rec(g_global->current_dir, "", *str, 0);
+        int zero = 0;
+        int slashs = slash_counter(&zero, *str);
+        char *pattern = strdup(&((*str)[slashs]));
+        free(*str);
+        *str = path_exp_rec(g_global->current_dir, "", pattern, slashs);
+        free(pattern);
     }
 }
