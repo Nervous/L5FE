@@ -141,11 +141,6 @@ static int options(int argc, char **argv, int i)
     return options2(argc, argv, i);
 }
 
-/**
-** @brief Reads the file passed as an argument to 42sh and stores it into a
-** single single to parse and execute
-*/
-
 int get_file(char *filename, bool config)
 {
     FILE *file;
@@ -235,11 +230,6 @@ static int try_standard_input(void)
 
     return parse();
 }
-
-/**
-** @brief Parses the argument passed to 42sh to find the options. If no
-** argument is provided, 42sh will run in interactive mode
-*/
 
 int get_options(int argc, char **argv)
 {

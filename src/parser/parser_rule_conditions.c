@@ -129,9 +129,6 @@ static void parse_elseclause(s_token **tok)
     }
 }
 
-/**
-** @brief Parse an rule_if grammar line
-*/
 int parse_ruleif(s_token **tok)
 {
     if ((*tok)->type != IF)

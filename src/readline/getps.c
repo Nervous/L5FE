@@ -7,8 +7,7 @@
 #include <string.h>
 #define _XOPEN_SOURCE
 
-    extern s_global *g_global;
-
+extern s_global *g_global;
 static char *match_char3(int *i, char *val, char *buf)
 {
     if (val[*i] == 'w' || val[*i] == 'W')

@@ -26,7 +26,15 @@ int parse_andor(s_token **tok, bool mandatory);
 ** @brief Parse a pipeline grammar line
 */
 int parse_pipeline(s_token **tok, bool mandatory);
+
+/**
+** @brief Parse a prefix
+*/
 int parse_prefix(s_token **tok);
+
+/**
+** @brief Parse an element
+*/
 int parse_element(s_token **tok);
 int parse_redirection(s_token **tok);
 
@@ -46,6 +54,10 @@ int parse_rulefor(s_token **tok);
 int parse_rulewhile(s_token **tok);
 int parse_ruleuntil(s_token **tok);
 int parse_rulecase(s_token **tok);
+
+/**
+** @brief Parse an rule_if grammar line
+*/
 int parse_ruleif(s_token **tok);
 
 /**

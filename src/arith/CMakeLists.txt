@@ -5,6 +5,7 @@ set(arith_source_files
     parse.c
     stack.c
     queue.c
+    free_stack.c
     std.h eval.h
 )
 
