@@ -24,7 +24,7 @@ char **get_dir_list2(char *dir)
     {
         while ((tmp = readdir(dp)))
         {
-            if ((tmp->d_name)[0] != '.')
+            if (1 || (tmp->d_name)[0] != '.')
             {
                 dir_list2[dir_count] = strdup(tmp->d_name);
                 dir_count++;

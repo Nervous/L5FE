@@ -105,7 +105,7 @@ static char *path_exp_rec(char *pwd, char *current_dir,
     c_pattern[sep_pos - slash_count] = '\0';
     char *rem_pattern = strdup(&(pattern[sep_pos]));
     for (int i = 0; dir_list2[i] != NULL; i++)
-        if (my_fnmatch(c_pattern, dir_list2[i]))
+        if (!my_fnmatch(c_pattern, dir_list2[i]))
         {
             c_dir = free_concat_slashs(current_dir, dir_list2[i], slashs, 0);
             tmp = path_exp_rec(pwd, c_dir, rem_pattern, slash_count);
