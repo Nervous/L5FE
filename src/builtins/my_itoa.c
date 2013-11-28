@@ -4,9 +4,9 @@
 int int_length(int n)
 {
     if (n > 0)
-    return 1 + int_length(n/10);
+    return 1 + int_length(n / 10);
     else if (n < 0)
-        return 1 +int_length(-n);
+        return 1 + int_length(-n);
     else
         return 0;
 }

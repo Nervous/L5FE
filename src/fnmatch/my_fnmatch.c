@@ -1,10 +1,16 @@
+#include "fn_match.h"
 #include "my_fnmatch.h"
 
 int my_fnmatch(const char *pattern, const char *string)
 {
-    s_fifo *fifo = init_fifo();
-    parse(fifo, pattern);
-    int result = compare(fifo->head, string, 0);
-    destroy(fifo);
-    return result;
+    if (pattern == NULL)
+        return 1;
+    int r_val = 0;
+    s_queue *queue = NULL;
+    queue = init_queue();
+    parser(queue, pattern);
+    r_val = match(queue->head, string);
+    free_queue_match(queue);
+    free(queue);
+    return r_val;
 }

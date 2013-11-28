@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
+#include <stdlib.h>
 #include "my_fnmatch.h"
 
 char *my_str_copy(char *str)

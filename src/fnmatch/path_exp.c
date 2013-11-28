@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 #include "my_fnmatch.h"
 #include "../struct.h"
 
@@ -65,7 +66,7 @@ static char *my_concat(char *str1, char *str2)
     free(str2);
     return result;
 }
-static void free_my_var(char *tofree1, char* tofree2, char *tofree3, char**fr)
+static void free_my_var(char *tofree1, char* tofree2, char *tofree3, char **fr)
 {
     free(tofree1);
     free(tofree2);
@@ -85,7 +86,7 @@ static int slash_counter(int *sep_pos, char *pattern)
 }
 
 static char *path_exp_rec(char *pwd, char *current_dir,
-    char *pattern, int slashs)
+                          char *pattern, int slashs)
 {
     char *c_dir = NULL;
     char *result = malloc(sizeof (char));

@@ -28,7 +28,7 @@ static void fill_buf(s_list *ast, int j, char *buf, int *trail)
             else if (ast->node->str[i] == '\\')
                 buf[j++] = '\\';
         }
-        else
+        else if (ast->node->str[i] != '\'')
             buf[j++] = ast->node->str[i];
     }
     buf[j] = '\0';
@@ -57,14 +57,10 @@ static int print_array(s_list *ast, int option_n)
     {
         if (strcmp(ast->node->str, "$") == 0)
             expand_var(ast);
-        tilde_handler(&(ast->node->str));
+            tilde_handler(&(ast->node->str));
+            my_puts(ast->node->str);
         if (ast->brothers)
-        {
-            my_puts(ast->node->str);
             my_puts(" ");
-        }
-        else
-            my_puts(ast->node->str);
         ast = ast->brothers;
     }
     if (!option_n)
