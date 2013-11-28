@@ -157,7 +157,7 @@ static int loop_parse(const char *c, int *is_ope, int *acu, s_queue *q)
     {
         *is_ope = 0;
         *acu = *acu * 10 + (*c - 48);
-        if (*(c + 1) < '0' || *(c+1) > '9')
+        if (*(c + 1) < '0' || *(c + 1) > '9')
         {
             n = node_from_int(*acu);
             q = queue_add(q, n);
