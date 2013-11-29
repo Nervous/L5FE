@@ -36,7 +36,7 @@ static void fill_buf(s_list *ast, int j, char *buf, int *trail)
     my_puts(buf);
 }
 
-static int expanded_echo(s_list *ast)
+static int expanded_echo(s_list *ast, int n)
 {
     if (!ast)
         return -1;
@@ -45,7 +45,7 @@ static int expanded_echo(s_list *ast)
     int trail = 0;
     fill_buf(ast, j, buf, &trail);
     free(buf);
-    if (trail == 0)
+    if (trail == 0 && n == 0)
         my_puts("\n");
     return 0;
 }
@@ -123,7 +123,9 @@ int my_echo(s_list *ast)
     else if (strcmp(ast->node->str, "-E") == 0)
         ret = print_array(ast->brothers, 0);
     else if (strcmp(ast->node->str, "-e") == 0)
-        ret = expanded_echo(ast->brothers);
+        ret = expanded_echo(ast->brothers, 0);
+    else if (strcmp(ast->node->str, "-en") == 0)
+        ret = expanded_echo(ast->brothers, 1);
     else
         ret = print_array(ast, 0);
     return ret;
