@@ -2,9 +2,6 @@
 
 extern s_global *g_global;
 
-/**
-** @brief Execute the and_or rule
-*/
 int exec_andor(s_list *ast)
 {
     int ret = 0;

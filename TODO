@@ -1,9 +1,22 @@
 V0.5
 
-
 Bonus: case
-Test zombies for pipes
-Handle & execution
+#Test zombies for pipes
+#Handle & execution
 Handle redirection heredoc
-Update option [+-]O
+#Update option [+-]O
 
+V0.8
+#Fix a bug in AST when ;
+#Arithm: See with lexer for an improvement on some operators
+#Alias: fix segfault
+#Variables: multiples declarations on same lines,
+multiples replacements in echo
+#readline: fix all invalid write/read
+fix alias memory leak (alias b='echo lol', then use b, then exit)
+torture 42sh for more leaks
+#update man
+finish expand path
+
+V0.9
+#Gerond_x: FIX AUTOCOMPLETION

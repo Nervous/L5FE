@@ -1,14 +1,42 @@
 .\" Manpage 42sh
 .\" Contact vallee_a@epita.fr
-.TH man 1 "19 November 2013" "0.5" "42sh Man Page"
+.TH man 1 "30 November 2013" "1.0" "42sh Man Page"
 .SH NAME
 42sh
 .SH SYNOPSIS
-Unix Shell in C
+42sh [options] [file]
 .SH DESCRIPTION
 42sh is a shell developped in C language.
+
+Features availables:
+
+-Shell grammar execution
+
+-Arithmetic expansion
+
+-Path expansion
+
+-Builtins: cd, exit, echo, source, export, alias
+
+-Variables & Alias management
+
 .SH OPTIONS
-42sh [--ast-print] [-c command] [file]
+42sh interprets the following options when it is invoked:
+
+-c string If the -c option is present, then commands are read from string.
+
+[-+]O [shopt_option]\n
+shopt_option: One of the shell options accepted by the shopt builtin.
+If shopt_option is present, -O sets the value of that option; +O unsets it.
+If shopt_option is not supplied, the names and values of the shell options accepted by shopt are printed on the standard output.
+If the invocation option is +O, the output is displayed in a format that may be reused as input.
+
+--ast-print Creates a .dot file representing the tree built from the grammar given in argument.
+
+--version Show version information for this instance of 42sh on the standard output and exit successfully.
+
+--help Print the synopsys and a error message on the error output, then exit successfully.
+
 .SH COPYRIGHT
 Copyright © 2013 Vallee Antoine, Guet Emmanuel, Pruvot Amaury, Gerondeau Xavier, Moizan Guillaume. Permission to use, copy, modify, distribute, and sell this software and its documentation for any purpose is hereby granted without fee, provided that the above copyright notice appear in all copies and that both that copyright notice and this permission notice appear in supporting documentation. No representations are made about the suitability of this software for any purpose. It is provided "as is" without express or implied warranty.
 .SH AUTHORS

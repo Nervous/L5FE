@@ -1,10 +1,6 @@
 #include "exec.h"
 #include <string.h>
 
-/**
-** @fn int exec_else(s_list *current);
-** @brief Execute the "else_clause" rule
-*/
 int exec_else(s_list *current)
 {
     int condition = 1;
@@ -25,10 +21,6 @@ int exec_else(s_list *current)
     return exec_compound(current->brothers->son_list);
 }
 
-/**
-** @fn int exec_if(s_list *current)
-** @brief Execute the "if" rule
-*/
 int exec_if(s_list *current)
 {
     int condition = exec_compound(current->brothers->son_list);

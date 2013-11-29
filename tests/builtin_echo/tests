@@ -14,7 +14,31 @@ Pattern :
 
 Exemple :
 
-CMD=tests/builtin_echo/file_test1
+CMD=tests/builtin_echo/echo1
 RV=0
 OP=lol
+
+CMD=tests/builtin_echo/echo2
+RV=0
+OP=test
+
+CMD=tests/builtin_echo/echo3
+RV=0
+OP=test
+
+CMD=tests/builtin_echo/echo_var1
+RV=0
+OP=$a
+
+CMD=tests/builtin_echo/echo_var2
+RV=0
+OP=b
+
+CMD=tests/builtin_echo/echo_var3
+RV=0
+OP=b
+
+CMD=tests/builtin_echo/echo_e1
+RV=0
+OP=toto
 

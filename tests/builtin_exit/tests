@@ -14,22 +14,22 @@ Pattern :
 
 Exemple :
 
-CMD=tests/builtins/exit1
+CMD=tests/builtin_exit/exit1
 RV=0
 
-CMD=tests/builtins/exit2
+CMD=tests/builtin_exit/exit2
 OP=toto
 RV=0
 
-CMD=tests/builtins/exit3
+CMD=tests/builtin_exit/exit3
 EOP=cat: titi: No such file or directory
 RV=1
 
-CMD=tests/builtins/exit4
+CMD=tests/builtin_exit/exit4
 OP=toto
 RV=42
 
-CMD=tests/builtins/exit5
+CMD=tests/builtin_exit/exit5
 EOP=cat: titi: No such file or directory
 RV=42
 

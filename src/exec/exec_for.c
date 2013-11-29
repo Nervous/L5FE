@@ -2,9 +2,6 @@
 
 extern s_global *g_global;
 
-/**
-** @brief Execute the for rule
-*/
 void exec_for_aux(s_list **ast, int *ret, char **tmp, s_list **cpy)
 {
     while ((*ast)->node->type == WORD)

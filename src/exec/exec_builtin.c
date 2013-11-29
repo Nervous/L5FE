@@ -120,6 +120,7 @@ int exec_alias(s_list **ast, char *str)
         new_ast = create_alias_token(father, new_ast, value);
     }
     new_ast->father = father;
+    //Ajouter en fils du pere...TODO
     remove_node(*ast);
     return exec_simplecommand(new_ast);
 }
